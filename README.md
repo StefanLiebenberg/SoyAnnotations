@@ -4,7 +4,7 @@ SoyAnnotations
 Annotations for turning soy classes into SoyData and rendering straight to templates.
 
 **User.java**
-
+'''java
     @Soy
     @Soy.Template("templates.User")
     public class User {
@@ -20,9 +20,11 @@ Annotations for turning soy classes into SoyData and rendering straight to templ
          return email;
        }
     }
+'''
 
 
 **templates.soy:**
+'''soy
     {namespace templates}
 
     /**
@@ -32,10 +34,11 @@ Annotations for turning soy classes into SoyData and rendering straight to templ
     {template .User}
        {$Name} ({$Email})
     {/template}
+'''
 
 
 **UserApplication.java:**
-
+'''java
     public class UserApplication {
 
       public static void main (final String[] args) {
@@ -51,3 +54,4 @@ Annotations for turning soy classes into SoyData and rendering straight to templ
 
       }
     }
+'''
