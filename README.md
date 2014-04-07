@@ -64,3 +64,19 @@ public class UserApplication {
   }
 }
 ```
+
+
+##Important Classes:
+
+
+### RendererFactoryContext:
+
+Used for rendering a Class<?> object into a string.
+
+### SoyDataConverterFactoryContext
+
+Used for converting a Class<?> into soyData.
+
+### JsonConverterFactoryContext
+
+Used to convert a Class<?> into a Map<String, Object> object.
