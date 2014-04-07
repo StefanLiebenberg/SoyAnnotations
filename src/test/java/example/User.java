@@ -1,27 +1,27 @@
 package example;
 
-import slieb.soy.annotations.SoyAnnotated;
-import slieb.soy.annotations.SoyField;
-import slieb.soy.annotations.SoyMethod;
-import slieb.soy.annotations.SoyTemplate;
+import slieb.soy.annotations.Soy;
 
 
-@SoyAnnotated
-@SoyTemplate("example.User")
+@Soy
+@Soy.Template("example.User")
 public class User {
 
     public User(String id) {
         this.id = id;
     }
 
-    @SoyField("Id")
+    @Soy.Field("Id")
     public final String id;
+
+    @Soy.Field("IsHuman")
+    public boolean isHuman = false;
 
     private String name;
 
     private String email;
 
-    @SoyMethod("Name")
+    @Soy.Method("Name")
     public String getName() {
         return name;
     }
@@ -30,7 +30,7 @@ public class User {
         this.name = name;
     }
 
-    @SoyMethod("Email")
+    @Soy.Method("Email")
     public String getEmail() {
         return email;
     }
