@@ -6,7 +6,7 @@ Annotations for turning soy classes into SoyData and rendering straight to templ
 
 ## Example:
 
-Here is a example that renders a User instance into a string by analyzing the @Soy.Template annotation.
+Here is a example that renders a User instance into a string by analyzing the `@Soy.Template` annotation.
 
 **User.java**
 ```java
