@@ -52,7 +52,7 @@ public class UserApplication {
   
   public static void main (final String[] args) {
 
-    SoyTofu soyTofu = SoyFileSet.Builder()
+    SoyTofu soyTofu = new SoyFileSet.Builder()
         .add(new File("templates.soy"))
         .compileToFu();
 
