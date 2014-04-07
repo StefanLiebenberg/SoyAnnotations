@@ -1,4 +1,4 @@
-package slieb.soy.internal;
+package slieb.soy.converters;
 
 import ch.lambdaj.function.convert.Converter;
 import com.google.template.soy.data.SoyData;
@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import slieb.soy.converters.FieldConverter;
 
 import java.lang.reflect.Field;
 

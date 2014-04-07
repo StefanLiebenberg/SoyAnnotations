@@ -1,4 +1,4 @@
-package slieb.soy.factories;
+package slieb.soy.factories.json;
 
 import ch.lambdaj.function.convert.Converter;
 import com.google.common.collect.Lists;
@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import slieb.soy.converters.ClassConverter;
 import slieb.soy.converters.JsonObjectConverter;
-import slieb.soy.factories.json.JsonConverterFactoryContext;
 
 import java.util.List;
 import java.util.Map;

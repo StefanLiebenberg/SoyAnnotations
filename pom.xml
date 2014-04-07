@@ -9,7 +9,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>SoyAnnotations</name>
-    <description>Soy utilities to easily convert and and render classes with soy templates.</description>
+    <description>Soy utilities to easily convert and and render classes with soy
+        templates.
+    </description>
     <url>http://github.com/StefanLiebenberg/SoyAnnotations</url>
 
     <licenses>
@@ -81,22 +83,26 @@
 
 
     <scm>
-        <connection>scm:git:git://github.com/StefanLiebenberg/SoyAnnotations.git</connection>
-        <developerConnection>scm:git:git@github.com:StefanLiebenberg/SoyAnnotations.git</developerConnection>
+        <connection>
+            scm:git:git://github.com/StefanLiebenberg/SoyAnnotations.git
+        </connection>
+        <developerConnection>
+            scm:git:git@github.com:StefanLiebenberg/SoyAnnotations.git
+        </developerConnection>
         <url>http://github.com/StefanLiebenberg/SoyAnnotations</url>
     </scm>
 
     <!--<distributionManagement>-->
-        <!--<snapshotRepository>-->
-            <!--<id>sonatype-nexus-snapshots</id>-->
-            <!--<name>Sonatype Nexus snapshot repository</name>-->
-            <!--<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
-        <!--</snapshotRepository>-->
-        <!--<repository>-->
-            <!--<id>sonatype-nexus-staging</id>-->
-            <!--<name>Sonatype Nexus release repository</name>-->
-            <!--<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-        <!--</repository>-->
+    <!--<snapshotRepository>-->
+    <!--<id>sonatype-nexus-snapshots</id>-->
+    <!--<name>Sonatype Nexus snapshot repository</name>-->
+    <!--<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+    <!--</snapshotRepository>-->
+    <!--<repository>-->
+    <!--<id>sonatype-nexus-staging</id>-->
+    <!--<name>Sonatype Nexus release repository</name>-->
+    <!--<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+    <!--</repository>-->
     <!--</distributionManagement>-->
 
     <profiles>
@@ -131,5 +137,5 @@
             </build>
         </profile>
     </profiles>
-    
+
 </project>

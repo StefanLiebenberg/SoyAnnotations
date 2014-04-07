@@ -1,18 +1,14 @@
-package slieb.soy.factories;
+package slieb.soy.factories.soydata;
 
 import example.User;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
 import slieb.soy.converters.ClassConverter;
 import slieb.soy.converters.LongConverter;
 import slieb.soy.converters.ObjectConverter;
-import slieb.soy.factories.soydata.SoyDataConverterFactoryContext;
 
 import static org.junit.Assert.assertTrue;
 
-@RunWith(MockitoJUnitRunner.class)
 public class SoyDataConverterFactoryTest {
 
     public SoyDataConverterFactoryContext factoryContext;

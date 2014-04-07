@@ -1,4 +1,4 @@
-package slieb.soy.internal;
+package slieb.soy.converters;
 
 import ch.lambdaj.function.convert.Converter;
 import com.google.template.soy.data.SoyData;
@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import slieb.soy.converters.MethodConverter;
 
 import java.lang.reflect.Method;
 
@@ -19,13 +18,13 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class MethodConverterTest {
 
-    private MethodConverter<SoyData> methodConverter;
-
     @Mock
     private Converter<Object, SoyData> mockTypeConverter;
 
     @Mock
     private User mockUser;
+
+    private MethodConverter<SoyData> methodConverter;
 
     @Before
     public void setup() throws Exception {

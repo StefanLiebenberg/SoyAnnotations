@@ -1,12 +1,10 @@
-package slieb.soy;
+package slieb.soy.factories.rendering;
 
 import com.google.template.soy.SoyFileSet;
 import example.User;
 import org.junit.Before;
 import org.junit.Test;
 import slieb.soy.annotations.Soy;
-import slieb.soy.factories.rendering.Renderer;
-import slieb.soy.factories.rendering.RendererFactoryContext;
 
 import static org.junit.Assert.assertEquals;
 

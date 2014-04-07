@@ -1,11 +1,10 @@
-package slieb.soy.factories;
+package slieb.soy.factories.soydata;
 
 import example.*;
 import org.junit.Before;
 import org.junit.Test;
 import slieb.soy.exceptions.NeedsDynamicConverterException;
 import slieb.soy.helpers.DefaultFactoryHelper;
-import slieb.soy.factories.soydata.SoyDataConverterFactoryContext;
 
 public class SoyDataConverterFactoryDynamicExceptionsTest {
 

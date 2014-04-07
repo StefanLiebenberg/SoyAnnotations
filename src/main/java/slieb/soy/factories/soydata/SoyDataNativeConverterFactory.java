@@ -21,7 +21,7 @@ public class SoyDataNativeConverterFactory extends AbstractConverterFactory<SoyD
     @Nonnull
     @Override
     public Converter<Object, ? extends SoyData> create(@Nonnull Class<?> classObject) {
-        if(Long.class.isAssignableFrom(classObject)) {
+        if (Long.class.isAssignableFrom(classObject)) {
             return LongConverter.INSTANCE;
         }
         return ObjectConverter.INSTANCE;
