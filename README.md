@@ -71,12 +71,12 @@ public class UserApplication {
 
 ### RendererFactoryContext:
 
-Used for rendering a Class<?> object into a string.
+Used for rendering a `Class<?>` object into a string.
 
 ### SoyDataConverterFactoryContext
 
-Used for converting a Class<?> into soyData.
+Used for converting a `Class<?>` into soyData.
 
 ### JsonConverterFactoryContext
 
-Used to convert a Class<?> into a Map<String, Object> object.
+Used to convert a `Class<?>` into a `Map<String, Object>` object.
