@@ -44,6 +44,10 @@ public class User {
 
 **UserApplication.java:**
 ```java
+import com.google.template.soy.SoyFileSet;
+import slieb.soy.factories.rendering.RenderFactoryContext;
+
+
 public class UserApplication {
   
   public static void main (final String[] args) {
