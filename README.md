@@ -13,7 +13,14 @@ Here is a example that renders a User instance into a string by analyzing the `@
 @Soy
 @Soy.Template("templates.User")
 public class User {
+
+
    private final String name, email;
+
+   public String(String name, String email) {
+     this.name = name;
+     this.email = email;
+   }
 
    @Soy.Method("Name")
    public String getName() {
