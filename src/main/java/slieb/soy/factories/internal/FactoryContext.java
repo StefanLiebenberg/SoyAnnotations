@@ -7,6 +7,8 @@ import javax.annotation.Nonnull;
 
 public interface FactoryContext<A> {
 
+    public void addCustomFactory(@Nonnull Factory<A> factory);
+
     @Nonnull
     public ImmutableList<? extends Factory<? extends A>> getFactories();
 

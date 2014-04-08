@@ -3,7 +3,7 @@ package slieb.soy.factories.soydata;
 import ch.lambdaj.function.convert.Converter;
 import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
-import slieb.soy.converters.SoyDataMapConverter;
+import slieb.soy.converters.soydata.SoyDataMapConverter;
 import slieb.soy.factories.internal.AbstractConverterFactory;
 import slieb.soy.factories.internal.ConverterFactoryContext;
 import slieb.soy.helpers.FactoryHelper;
@@ -11,7 +11,7 @@ import slieb.soy.helpers.FactoryHelper;
 import javax.annotation.Nonnull;
 import java.util.Map;
 
-import static slieb.soy.converters.NullSafeConverter.wrapConverterWithNullSafe;
+import static slieb.soy.converters.soydata.NullSafeConverter.wrapConverterWithNullSafe;
 
 
 public class SoyDataMapConverterFactory extends AbstractConverterFactory<SoyData> {

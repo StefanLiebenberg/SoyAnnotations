@@ -27,10 +27,10 @@ public @interface Soy {
         String value();
     }
 
-
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.TYPE})
     public @interface Template {
         String value();
     }
+
 }

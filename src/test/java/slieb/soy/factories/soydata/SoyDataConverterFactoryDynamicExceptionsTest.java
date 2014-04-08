@@ -1,6 +1,6 @@
 package slieb.soy.factories.soydata;
 
-import example.*;
+import example.models.*;
 import org.junit.Before;
 import org.junit.Test;
 import slieb.soy.exceptions.NeedsDynamicConverterException;
@@ -12,7 +12,7 @@ public class SoyDataConverterFactoryDynamicExceptionsTest {
 
     @Before
     public void setUp() throws Exception {
-        factoryContext = new SoyDataConverterFactoryContext(new DefaultFactoryHelper());
+        factoryContext = new SoyDataConverterFactoryContext(DefaultFactoryHelper.INSTANCE);
     }
 
     // todo, better exception class

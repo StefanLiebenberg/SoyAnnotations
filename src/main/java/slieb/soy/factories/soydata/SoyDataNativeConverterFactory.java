@@ -3,7 +3,7 @@ package slieb.soy.factories.soydata;
 import ch.lambdaj.function.convert.Converter;
 import com.google.common.primitives.Primitives;
 import com.google.template.soy.data.SoyData;
-import slieb.soy.converters.LongConverter;
+import slieb.soy.converters.soydata.LongConverter;
 import slieb.soy.converters.ObjectConverter;
 import slieb.soy.factories.internal.AbstractConverterFactory;
 import slieb.soy.factories.internal.ConverterFactoryContext;

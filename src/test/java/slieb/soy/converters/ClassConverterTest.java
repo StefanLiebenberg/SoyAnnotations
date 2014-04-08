@@ -1,12 +1,13 @@
 package slieb.soy.converters;
 
 import com.google.template.soy.data.SoyMapData;
-import example.User;
+import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import slieb.soy.converters.soydata.SoyDataMapConverter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

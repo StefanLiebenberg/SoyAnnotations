@@ -1,10 +1,10 @@
 package slieb.soy.factories.soydata;
 
-import example.User;
+import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
 import slieb.soy.converters.ClassConverter;
-import slieb.soy.converters.LongConverter;
+import slieb.soy.converters.soydata.LongConverter;
 import slieb.soy.converters.ObjectConverter;
 
 import static org.junit.Assert.assertTrue;

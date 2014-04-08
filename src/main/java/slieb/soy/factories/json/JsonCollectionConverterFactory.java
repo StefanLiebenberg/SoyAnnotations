@@ -2,7 +2,7 @@ package slieb.soy.factories.json;
 
 
 import ch.lambdaj.function.convert.Converter;
-import slieb.soy.converters.JsonListConverter;
+import slieb.soy.converters.json.JsonListConverter;
 import slieb.soy.factories.internal.AbstractConverterFactory;
 import slieb.soy.factories.internal.ConverterFactoryContext;
 import slieb.soy.helpers.FactoryHelper;

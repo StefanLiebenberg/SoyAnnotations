@@ -3,7 +3,7 @@ package slieb.soy.factories.json;
 
 import ch.lambdaj.function.convert.Converter;
 import slieb.soy.converters.ClassConverter;
-import slieb.soy.converters.StrictClassToJsonMapConverter;
+import slieb.soy.converters.json.StrictClassToJsonMapConverter;
 import slieb.soy.factories.internal.AbstractClassConverterFactory;
 import slieb.soy.factories.internal.ConverterFactoryContext;
 import slieb.soy.helpers.FactoryHelper;

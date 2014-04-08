@@ -17,28 +17,12 @@ public abstract class AbstractConverterFactoryContext<A>
         this.factoryHelper = factoryHelper;
     }
 
-    private ImmutableList<Factory<Converter<Object, ? extends A>>> converterFactories;
-
     @Nonnull
     @Override
-    public ImmutableList<Factory<Converter<Object, ? extends A>>> getFactories() {
-        if (converterFactories == null) {
-            converterFactories =
-                    new ImmutableList.Builder<Factory<Converter<Object, ? extends A>>>()
-                            .add(getClassConverterFactory())
-                            .add(getCollectionConverterFactory())
-                            .add(getMapConverterFactory())
-                            .add(getNativeConverterFactory())
-                            .build();
-        }
-        return converterFactories;
-    }
-
+    public abstract ImmutableList<? extends Factory<Converter<Object, ? extends A>>> getFactoriesInternal();
 
     @Nonnull
     public A convert(@Nonnull Object object) {
         return createFromInstance(object).convert(object);
     }
-
-
 }

@@ -4,7 +4,7 @@ import ch.lambdaj.function.convert.Converter;
 import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
 import slieb.soy.converters.ClassConverter;
-import slieb.soy.converters.StrictClassToSoyMapDataConverter;
+import slieb.soy.converters.soydata.StrictClassToSoyMapDataConverter;
 import slieb.soy.exceptions.NeedsDynamicConverterException;
 import slieb.soy.factories.internal.AbstractClassConverterFactory;
 import slieb.soy.factories.internal.ConverterFactoryContext;
@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import static slieb.soy.converters.NullSafeConverter.wrapConverterWithNullSafe;
+import static slieb.soy.converters.soydata.NullSafeConverter.wrapConverterWithNullSafe;
 
 
 public class SoyDataClassConverterFactory extends AbstractClassConverterFactory<SoyData> {

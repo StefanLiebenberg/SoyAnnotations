@@ -1,32 +1,39 @@
 package slieb.soy.factories.rendering;
 
 import com.google.template.soy.SoyFileSet;
-import example.User;
+import com.google.template.soy.tofu.SoyTofu;
+import example.models.Setting;
+import example.models.Settings;
+import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
 import slieb.soy.annotations.Soy;
+import slieb.soy.factories.internal.Factory;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 public class RendererFactoryContextTest {
 
-    RendererFactoryContext rendererFactoryContext;
+    private final SoyTofu soyTofu = new SoyFileSet.Builder()
+            .add(getClass().getResource("/templates.soy"))
+            .build().compileToTofu();
+
+    private RendererFactoryContext rendererFactoryContext;
 
     @Before
     public void setUp() throws Exception {
-        rendererFactoryContext =
-                new RendererFactoryContext(
-                        new SoyFileSet.Builder()
-                                .add(getClass().getResource("/templates.soy"))
-                                .build().compileToTofu());
+        rendererFactoryContext = new RendererFactoryContext(soyTofu);
     }
 
 
     @Test
     public void testBasicSoyTemplateWithFactory() throws Exception {
 
-        @Soy.Template("example.BasicString")
         @Soy
+        @Soy.Template("example.BasicString")
         class BasicString {
         }
 
@@ -48,4 +55,37 @@ public class RendererFactoryContextTest {
         String result = renderer.render(exampleUser);
         assertEquals(expected, result);
     }
+
+    public static interface RendererFactory extends Factory<Renderer<Object>> {
+    }
+
+    @Test
+    public void testNoExceptionWhenAddingCustomFactoriesAfterFirstUse() {
+        rendererFactoryContext.addCustomFactory(mock(RendererFactory.class));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testExceptionWhenAddingCustomFactoriesAfterFirstUse() {
+        rendererFactoryContext.create(User.class);
+        rendererFactoryContext.addCustomFactory(mock(RendererFactory.class));
+    }
+
+    @Test
+    public void testCustomRendererAnnotation() {
+        Settings settings = new Settings();
+        settings.Name = "GlobalSettings";
+        settings.Value = true;
+        settings.GeneralSettings = new ArrayList<>();
+
+        Setting<String> userNameSetting = new Setting<>();
+        userNameSetting.Name = "UserName";
+        userNameSetting.Value = "user";
+        settings.GeneralSettings.add(userNameSetting);
+
+        String result = rendererFactoryContext.render(settings);
+        String expected = "{ GlobalSettings : true, GeneralSettings: [UserName: user], SpecialSettings: null}";
+        assertEquals(expected, result);
+    }
+
+
 }

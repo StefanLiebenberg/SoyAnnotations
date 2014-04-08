@@ -1,6 +1,6 @@
 package slieb.soy.helpers;
 
-import example.ReflectiveManExample;
+import example.models.ReflectiveManExample;
 import org.junit.Before;
 import org.junit.Test;
 

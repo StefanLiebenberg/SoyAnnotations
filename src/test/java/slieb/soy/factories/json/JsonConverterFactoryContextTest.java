@@ -2,13 +2,13 @@ package slieb.soy.factories.json;
 
 import ch.lambdaj.function.convert.Converter;
 import com.google.common.collect.Lists;
-import example.AnnotatedCommentExample;
-import example.AnnotatedPostExample;
-import example.AnnotatedUserExample;
+import example.models.AnnotatedCommentExample;
+import example.models.AnnotatedPostExample;
+import example.models.AnnotatedUserExample;
 import org.junit.Before;
 import org.junit.Test;
 import slieb.soy.converters.ClassConverter;
-import slieb.soy.converters.JsonObjectConverter;
+import slieb.soy.converters.json.JsonIdentityConverter;
 
 import java.util.List;
 import java.util.Map;
@@ -72,8 +72,8 @@ public class JsonConverterFactoryContextTest {
 
     @Test
     public void testCreateConverter() throws Exception {
-        assertTrue(converterFactoryContext.create(String.class) instanceof JsonObjectConverter);
-        assertTrue(converterFactoryContext.create(Object.class) instanceof JsonObjectConverter);
+        assertTrue(converterFactoryContext.create(String.class) instanceof JsonIdentityConverter);
+        assertTrue(converterFactoryContext.create(Object.class) instanceof JsonIdentityConverter);
         assertTrue(converterFactoryContext.create(AnnotatedUserExample.class) instanceof ClassConverter);
     }
 

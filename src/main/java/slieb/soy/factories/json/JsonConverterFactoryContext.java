@@ -2,6 +2,7 @@ package slieb.soy.factories.json;
 
 
 import ch.lambdaj.function.convert.Converter;
+import com.google.common.collect.ImmutableList;
 import slieb.soy.factories.internal.AbstractConverterFactoryContext;
 import slieb.soy.factories.internal.Factory;
 import slieb.soy.helpers.DefaultFactoryHelper;
@@ -17,7 +18,18 @@ public class JsonConverterFactoryContext extends AbstractConverterFactoryContext
     }
 
     public JsonConverterFactoryContext() {
-        super(new DefaultFactoryHelper());
+        super(DefaultFactoryHelper.INSTANCE);
+    }
+
+    @Nonnull
+    @Override
+    public ImmutableList<Factory<Converter<Object, ?>>> getFactoriesInternal() {
+        return new ImmutableList.Builder<Factory<Converter<Object, ?>>>()
+                .add(getClassConverterFactory())
+                .add(getCollectionConverterFactory())
+                .add(getMapConverterFactory())
+                .add(getNativeConverterFactory())
+                .build();
     }
 
     @Nonnull
@@ -47,5 +59,8 @@ public class JsonConverterFactoryContext extends AbstractConverterFactoryContext
         return new JsonNativeConverterFactory(factoryHelper, this);
     }
 
-
+    @Override
+    public void addCustomFactory(@Nonnull Factory<Converter<Object, ?>> factory) {
+        throw new RuntimeException();
+    }
 }

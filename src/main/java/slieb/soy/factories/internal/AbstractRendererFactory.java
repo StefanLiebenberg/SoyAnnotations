@@ -11,6 +11,7 @@ public abstract class AbstractRendererFactory implements Factory<Renderer<Object
 
     protected final RendererFactoryContext factoryContext;
 
+
     protected AbstractRendererFactory(RendererFactoryContext factoryContext) {
         this.factoryContext = factoryContext;
     }

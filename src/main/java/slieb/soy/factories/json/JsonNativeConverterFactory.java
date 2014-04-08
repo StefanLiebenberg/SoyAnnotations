@@ -3,7 +3,7 @@ package slieb.soy.factories.json;
 
 import ch.lambdaj.function.convert.Converter;
 import com.google.common.primitives.Primitives;
-import slieb.soy.converters.JsonObjectConverter;
+import slieb.soy.converters.json.JsonIdentityConverter;
 import slieb.soy.factories.internal.AbstractConverterFactory;
 import slieb.soy.factories.internal.ConverterFactoryContext;
 import slieb.soy.helpers.FactoryHelper;
@@ -26,6 +26,6 @@ public class JsonNativeConverterFactory extends AbstractConverterFactory<Object>
     @Nonnull
     @Override
     public Converter<Object, ?> create(@Nonnull Class<?> classObject) {
-        return new JsonObjectConverter();
+        return JsonIdentityConverter.INSTANCE;
     }
 }

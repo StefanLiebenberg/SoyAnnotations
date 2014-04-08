@@ -11,6 +11,10 @@ import static com.google.common.base.Preconditions.checkState;
 
 public class DefaultFactoryHelper implements FactoryHelper {
 
+    public static DefaultFactoryHelper INSTANCE = new DefaultFactoryHelper();
+
+    private DefaultFactoryHelper() {}
+
     @Override
     @Nonnull
     public Boolean isFactoryClass(@Nonnull Class<?> classObject) {
@@ -73,4 +77,6 @@ public class DefaultFactoryHelper implements FactoryHelper {
     public String getMethodKey(@Nonnull Method field) {
         return field.getAnnotation(Soy.Method.class).value();
     }
+
+
 }

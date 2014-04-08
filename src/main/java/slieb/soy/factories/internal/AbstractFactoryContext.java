@@ -2,9 +2,12 @@ package slieb.soy.factories.internal;
 
 
 import com.google.common.collect.ImmutableList;
+import slieb.soy.exceptions.MissingFactory;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractFactoryContext<A> implements FactoryContext<A> {
@@ -13,11 +16,25 @@ public abstract class AbstractFactoryContext<A> implements FactoryContext<A> {
 
     protected AbstractFactoryContext() {
         cacheValueMap = new HashMap<>();
+        customFactories = new ArrayList<>();
     }
+
+    protected ImmutableList<? extends Factory<A>> factories;
+
+    protected List<Factory<A>> customFactories;
+
+    @Nonnull
+    public abstract ImmutableList<? extends Factory<A>> getFactoriesInternal();
+
 
     @Nonnull
     @Override
-    public abstract ImmutableList<? extends Factory<A>> getFactories();
+    public ImmutableList<? extends Factory<A>> getFactories() {
+        if (factories == null) {
+            factories = getFactoriesInternal();
+        }
+        return factories;
+    }
 
     @Nonnull
     @Override
@@ -27,7 +44,7 @@ public abstract class AbstractFactoryContext<A> implements FactoryContext<A> {
                 return factory;
             }
         }
-        throw new RuntimeException();
+        throw new MissingFactory();
     }
 
     @Nonnull
@@ -40,6 +57,13 @@ public abstract class AbstractFactoryContext<A> implements FactoryContext<A> {
             A value = factory.create(classObject);
             cacheValueMap.put(classObject, value);
             return value;
+        }
+    }
+
+    @Override
+    public void addCustomFactory(@Nonnull Factory<A> factory) {
+        if (!customFactories.contains(factory)) {
+            customFactories.add(factory);
         }
     }
 

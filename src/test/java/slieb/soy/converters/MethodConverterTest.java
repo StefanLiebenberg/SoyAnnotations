@@ -2,7 +2,7 @@ package slieb.soy.converters;
 
 import ch.lambdaj.function.convert.Converter;
 import com.google.template.soy.data.SoyData;
-import example.User;
+import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
