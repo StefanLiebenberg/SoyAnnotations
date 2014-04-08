@@ -1,6 +1,7 @@
 package example.cases;
 
 
+import ch.lambdaj.function.convert.Converter;
 import example.assertions.BlogPageAssertions;
 import example.models.blog.BlogPost;
 import example.models.blog.BlogPostsPage;
@@ -50,9 +51,10 @@ public class BlogPageTestCase {
 
     @Test
     public void testPage() {
-        BlogPostsPage page = getPage(10, 10);
+        BlogPostsPage page = getPage(10, 5);
         JsonConverterFactoryContext jsonContext = new JsonConverterFactoryContext();
-        Object object = jsonContext.convert(page);
+        Converter<Object, ?> converter = jsonContext.create(BlogPostsPage.class);
+        Object object = converter.convert(page);
         BlogPageAssertions.assertBlogPostPageJsonEquals(page, object);
     }
 }
