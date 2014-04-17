@@ -8,24 +8,25 @@ import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
 import slieb.soy.annotations.Soy;
-import slieb.soy.factories.internal.Factory;
+import slieb.soy.context.RendererFactoryContext;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+import static slieb.soy.configuration.Loader.getRendererContext;
 
 public class RendererFactoryContextTest {
 
-    private final SoyTofu soyTofu = new SoyFileSet.Builder()
-            .add(getClass().getResource("/templates.soy"))
-            .build().compileToTofu();
+    private final SoyTofu soyTofu =
+            new SoyFileSet.Builder()
+                    .add(getClass().getResource("/templates.soy"))
+                    .build().compileToTofu();
 
     private RendererFactoryContext rendererFactoryContext;
 
     @Before
     public void setUp() throws Exception {
-        rendererFactoryContext = new RendererFactoryContext(soyTofu);
+        rendererFactoryContext = getRendererContext(soyTofu);
     }
 
 
@@ -37,7 +38,7 @@ public class RendererFactoryContextTest {
         class BasicString {
         }
 
-        Renderer<Object> renderer = rendererFactoryContext.create(BasicString.class);
+        Renderer<Object> renderer = rendererFactoryContext.getRenderer(BasicString.class);
         BasicString exampleUser = new BasicString();
         String expected = "basic";
         String result = renderer.render(exampleUser);
@@ -46,7 +47,7 @@ public class RendererFactoryContextTest {
 
     @Test
     public void testComplexSoyTemplateWithFactory() throws Exception {
-        Renderer<Object> renderer = rendererFactoryContext.create(User.class);
+        Renderer<Object> renderer = rendererFactoryContext.getRenderer(User.class);
         User exampleUser = new User("1");
         exampleUser.setName("John");
         exampleUser.setEmail("john@gmail.com");
@@ -56,19 +57,6 @@ public class RendererFactoryContextTest {
         assertEquals(expected, result);
     }
 
-    public static interface RendererFactory extends Factory<Renderer<Object>> {
-    }
-
-    @Test
-    public void testNoExceptionWhenAddingCustomFactoriesAfterFirstUse() {
-        rendererFactoryContext.addCustomFactory(mock(RendererFactory.class));
-    }
-
-    @Test(expected = IllegalStateException.class)
-    public void testExceptionWhenAddingCustomFactoriesAfterFirstUse() {
-        rendererFactoryContext.create(User.class);
-        rendererFactoryContext.addCustomFactory(mock(RendererFactory.class));
-    }
 
     @Test
     public void testCustomRendererAnnotation() {

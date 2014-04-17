@@ -1,29 +1,44 @@
 package slieb.soy.factories.soydata;
 
+
 import ch.lambdaj.function.convert.Converter;
+import com.google.inject.Singleton;
 import com.google.template.soy.data.SoyData;
-import slieb.soy.factories.internal.AbstractConverterFactory;
-import slieb.soy.factories.internal.ConverterFactoryContext;
-import slieb.soy.helpers.FactoryHelper;
+import slieb.soy.context.SoyDataFactoryContext;
+import slieb.soy.factories.SoyConverterFactory;
 
 import javax.annotation.Nonnull;
 
-public class SoyDataConverterFactory extends AbstractConverterFactory<SoyData> {
+import static com.google.common.base.Preconditions.checkArgument;
 
-    public SoyDataConverterFactory(FactoryHelper factoryHelper, ConverterFactoryContext<SoyData> factoryContext) {
-        super(factoryHelper, factoryContext);
-    }
+@Singleton
+public class SoyDataConverterFactory implements SoyConverterFactory, Converter<Object, SoyData> {
+
+    public static final SoyDataConverterFactory INSTANCE = new SoyDataConverterFactory();
+
+    public SoyDataConverterFactory() {}
 
 
     @Nonnull
     @Override
     public Boolean canCreate(@Nonnull Class<?> classObject) {
-        return Boolean.FALSE;
+        return SoyData.class.isAssignableFrom(classObject);
     }
+
 
     @Nonnull
     @Override
-    public Converter<Object, ? extends SoyData> create(@Nonnull Class<?> classObject) {
-        return null;
+    public Converter<Object, ? extends SoyData> create(@Nonnull Class<?> classObject, @Nonnull SoyDataFactoryContext context) {
+        checkArgument(canCreate(classObject));
+        return this;
+    }
+
+    @Override
+    public SoyData convert(Object from) {
+        if (from instanceof SoyData) {
+            return (SoyData) from;
+        } else {
+            return null;
+        }
     }
 }

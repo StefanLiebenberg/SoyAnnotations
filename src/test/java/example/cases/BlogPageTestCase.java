@@ -1,60 +1,37 @@
 package example.cases;
 
 
-import ch.lambdaj.function.convert.Converter;
-import example.assertions.BlogPageAssertions;
-import example.models.blog.BlogPost;
+import com.google.template.soy.data.SoyData;
 import example.models.blog.BlogPostsPage;
-import example.models.blog.Comment;
 import org.junit.Test;
-import slieb.soy.factories.json.JsonConverterFactoryContext;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
-import static java.lang.String.format;
+import static example.assertions.BlogPageAssertions.assertBlogPostPageJsonEquals;
+import static example.assertions.BlogPageAssertions.assertBlogPostPageSoyDataEquals;
+import static example.builders.BlogPostPageBuilder.getPage;
+import static slieb.soy.configuration.Loader.getFullJsonDataContext;
+import static slieb.soy.configuration.Loader.getFullSoyDataContext;
 
 public class BlogPageTestCase {
 
-    private Integer currentId = 0;
-
-    private String getId(String prefix) {
-        return format("%s-%s", prefix, currentId++);
+    @Test
+    public void testPageSoy() {
+        BlogPostsPage page = getPage(10, 5);
+        SoyData object = getFullSoyDataContext().convert(page);
+        assertBlogPostPageSoyDataEquals(page, object);
     }
-
-    private List<Comment> getComments(Integer depthOfComments) {
-        return newArrayList(getComment(depthOfComments), getComment(depthOfComments));
-    }
-
-    private Comment getComment(Integer depthOfComments) {
-        return new Comment(getId("Comment"), null, null,
-                depthOfComments > 0 ? getComments(depthOfComments - 1) : null, null);
-    }
-
-    private BlogPost getPost(Integer depthOfComments) {
-        return new BlogPost(getId("Post"), null, getComments(depthOfComments));
-    }
-
-    private List<BlogPost> getPosts(Integer number, Integer depthOfComments) {
-        List<BlogPost> posts = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            posts.add(getPost(depthOfComments));
-        }
-        return posts;
-    }
-
-    private BlogPostsPage getPage(Integer numberOfPosts, Integer depthOfComments) {
-        return new BlogPostsPage(getId("BlogPost"), getPosts(numberOfPosts, depthOfComments));
-    }
-
 
     @Test
-    public void testPage() {
-        BlogPostsPage page = getPage(10, 5);
-        JsonConverterFactoryContext jsonContext = new JsonConverterFactoryContext();
-        Converter<Object, ?> converter = jsonContext.create(BlogPostsPage.class);
-        Object object = converter.convert(page);
-        BlogPageAssertions.assertBlogPostPageJsonEquals(page, object);
+    public void testPageSoyWith3_3() {
+        BlogPostsPage page = getPage(3, 3);
+        SoyData object = getFullSoyDataContext().convert(page);
+        assertBlogPostPageSoyDataEquals(page, object);
     }
+
+    @Test
+    public void testPageJson() {
+        BlogPostsPage page = getPage(3, 3);
+        Object object = getFullJsonDataContext().convert(page);
+        assertBlogPostPageJsonEquals(page, object);
+    }
+
 }

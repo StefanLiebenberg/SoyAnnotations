@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import slieb.soy.annotations.CustomRenderer;
 import slieb.soy.annotations.Soy;
-import slieb.soy.helpers.DefaultFactoryHelper;
+import slieb.soy.context.RendererFactoryContext;
 
 import javax.annotation.Nullable;
 
@@ -48,22 +48,21 @@ public class CustomRendererFactoryTest {
     }
 
     @Mock
-    RendererFactoryContext mockFactoryContext;
+    private RendererFactoryContext mockRendererFactoryContext;
 
     private CustomRendererFactory customRendererFactory;
 
 
     @Before
     public void setUp() {
-        customRendererFactory = new CustomRendererFactory(mockFactoryContext,
-                DefaultFactoryHelper.INSTANCE);
+        customRendererFactory = new CustomRendererFactory();
     }
 
     @Test
     public void testRenderParrot() {
         assertTrue(customRendererFactory.canCreate(Parrot.class));
         assertFalse(customRendererFactory.canCreate(Dog.class));
-        assertEquals("parrot say whoo", customRendererFactory.create(Parrot.class).render(new Parrot()));
+        assertEquals("parrot say whoo", customRendererFactory.create(Parrot.class, mockRendererFactoryContext).render(new Parrot()));
     }
 
 }

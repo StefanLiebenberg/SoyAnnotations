@@ -2,17 +2,19 @@ package example.renderer;
 
 
 import example.models.Setting;
+import slieb.soy.context.RendererFactoryContext;
 import slieb.soy.factories.rendering.Renderer;
-import slieb.soy.factories.rendering.RendererFactoryContext;
+import slieb.soy.factories.rendering.RendererFactoryContextAware;
 
 import javax.annotation.Nullable;
 
-public class SettingsRenderer implements Renderer<Object> {
+public class SettingsRenderer implements Renderer<Object>, RendererFactoryContextAware {
 
-    private final RendererFactoryContext factoryContext;
+    private RendererFactoryContext factoryContext;
 
-    public SettingsRenderer(RendererFactoryContext factoryContext) {
-        this.factoryContext = factoryContext;
+    @Override
+    public void setRendererFactoryContext(RendererFactoryContext context) {
+        this.factoryContext = context;
     }
 
     @Nullable

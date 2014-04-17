@@ -9,6 +9,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
 
+
 public class SoyListDataConverter implements Converter<Object, SoyListData> {
 
     private final Converter<Object, ? extends SoyData> itemConverter;

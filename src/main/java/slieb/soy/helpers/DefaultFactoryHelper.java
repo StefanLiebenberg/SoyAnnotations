@@ -1,6 +1,7 @@
 package slieb.soy.helpers;
 
 
+import com.google.inject.Singleton;
 import slieb.soy.annotations.Soy;
 
 import javax.annotation.Nonnull;
@@ -9,11 +10,10 @@ import java.lang.reflect.Method;
 
 import static com.google.common.base.Preconditions.checkState;
 
+@Singleton
 public class DefaultFactoryHelper implements FactoryHelper {
 
-    public static DefaultFactoryHelper INSTANCE = new DefaultFactoryHelper();
-
-    private DefaultFactoryHelper() {}
+    public DefaultFactoryHelper() {}
 
     @Override
     @Nonnull

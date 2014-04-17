@@ -1,45 +1,57 @@
 package slieb.soy.factories.soydata;
 
+import ch.lambdaj.function.convert.Converter;
 import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
-import slieb.soy.converters.ClassConverter;
-import slieb.soy.converters.soydata.LongConverter;
-import slieb.soy.converters.ObjectConverter;
+import slieb.soy.context.SoyDataFactoryContext;
+import slieb.soy.converters.soydata.*;
 
 import static org.junit.Assert.assertTrue;
+import static slieb.soy.configuration.Loader.getFullSoyDataContext;
 
 public class SoyDataConverterFactoryTest {
 
-    public SoyDataConverterFactoryContext factoryContext;
+    public SoyDataFactoryContext factoryContext;
 
     @Before
     public void setUp() {
-        factoryContext = new SoyDataConverterFactoryContext();
+        factoryContext = getFullSoyDataContext();
     }
 
     @Test
     public void testCreateClassConverter() {
-        assertTrue(factoryContext.create(User.class) instanceof ClassConverter);
+        Converter converter = factoryContext.create(User.class);
+        assertTrue(converter instanceof ClassToSoyMapDataConverter);
     }
 
     @Test
     public void testCreateBooleanConverter() {
-        assertTrue(factoryContext.create(Boolean.class) instanceof ObjectConverter);
+        Converter converter = factoryContext.create(Boolean.class);
+        assertTrue(converter instanceof BooleanDataConverter);
     }
 
     @Test
     public void testCreateLongConverter() {
-        assertTrue(factoryContext.create(Long.class) instanceof LongConverter);
+        Converter converter = factoryContext.create(Long.class);
+        assertTrue(converter instanceof LongDataConverter);
     }
 
     @Test
-    public void testCreateNumberConverter() {
-        assertTrue(factoryContext.create(Integer.class) instanceof ObjectConverter);
+    public void testCreateIntegerConverter() {
+        Converter converter = factoryContext.create(Integer.class);
+        assertTrue(converter instanceof IntegerDataConverter);
+    }
+
+    @Test
+    public void testCreateFloatConverter() {
+        Converter converter = factoryContext.create(Float.class);
+        assertTrue(converter instanceof FloatDataConverter);
     }
 
     @Test
     public void testCreateStringConverter() {
-        assertTrue(factoryContext.create(String.class) instanceof ObjectConverter);
+        Converter converter = factoryContext.create(String.class);
+        assertTrue(converter instanceof StringDataConverter);
     }
 }

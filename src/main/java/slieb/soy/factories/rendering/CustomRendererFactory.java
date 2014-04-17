@@ -1,51 +1,35 @@
 package slieb.soy.factories.rendering;
 
+import com.google.inject.Singleton;
 import slieb.soy.annotations.CustomRenderer;
-import slieb.soy.factories.internal.AbstractRendererFactory;
-import slieb.soy.helpers.FactoryHelper;
+import slieb.soy.context.RendererFactoryContext;
+import slieb.soy.factories.RendererFactory;
 
 import javax.annotation.Nonnull;
-import java.lang.reflect.Constructor;
 
+@Singleton
+public class CustomRendererFactory implements RendererFactory {
 
-public class CustomRendererFactory extends AbstractRendererFactory {
-
-    private final FactoryHelper factoryHelper;
-
-    public CustomRendererFactory(RendererFactoryContext factoryContext, FactoryHelper factoryHelper) {
-        super(factoryContext);
-        this.factoryHelper = factoryHelper;
+    private Class<? extends Renderer<Object>> getRendererClass(Class<?> classObject) {
+        return classObject.getAnnotation(CustomRenderer.class).value();
     }
 
+    private Renderer<Object> getRendererInstance(Class<? extends Renderer<Object>> rendererClass,
+                                                 RendererFactoryContext context) {
+        try {
+            Renderer<Object> renderer = rendererClass.newInstance();
+            if (renderer instanceof RendererFactoryContextAware) {
+                ((RendererFactoryContextAware) renderer).setRendererFactoryContext(context);
+            }
+            return renderer;
+        } catch (ReflectiveOperationException r) {
+            throw new RuntimeException(r);
+        }
+    }
 
-    @Nonnull
     @Override
-    public Renderer<Object> create(@Nonnull Class<?> classObject) {
-        Class<? extends Renderer<Object>> rendererClass = classObject.getAnnotation(CustomRenderer.class).value();
-
-
-        Constructor<? extends Renderer<Object>> rendererConstructor;
-        try {
-            rendererConstructor = rendererClass.getConstructor(FactoryHelper.class, RendererFactoryContext.class);
-            if (rendererConstructor != null) {
-                return rendererConstructor.newInstance(factoryHelper, factoryContext);
-            }
-        } catch (Exception exception) {
-        }
-
-        try {
-            rendererConstructor = rendererClass.getConstructor(RendererFactoryContext.class);
-            if (rendererConstructor != null) {
-                return rendererConstructor.newInstance(factoryContext);
-            }
-        } catch (ReflectiveOperationException exception) {
-        }
-
-        try {
-            return rendererClass.newInstance();
-        } catch (ReflectiveOperationException exception) {
-            throw new RuntimeException(exception);
-        }
+    public Renderer<Object> create(Class<?> classObject, RendererFactoryContext context) {
+        return getRendererInstance(getRendererClass(classObject), context);
     }
 
     @Nonnull

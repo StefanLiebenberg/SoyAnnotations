@@ -3,7 +3,7 @@ package example.models;
 import example.renderer.SettingsRenderer;
 import slieb.soy.annotations.CustomRenderer;
 import slieb.soy.annotations.Soy;
-import slieb.soy.factories.rendering.RendererFactoryContext;
+import slieb.soy.context.RendererFactoryContext;
 
 import static java.lang.String.format;
 

@@ -1,8 +1,9 @@
 package slieb.soy.factories.internal;
 
 
+import slieb.soy.factories.Factory;
 import slieb.soy.factories.rendering.Renderer;
-import slieb.soy.factories.rendering.RendererFactoryContext;
+import slieb.soy.context.RendererFactoryContext;
 import slieb.soy.renderers.DynamicRenderer;
 
 import javax.annotation.Nonnull;

@@ -8,7 +8,7 @@ public class MissingFactory extends RuntimeException {
     public static final String MESSAGE_FORMAT = "Cannot find factory for %s";
 
     public MissingFactory(Class<?> classObject) {
-        this(format(MESSAGE_FORMAT, classObject.getCanonicalName()));
+        this(format(MESSAGE_FORMAT, classObject.getName()));
     }
 
     public MissingFactory() {

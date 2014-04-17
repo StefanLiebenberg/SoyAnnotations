@@ -1,26 +1,32 @@
 package slieb.soy.factories.rendering;
 
 
-import slieb.soy.factories.internal.AbstractRendererFactory;
-import slieb.soy.renderers.ObjectRenderer;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import slieb.soy.context.RendererFactoryContext;
+import slieb.soy.factories.RendererFactory;
+import slieb.soy.renderers.NativeRenderer;
 
 import javax.annotation.Nonnull;
 
-public class NativeRendererFactory extends AbstractRendererFactory {
+@Singleton
+public class NativeRendererFactory implements RendererFactory {
 
-    public NativeRendererFactory(RendererFactoryContext factoryContext) {
-        super(factoryContext);
-    }
+    private final NativeRenderer nativeRenderer;
 
-    @Nonnull
-    @Override
-    public Renderer<Object> create(@Nonnull Class<?> classObject) {
-        return ObjectRenderer.INSTANCE;
+    @Inject
+    public NativeRendererFactory(NativeRenderer nativeRenderer) {
+        this.nativeRenderer = nativeRenderer;
     }
 
     @Nonnull
     @Override
     public Boolean canCreate(@Nonnull Class<?> classObject) {
         return Boolean.TRUE;
+    }
+
+    @Override
+    public Renderer<Object> create(Class<?> classObject, RendererFactoryContext context) {
+        return nativeRenderer;
     }
 }

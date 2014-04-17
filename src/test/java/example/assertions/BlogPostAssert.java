@@ -1,33 +1,39 @@
 package example.assertions;
 
 import com.google.template.soy.data.SoyData;
+import com.google.template.soy.data.SoyMapData;
 import example.models.blog.BlogPost;
-import example.models.blog.Comment;
 
-import java.util.List;
 import java.util.Map;
 
+import static example.assertions.CommentAssert.assertCommentsEqualsJson;
+import static example.assertions.CommentAssert.assertCommentsSoyDataEquals;
+import static example.assertions.SoyDataAssertions.assertNullData;
+import static example.assertions.SoyDataAssertions.assertString;
 import static org.junit.Assert.*;
 
 
 public class BlogPostAssert {
 
-    public static void assertCommentsEquals(List<Comment> blogPosts, Object postsObject) {
-        CommentAssert.assertCommentsEquals(blogPosts, postsObject);
-    }
-
-    public static void assertBlogPostEqualsJson(BlogPost postModel, Object postObject) {
+    public static void assertBlogPostJsonEquals(BlogPost postModel, Object postObject) {
         if (postModel != null) {
             assertTrue(postObject instanceof Map);
             assertEquals(postModel.getId(), ((Map) postObject).get("Id"));
             assertEquals(postModel.getContent(), ((Map) postObject).get("Content"));
-            assertCommentsEquals(postModel.getComments(), ((Map) postObject).get("Comments"));
+            assertCommentsEqualsJson(postModel.getComments(), ((Map) postObject).get("Comments"));
         } else {
             assertNull(postObject);
         }
     }
 
-    public static void assertBlogPostEqualsSoyData(BlogPost postModel, SoyData postObject) {
-        throw new RuntimeException();
+    public static void assertBlogPostSoyDataEquals(BlogPost postModel, SoyData postObject) {
+        if (postModel != null) {
+            assertTrue(postObject instanceof SoyMapData);
+            assertString(postModel.getId(), ((SoyMapData) postObject).get("Id"));
+            assertString(postModel.getContent(), ((SoyMapData) postObject).get("Content"));
+            assertCommentsSoyDataEquals(postModel.getComments(), ((SoyMapData) postObject).get("Comments"));
+        } else {
+            assertNullData(postObject);
+        }
     }
 }

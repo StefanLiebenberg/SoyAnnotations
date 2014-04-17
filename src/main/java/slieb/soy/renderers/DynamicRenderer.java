@@ -2,7 +2,7 @@ package slieb.soy.renderers;
 
 
 import slieb.soy.factories.rendering.Renderer;
-import slieb.soy.factories.rendering.RendererFactoryContext;
+import slieb.soy.context.RendererFactoryContext;
 
 import javax.annotation.Nullable;
 

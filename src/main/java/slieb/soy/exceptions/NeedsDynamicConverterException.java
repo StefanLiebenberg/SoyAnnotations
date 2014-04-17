@@ -2,6 +2,7 @@ package slieb.soy.exceptions;
 
 
 public class NeedsDynamicConverterException extends RuntimeException {
+    //todo, add member here for better debugin.
     public NeedsDynamicConverterException() {
     }
 

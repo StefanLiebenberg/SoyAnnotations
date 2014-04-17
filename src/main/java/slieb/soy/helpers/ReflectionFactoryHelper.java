@@ -1,6 +1,7 @@
 package slieb.soy.helpers;
 
 
+import com.google.inject.Singleton;
 import slieb.soy.exceptions.UnsupportedFunctionality;
 
 import javax.annotation.Nonnull;
@@ -13,6 +14,7 @@ import static com.google.common.primitives.Primitives.isWrapperType;
 import static java.lang.reflect.Modifier.isPublic;
 import static java.lang.reflect.Modifier.isStatic;
 
+@Singleton
 public class ReflectionFactoryHelper implements FactoryHelper {
 
     private Boolean isContainerType(Class<?> classObject) {

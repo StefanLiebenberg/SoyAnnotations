@@ -16,10 +16,18 @@ public class NullSafeConverter implements Converter<Object, SoyData> {
         this.converter = converter;
     }
 
+    public Converter<Object, ? extends SoyData> getNestedConverter() {
+        return converter;
+    }
+
     @Override
     @Nonnull
     public SoyData convert(@Nullable Object from) {
-        return convertResult(converter.convert(from));
+        if (from != null) {
+            return convertResult(converter.convert(from));
+        } else {
+            return NullData.INSTANCE;
+        }
     }
 
 

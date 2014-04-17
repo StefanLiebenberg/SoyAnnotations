@@ -1,6 +1,7 @@
 package slieb.soy.renderers;
 
 
+import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.tofu.SoyTofu;
 import slieb.soy.factories.rendering.Renderer;
@@ -8,7 +9,7 @@ import slieb.soy.factories.rendering.Renderer;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class DataRenderer implements Renderer<SoyMapData> {
+public class DataRenderer implements Renderer<SoyData> {
 
     private final SoyTofu tofu;
 
@@ -35,7 +36,7 @@ public class DataRenderer implements Renderer<SoyMapData> {
 
     @Nullable
     @Override
-    public String render(@Nullable SoyMapData data) {
-        return getRenderer().setData(data).render();
+    public String render(@Nullable SoyData data) {
+        return getRenderer().setData((SoyMapData) data).render();
     }
 }
