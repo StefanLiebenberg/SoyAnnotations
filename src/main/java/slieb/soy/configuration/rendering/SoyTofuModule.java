@@ -2,6 +2,7 @@ package slieb.soy.configuration.rendering;
 
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
 import com.google.template.soy.tofu.SoyTofu;
 
 public class SoyTofuModule extends AbstractModule {
@@ -14,6 +15,11 @@ public class SoyTofuModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(SoyTofu.class).toInstance(soyTofu);
+//        bind(SoyTofu.class).toInstance(soyTofu);
+    }
+
+    @Provides
+    public SoyTofu getSoyTofu () {
+        return soyTofu;
     }
 }

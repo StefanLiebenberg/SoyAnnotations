@@ -11,6 +11,7 @@ import slieb.soy.configuration.rendering.SoyTofuModule;
 import slieb.soy.configuration.soydata.BasicSoyDataConvertersFactoryModule;
 import slieb.soy.configuration.soydata.LazyClassSoyFactoriesModule;
 import slieb.soy.configuration.soydata.MetaClassBindingsModule;
+import slieb.soy.context.Context;
 import slieb.soy.context.JsonDataFactoryContext;
 import slieb.soy.context.RendererFactoryContext;
 import slieb.soy.context.SoyDataFactoryContext;
@@ -78,5 +79,22 @@ public class Loader {
                 new MetaFactoriesModule(),
                 new MetaClassBindingsModule())
                 .getInstance(RendererFactoryContext.class);
+    }
+
+    public static Context getContext(SoyTofu soyTofu) {
+        return createInjector(
+                new DefaultFactoryHelperModule(),
+                new RenderingFactoriesModule(),
+                new SoyTofuModule(soyTofu),
+                new BasicSoyDataConvertersFactoryModule(),
+                new BasicJsonDataConvertersFactoryModule(),
+                new MetaFactoriesModule(),
+                new MetaClassBindingsModule(),
+                new MetaJsonDataConvertersFactoryModule()
+        ).getInstance(Context.class);
+    }
+
+    public static Context getContext() {
+        return getContext(null);
     }
 }

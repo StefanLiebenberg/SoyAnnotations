@@ -12,6 +12,8 @@ import slieb.soy.helpers.FactoryHelper;
 import slieb.soy.renderers.ClassRenderer;
 import slieb.soy.renderers.DataRenderer;
 
+import javax.annotation.Nullable;
+
 public class TemplateRendererFactory implements RendererFactory {
 
     private final FactoryHelper factoryHelper;
@@ -21,7 +23,7 @@ public class TemplateRendererFactory implements RendererFactory {
     private final SoyTofu soyTofu;
 
     @Inject
-    public TemplateRendererFactory(FactoryHelper factoryHelper, SoyDataFactoryContext soyDataFactoryContext, SoyTofu soyTofu) {
+    public TemplateRendererFactory(FactoryHelper factoryHelper, SoyDataFactoryContext soyDataFactoryContext, @Nullable SoyTofu soyTofu) {
         this.factoryHelper = factoryHelper;
         this.soyDataFactoryContext = soyDataFactoryContext;
         this.soyTofu = soyTofu;

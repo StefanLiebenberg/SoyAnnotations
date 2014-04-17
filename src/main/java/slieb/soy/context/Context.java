@@ -26,6 +26,10 @@ public class Context {
         return soyDataFactoryContext.getSoyMapData(instanceObject);
     }
 
+    public Object getJsonData(Object instanceObject) {
+        return jsonDataFactoryContext.convert(instanceObject);
+    }
+
     public String getRenderString(Object object) {
         return rendererFactoryContext.render(object);
     }
