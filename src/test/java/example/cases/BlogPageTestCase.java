@@ -5,12 +5,12 @@ import com.google.template.soy.data.SoyData;
 import example.models.blog.BlogPostsPage;
 import org.junit.Before;
 import org.junit.Test;
-import slieb.soy.context.Context;
+import slieb.soy.Context;
 
 import static example.assertions.BlogPageAssertions.assertBlogPostPageJsonEquals;
 import static example.assertions.BlogPageAssertions.assertBlogPostPageSoyDataEquals;
 import static example.builders.BlogPostPageBuilder.getPage;
-import static slieb.soy.configuration.Loader.getContext;
+import static slieb.soy.Loader.getContext;
 
 public class BlogPageTestCase {
 

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static slieb.soy.configuration.Loader.getFullJsonDataContext;
+import static slieb.soy.Loader.getFullJsonDataContext;
 
 
 public class FullJsonDataConverterFactoryContextTest {

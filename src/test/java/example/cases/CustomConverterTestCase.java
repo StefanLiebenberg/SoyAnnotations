@@ -4,7 +4,7 @@ package example.cases;
 import org.junit.Test;
 import slieb.soy.annotations.CustomConverter;
 import slieb.soy.annotations.Soy;
-import slieb.soy.configuration.Loader;
+import slieb.soy.Loader;
 import slieb.soy.context.SoyDataFactoryContext;
 import slieb.soy.meta.MetaConverter;
 

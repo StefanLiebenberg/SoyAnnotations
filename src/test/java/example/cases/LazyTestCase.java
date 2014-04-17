@@ -3,7 +3,7 @@ package example.cases;
 
 import com.google.template.soy.data.SoyData;
 import org.junit.Test;
-import slieb.soy.configuration.Loader;
+import slieb.soy.Loader;
 import slieb.soy.annotations.Soy;
 import slieb.soy.context.SoyDataFactoryContext;
 

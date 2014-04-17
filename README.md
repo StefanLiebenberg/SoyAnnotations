@@ -52,7 +52,8 @@ public class User {
 **UserApplication.java:**
 ```java
 import com.google.template.soy.SoyFileSet;
-import slieb.soy.factories.rendering.RenderFactoryContext;
+import slieb.soy.Context;
+import slieb.soy.Loader;
 
 
 public class UserApplication {
@@ -63,27 +64,16 @@ public class UserApplication {
         .add(new File("templates.soy"))
         .compileToFu();
 
-    RendererFactoryContext context = new RendererFactoryContext(soyTofu);
+    Context context = Loader.getContext(soyTofu);
 
     User user = new User("John", "john@domain.com");
-    String result = context.render(user); // "John (john@domain.com)"
+
+    SoyData data = context.getSoyData(user); // SoyData to match
+
+    Object jsonData = context.getJsonData(user); // JsonData to match
+
+    String result = context.getRenderString(user); // "John (john@domain.com)"
 
   }
 }
 ```
-
-
-##Important Classes:
-
-
-### RendererFactoryContext:
-
-Used for rendering a `Class<?>` object into a string.
-
-### SoyDataConverterFactoryContext
-
-Used for converting a `Class<?>` into soyData.
-
-### JsonConverterFactoryContext
-
-Used to convert a `Class<?>` into a `Map<String, Object>` object.

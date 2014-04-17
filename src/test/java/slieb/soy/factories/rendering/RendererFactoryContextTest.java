@@ -13,7 +13,7 @@ import slieb.soy.context.RendererFactoryContext;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static slieb.soy.configuration.Loader.getRendererContext;
+import static slieb.soy.Loader.getRendererContext;
 
 public class RendererFactoryContextTest {
 

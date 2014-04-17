@@ -6,7 +6,7 @@ import org.junit.Test;
 import slieb.soy.context.SoyDataFactoryContext;
 import slieb.soy.exceptions.NeedsDynamicConverterException;
 
-import static slieb.soy.configuration.Loader.getFullSoyDataContext;
+import static slieb.soy.Loader.getFullSoyDataContext;
 
 public class SoyDataConverterFactoryDynamicExceptionsTest {
 

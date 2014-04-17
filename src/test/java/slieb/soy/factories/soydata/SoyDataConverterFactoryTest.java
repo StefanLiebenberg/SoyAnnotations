@@ -8,7 +8,7 @@ import slieb.soy.context.SoyDataFactoryContext;
 import slieb.soy.converters.soydata.*;
 
 import static org.junit.Assert.assertTrue;
-import static slieb.soy.configuration.Loader.getFullSoyDataContext;
+import static slieb.soy.Loader.getFullSoyDataContext;
 
 public class SoyDataConverterFactoryTest {
 

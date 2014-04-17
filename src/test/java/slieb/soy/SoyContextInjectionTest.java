@@ -4,7 +4,7 @@ package slieb.soy;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
-import static slieb.soy.configuration.Loader.*;
+import static slieb.soy.Loader.*;
 
 
 public class SoyContextInjectionTest {
