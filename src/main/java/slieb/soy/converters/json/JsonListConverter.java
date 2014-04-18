@@ -10,15 +10,15 @@ import java.util.List;
 
 public class JsonListConverter implements Converter<Object, List> {
 
-    private final Converter typeConverter;
+    private final Converter<Object, ?> typeConverter;
 
-    public JsonListConverter(@Nonnull Converter typeConverter) {
+    public JsonListConverter(@Nonnull Converter<Object, ?> typeConverter) {
         this.typeConverter = typeConverter;
     }
 
     @Override
     public List convert(Object from) {
-        if (from != null && from instanceof Collection) {
+        if (from instanceof Collection) {
             return Lambda.convert(from, typeConverter);
         } else {
             return null;

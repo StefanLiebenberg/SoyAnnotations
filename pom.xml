@@ -29,6 +29,12 @@
         </developer>
     </developers>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <build>
         <plugins>
             <plugin>
@@ -110,12 +116,8 @@
     </dependencies>
 
     <scm>
-        <connection>
-            scm:git:git://github.com/StefanLiebenberg/SoyAnnotations.git
-        </connection>
-        <developerConnection>
-            scm:git:git@github.com:StefanLiebenberg/SoyAnnotations.git
-        </developerConnection>
+        <connection>scm:git:git://github.com/StefanLiebenberg/SoyAnnotations.git</connection>
+        <developerConnection>scm:git:git@github.com:StefanLiebenberg/SoyAnnotations.git</developerConnection>
         <url>http://github.com/StefanLiebenberg/SoyAnnotations</url>
     </scm>
 
