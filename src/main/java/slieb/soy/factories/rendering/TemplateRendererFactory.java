@@ -12,7 +12,8 @@ import slieb.soy.helpers.FactoryHelper;
 import slieb.soy.renderers.ClassRenderer;
 import slieb.soy.renderers.DataRenderer;
 
-import javax.annotation.Nullable;
+import javax.inject.Named;
+import java.util.Set;
 
 public class TemplateRendererFactory implements RendererFactory {
 
@@ -22,11 +23,15 @@ public class TemplateRendererFactory implements RendererFactory {
 
     private final SoyTofu soyTofu;
 
+    private final Set<String> delegatePackages;
+
     @Inject
-    public TemplateRendererFactory(FactoryHelper factoryHelper, SoyDataFactoryContext soyDataFactoryContext, @Nullable SoyTofu soyTofu) {
+    public TemplateRendererFactory(FactoryHelper factoryHelper, SoyDataFactoryContext soyDataFactoryContext, SoyTofu soyTofu,
+                                   @Named("DelegatePackages") Set<String> delegatePackages) {
         this.factoryHelper = factoryHelper;
         this.soyDataFactoryContext = soyDataFactoryContext;
         this.soyTofu = soyTofu;
+        this.delegatePackages = delegatePackages;
     }
 
     @Override
@@ -38,7 +43,7 @@ public class TemplateRendererFactory implements RendererFactory {
     public Renderer<Object> create(Class<?> classObject, RendererFactoryContext context) {
         String templateName = factoryHelper.getTemplateName(classObject);
         Converter<Object, ? extends SoyData> dataConverter = soyDataFactoryContext.create(classObject);
-        Renderer<SoyData> dataRenderer = new DataRenderer(soyTofu, templateName, null);
+        Renderer<SoyData> dataRenderer = new DataRenderer(soyTofu, templateName, delegatePackages);
         return new ClassRenderer(dataConverter, dataRenderer);
     }
 }

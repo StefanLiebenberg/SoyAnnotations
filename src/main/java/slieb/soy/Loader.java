@@ -8,6 +8,7 @@ import slieb.soy.configuration.DefaultFactoryHelperModule;
 import slieb.soy.configuration.jsondata.BasicJsonDataConvertersFactoryModule;
 import slieb.soy.configuration.jsondata.MetaJsonDataConvertersFactoryModule;
 import slieb.soy.configuration.meta.MetaFactoriesModule;
+import slieb.soy.configuration.rendering.DelegateTemplates;
 import slieb.soy.configuration.rendering.RenderingFactoriesModule;
 import slieb.soy.configuration.rendering.SoyTofuModule;
 import slieb.soy.configuration.soydata.BasicSoyDataConvertersFactoryModule;
@@ -16,6 +17,9 @@ import slieb.soy.configuration.soydata.MetaClassBindingsModule;
 import slieb.soy.context.JsonDataFactoryContext;
 import slieb.soy.context.RendererFactoryContext;
 import slieb.soy.context.SoyDataFactoryContext;
+import slieb.soy.factories.rendering.Renderer;
+
+import java.util.Set;
 
 import static com.google.inject.Guice.createInjector;
 
@@ -71,9 +75,10 @@ public class Loader {
         return getLazySoyDataInjector().getInstance(SoyDataFactoryContext.class);
     }
 
-    public static RendererFactoryContext getRendererContext(SoyTofu soyTofu) {
+    public static RendererFactoryContext getRendererContext(SoyTofu soyTofu, Set<String> delegatePackages) {
         return createInjector(
                 new DefaultFactoryHelperModule(),
+                new DelegateTemplates(delegatePackages),
                 new RenderingFactoriesModule(),
                 new SoyTofuModule(soyTofu),
                 new BasicSoyDataConvertersFactoryModule(),
@@ -82,9 +87,10 @@ public class Loader {
                 .getInstance(RendererFactoryContext.class);
     }
 
-    public static DataConverter getContext(SoyTofu soyTofu) {
+    public static Sauce getContext(SoyTofu soyTofu, Set<String> delegatePackages) {
         return createInjector(
                 new DefaultFactoryHelperModule(),
+                new DelegateTemplates(delegatePackages),
                 new RenderingFactoriesModule(),
                 new SoyTofuModule(soyTofu),
                 new BasicSoyDataConvertersFactoryModule(),
@@ -92,10 +98,16 @@ public class Loader {
                 new MetaFactoriesModule(),
                 new MetaClassBindingsModule(),
                 new MetaJsonDataConvertersFactoryModule()
-        ).getInstance(DataConverter.class);
+        ).getInstance(Sauce.class);
     }
 
-    public static DataConverter getContext() {
-        return getContext(null);
+    public static Sauce getContext() {
+        return getContext(null, null);
     }
+
+    public static Renderer<Object> getRenderer(SoyTofu tofu, Set<String> delegatePackages) {
+        return getRendererContext(tofu, delegatePackages);
+    }
+
+
 }

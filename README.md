@@ -51,7 +51,7 @@ public class User {
 **UserApplication.java:**
 ```java
 import com.google.template.soy.SoyFileSet;
-import slieb.soy.DataConverter;
+import slieb.soy.Sauce;
 import slieb.soy.Loader;
 
 

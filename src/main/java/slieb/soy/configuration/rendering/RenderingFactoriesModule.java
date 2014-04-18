@@ -17,6 +17,5 @@ public class RenderingFactoriesModule extends AbstractModule {
         binder.addBinding().to(NativeRendererFactory.class);
         binder.addBinding().to(TemplateRendererFactory.class);
         binder.addBinding().to(CustomRendererFactory.class);
-
     }
 }

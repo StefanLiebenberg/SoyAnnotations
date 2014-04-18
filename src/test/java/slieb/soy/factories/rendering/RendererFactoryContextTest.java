@@ -26,7 +26,7 @@ public class RendererFactoryContextTest {
 
     @Before
     public void setUp() throws Exception {
-        rendererFactoryContext = getRendererContext(soyTofu);
+        rendererFactoryContext = getRendererContext(soyTofu, null);
     }
 
 
