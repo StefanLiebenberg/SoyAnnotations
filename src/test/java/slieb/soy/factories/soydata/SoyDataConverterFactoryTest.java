@@ -1,22 +1,26 @@
 package slieb.soy.factories.soydata;
 
 import ch.lambdaj.function.convert.Converter;
+import com.google.inject.Injector;
 import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
+import slieb.soy.Loader;
 import slieb.soy.context.SoyDataFactoryContext;
 import slieb.soy.converters.soydata.*;
 
 import static org.junit.Assert.assertTrue;
-import static slieb.soy.Loader.getFullSoyDataContext;
+
 
 public class SoyDataConverterFactoryTest {
+
+    private final Injector injector = Loader.getFullInjector();
 
     public SoyDataFactoryContext factoryContext;
 
     @Before
     public void setUp() {
-        factoryContext = getFullSoyDataContext();
+        factoryContext = injector.getInstance(SoyDataFactoryContext.class);
     }
 
     @Test

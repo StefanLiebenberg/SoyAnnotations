@@ -2,12 +2,13 @@ package slieb.soy.context;
 
 import ch.lambdaj.function.convert.Converter;
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
+import com.google.inject.Injector;
 import example.models.AnnotatedCommentExample;
 import example.models.AnnotatedPostExample;
 import example.models.AnnotatedUserExample;
 import org.junit.Before;
 import org.junit.Test;
+import slieb.soy.Loader;
 import slieb.soy.converters.json.ClassToMapConverter;
 import slieb.soy.converters.json.NativeJsonConverter;
 
@@ -15,17 +16,16 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
-import static slieb.soy.Loader.getFullJsonDataContext;
 
 
 public class FullJsonDataConverterFactoryContextTest {
 
-    @Inject
+    private Injector injector = Loader.getFullInjector();
     private JsonDataFactoryContext factoryContext;
 
     @Before
     public void setup() {
-        factoryContext = getFullJsonDataContext();
+        factoryContext = injector.getInstance(JsonDataFactoryContext.class);
     }
 
     private void assertUserEquals(AnnotatedUserExample userExample, Object userObject) {

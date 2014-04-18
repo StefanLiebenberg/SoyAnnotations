@@ -1,6 +1,7 @@
 package example.cases;
 
 
+import com.google.inject.Injector;
 import com.google.template.soy.data.SoyData;
 import org.junit.Test;
 import slieb.soy.Loader;
@@ -8,6 +9,7 @@ import slieb.soy.annotations.Soy;
 import slieb.soy.context.SoyDataFactoryContext;
 
 public class LazyTestCase {
+
 
     @Soy
     @Soy.Dynamic
@@ -56,21 +58,24 @@ public class LazyTestCase {
 
     @Test
     public void testExceptionIsNotThrownNormalChain() {
-        SoyDataFactoryContext context = Loader.getFullSoyDataContext();
+        Injector injector = Loader.getFullInjector();
+        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
         Node node = createChain(3, null);
         SoyData soyData = context.convert(node);
     }
 
     @Test(expected = StackOverflowError.class)
     public void testExceptionIsThrownOnSelfReferencingChain() {
-        SoyDataFactoryContext context = Loader.getFullSoyDataContext();
+        Injector injector = Loader.getFullInjector();
+        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
         Node node = createSelfReferenceChain(10);
         SoyData soyData = context.convert(node);
     }
 
     @Test
     public void testExceptionIsNotThrownOnSelfReferencingChainWithLazyContext() {
-        SoyDataFactoryContext context = Loader.getLazySoyDataContext();
+        Injector injector = Loader.getLazyInjector();
+        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
         Node node = createSelfReferenceChain(10);
         SoyData soyData = context.convert(node);
     }

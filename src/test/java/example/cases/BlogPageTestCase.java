@@ -1,45 +1,41 @@
 package example.cases;
 
 
-import com.google.template.soy.data.SoyData;
+import com.google.inject.Injector;
 import example.models.blog.BlogPostsPage;
 import org.junit.Before;
 import org.junit.Test;
-import slieb.soy.Sauce;
+import slieb.soy.Loader;
+import slieb.soy.context.JsonDataFactoryContext;
+import slieb.soy.context.SoyDataFactoryContext;
 
 import static example.assertions.BlogPageAssertions.assertBlogPostPageJsonEquals;
 import static example.assertions.BlogPageAssertions.assertBlogPostPageSoyDataEquals;
 import static example.builders.BlogPostPageBuilder.getPage;
-import static slieb.soy.Loader.getContext;
 
 public class BlogPageTestCase {
 
-    private Sauce sauce;
+    private Injector injector = Loader.getFullInjector();
+
+    private BlogPostsPage page;
 
     @Before
     public void setup() {
-        sauce = getContext();
+        page = getPage(10, 5);
+
     }
 
     @Test
     public void testPageSoy() {
-        BlogPostsPage page = getPage(10, 5);
-        SoyData object = sauce.getSoyData(page);
-        assertBlogPostPageSoyDataEquals(page, object);
-    }
-
-    @Test
-    public void testPageSoyWith3_3() {
-        BlogPostsPage page = getPage(3, 3);
-        SoyData object = sauce.getSoyData(page);
-        assertBlogPostPageSoyDataEquals(page, object);
+        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        assertBlogPostPageSoyDataEquals(page, context.getSoyData(page));
     }
 
     @Test
     public void testPageJson() {
-        BlogPostsPage page = getPage(3, 3);
-        Object object = sauce.getJsonData(page);
-        assertBlogPostPageJsonEquals(page, object);
+        JsonDataFactoryContext context = injector.getInstance(JsonDataFactoryContext.class);
+        // todo, add getJson and getJsonMap to context as methods.
+        assertBlogPostPageJsonEquals(page, context.convert(page));
     }
 
 }

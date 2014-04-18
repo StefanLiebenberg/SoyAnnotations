@@ -1,19 +1,20 @@
 package example.cases;
 
 
+import com.google.inject.Injector;
 import org.junit.Test;
+import slieb.soy.Loader;
 import slieb.soy.annotations.CustomConverter;
 import slieb.soy.annotations.Soy;
-import slieb.soy.Loader;
 import slieb.soy.context.SoyDataFactoryContext;
 import slieb.soy.meta.MetaConverter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.String.format;
-
 public class CustomConverterTestCase {
+
+    private final Injector injector = Loader.getFullInjector();
 
     public static class ExampleToMapConverter implements MetaConverter {
 
@@ -46,14 +47,11 @@ public class CustomConverterTestCase {
             this.userEmail = userEmail;
         }
 
-        public String getHash() {
-            return format("%s:%s", userName, userEmail);
-        }
     }
 
     @Test
     public void testCustomConverter() {
-        SoyDataFactoryContext context = Loader.getFullSoyDataContext();
+        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
         Example example = new Example("John", "john@domain.com");
         Object object = context.convert(example);
     }

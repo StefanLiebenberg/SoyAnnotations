@@ -51,27 +51,32 @@ public class User {
 **UserApplication.java:**
 ```java
 import com.google.template.soy.SoyFileSet;
-import slieb.soy.Sauce;
+import slieb.soy.factories.jsondata.JsonDataFactoryContext;
+import slieb.soy.factories.soydata.SoyDataFactoryContext;
+import slieb.soy.factories.rendering.RendererFactoryContext;
 import slieb.soy.Loader;
 
 
 public class UserApplication {
-  
-  public static void main (final String[] args) {
 
-    SoyTofu soyTofu = new SoyFileSet.Builder()
+  private static final SoyTofu soyTofu = new SoyFileSet.Builder()
         .add(new File("templates.soy"))
         .compileToFu();
 
-    Sauce sauce = Loader.getContext(soyTofu);
+  private static final Injector injector = Loader.getFullInjector(soyTofu, null);
+  
+  public static void main (final String[] args) {
 
     User user = new User("John", "john@domain.com");
 
-    SoyData data = sauce.getSoyData(user); // SoyData to match
+    SoyDataFactoryContext soyContext = injector.getInstance(SoyDataFactoryContext.class);
+    SoyData data = soyContext.getSoyData(user); // SoyData to match
 
-    Object jsonData = sauce.getJsonData(user); // JsonData to match
+    JsonDataFactoryContext jsonContext = injector.getInstance(JsonDataFactoryContext.class);
+    Object jsonData = jsonContext.getJsonData(user); // JsonData to match
 
-    String result = sauce.getRenderString(user); // "John (john@domain.com)"
+    RendererFactoryContext rendererContext = injector.getInstance(RendererFactoryContext);
+    String result = rendererContext.getRenderString(user); // "John (john@domain.com)"
 
   }
 }

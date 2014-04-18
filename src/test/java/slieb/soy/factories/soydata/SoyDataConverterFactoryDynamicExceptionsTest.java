@@ -1,20 +1,23 @@
 package slieb.soy.factories.soydata;
 
+import com.google.inject.Injector;
 import example.models.*;
 import org.junit.Before;
 import org.junit.Test;
+import slieb.soy.Loader;
 import slieb.soy.context.SoyDataFactoryContext;
 import slieb.soy.exceptions.NeedsDynamicConverterException;
 
-import static slieb.soy.Loader.getFullSoyDataContext;
 
 public class SoyDataConverterFactoryDynamicExceptionsTest {
+
+    private final Injector injector =Loader.getFullInjector();
 
     private SoyDataFactoryContext factoryContext;
 
     @Before
     public void setUp() throws Exception {
-        factoryContext = getFullSoyDataContext();
+        factoryContext = injector.getInstance(SoyDataFactoryContext.class);
     }
 
     // todo, better exception class

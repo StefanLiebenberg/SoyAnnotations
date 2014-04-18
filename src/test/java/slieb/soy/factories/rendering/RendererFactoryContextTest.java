@@ -1,5 +1,6 @@
 package slieb.soy.factories.rendering;
 
+import com.google.inject.Injector;
 import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.tofu.SoyTofu;
 import example.models.Setting;
@@ -7,26 +8,29 @@ import example.models.Settings;
 import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
+import slieb.soy.Loader;
 import slieb.soy.annotations.Soy;
 import slieb.soy.context.RendererFactoryContext;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static slieb.soy.Loader.getRendererContext;
 
 public class RendererFactoryContextTest {
+
 
     private final SoyTofu soyTofu =
             new SoyFileSet.Builder()
                     .add(getClass().getResource("/templates.soy"))
                     .build().compileToTofu();
 
+    private final Injector injector = Loader.getFullInjector(soyTofu, null);
+
     private RendererFactoryContext rendererFactoryContext;
 
     @Before
     public void setUp() throws Exception {
-        rendererFactoryContext = getRendererContext(soyTofu, null);
+        rendererFactoryContext = injector.getInstance(RendererFactoryContext.class);
     }
 
 
