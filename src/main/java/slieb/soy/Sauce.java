@@ -8,6 +8,10 @@ import slieb.soy.context.JsonDataFactoryContext;
 import slieb.soy.context.RendererFactoryContext;
 import slieb.soy.context.SoyDataFactoryContext;
 
+/**
+ * todo: As of this placeholder, I cannot think of a
+ *       better name for this class :(
+ */
 public class Sauce {
 
     private final JsonDataFactoryContext jsonDataFactoryContext;

@@ -63,15 +63,15 @@ public class UserApplication {
         .add(new File("templates.soy"))
         .compileToFu();
 
-    Context context = Loader.getContext(soyTofu);
+    Sauce sauce = Loader.getContext(soyTofu);
 
     User user = new User("John", "john@domain.com");
 
-    SoyData data = context.getSoyData(user); // SoyData to match
+    SoyData data = sauce.getSoyData(user); // SoyData to match
 
-    Object jsonData = context.getJsonData(user); // JsonData to match
+    Object jsonData = sauce.getJsonData(user); // JsonData to match
 
-    String result = context.getRenderString(user); // "John (john@domain.com)"
+    String result = sauce.getRenderString(user); // "John (john@domain.com)"
 
   }
 }
