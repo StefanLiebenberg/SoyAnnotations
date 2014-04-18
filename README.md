@@ -14,7 +14,6 @@ Here is a example that renders a User instance into a string by analyzing the `@
 @Soy.Template("templates.User")
 public class User {
 
-
    private final String name, email;
 
    public User(String name, String email) {
@@ -52,7 +51,7 @@ public class User {
 **UserApplication.java:**
 ```java
 import com.google.template.soy.SoyFileSet;
-import slieb.soy.Context;
+import slieb.soy.DataConverter;
 import slieb.soy.Loader;
 
 
