@@ -33,6 +33,7 @@ public class SoyDataConverterFactory implements SoyConverterFactory, Converter<O
         return this;
     }
 
+    // todo, move out to own factory
     @Override
     public SoyData convert(Object from) {
         if (from instanceof SoyData) {
