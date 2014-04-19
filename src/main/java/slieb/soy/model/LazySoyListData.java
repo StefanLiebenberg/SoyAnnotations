@@ -184,7 +184,8 @@ public class LazySoyListData extends SoyListData {
 
     @Override
     public String toString() {
-        return container.result().toString();
+        return "[LAZY-LIST:CANNOT-CONSTRUCT]";
+//        return container.result().toString();
     }
 
     @Override

@@ -22,7 +22,8 @@ public class StringDataConverterFactory implements SoyConverterFactory {
     @Nonnull
     @Override
     public Boolean canCreate(@Nonnull Class<?> classObject) {
-        return String.class.equals(classObject);
+        // todo, make separate factory class for enums?
+        return String.class.equals(classObject) || classObject.isEnum();
     }
 
     @Nonnull

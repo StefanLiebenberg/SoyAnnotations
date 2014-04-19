@@ -16,7 +16,6 @@ import static slieb.soy.converters.soydata.NullSafeConverter.wrapConverterWithNu
 import static slieb.utilities.ConverterUtils.chain;
 import static slieb.utilities.ConverterUtils.join;
 
-
 public class MetaInformationToSoyDataConverter implements Converter<MetaClassInformation, Converter<Object, ? extends SoyData>> {
 
     private final SoyDataFactoryContext soyDataFactoryFactoryContext;
@@ -47,16 +46,16 @@ public class MetaInformationToSoyDataConverter implements Converter<MetaClassInf
 
     @SuppressWarnings("unchecked")
     public Converter<Object, ? extends SoyData> getValueConverter(MetaValueConvertableInformation valueConvertableInformation) {
+        Class<?> memberType = valueConvertableInformation.getType();
+        Converter<Object, ?> valueConverter = valueConvertableInformation.getValueConverter();
         try {
-            Class<?> memberType = valueConvertableInformation.getType();
-            Converter<Object, ?> valueConverter = valueConvertableInformation.getValueConverter();
             Converter<Object, ? extends SoyData> soyConverter =
                     valueConvertableInformation.getDynamic() ?
                             wrapConverterWithNullSafe(dynamicConverter) :
                             soyDataFactoryFactoryContext.create(memberType);
             return (Converter<Object, ? extends SoyData>) chain(valueConverter, soyConverter);
         } catch (StackOverflowError e) {
-            throw new NeedsDynamicConverterException();
+            throw new NeedsDynamicConverterException(memberType, e);
         }
     }
 

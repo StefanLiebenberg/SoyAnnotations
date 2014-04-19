@@ -21,7 +21,7 @@ public class LazyMapDataConverter implements Converter<Object, SoyData> {
 
     @Override
     public SoyData convert(Object from) {
-        if (from instanceof Map) {
+        if (from != null) {
             return new LazySoyMapData(new DefaultLazyResult<>(from, soyMapDataConverter));
         } else {
             return NullData.INSTANCE;

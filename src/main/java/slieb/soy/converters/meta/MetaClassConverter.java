@@ -38,14 +38,14 @@ public class MetaClassConverter implements Converter<Class<?>, MetaClassInformat
 
     public Map<String, MetaMemberInformation> getMemberMetaInformation(Class<?> classObject, Boolean dyn) {
         ImmutableMap.Builder<String, MetaMemberInformation> builder = new ImmutableMap.Builder<>();
-        for (Field field : classObject.getDeclaredFields()) {
+        for (Field field : classObject.getFields()) {
             if (factoryHelper.isFactoryField(field)) {
                 String key = factoryHelper.getFieldKey(field);
                 MetaMemberInformation container = getMemberInformation(field, dyn);
                 builder.put(key, container);
             }
         }
-        for (Method method : classObject.getDeclaredMethods()) {
+        for (Method method : classObject.getMethods()) {
             if (factoryHelper.isFactoryMethod(method)) {
                 String key = factoryHelper.getMethodKey(method);
                 MetaMemberInformation container = getMemberInformation(method, dyn);

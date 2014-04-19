@@ -28,7 +28,8 @@ public class LazySoyMapData extends SoyMapData {
 
     @Override
     public String toString() {
-        return container.result().toString();
+        return "[LAZY-MAP:CANNOT-CONSTRUCT]";
+//        return container.result().toString();
     }
 
     @Override
