@@ -13,11 +13,6 @@ public class LazySoyData extends SoyData {
     }
 
     @Override
-    public String toString() {
-        return container.result().toString();
-    }
-
-    @Override
     public boolean toBoolean() {
         return container.result().toBoolean();
     }
@@ -51,5 +46,10 @@ public class LazySoyData extends SoyData {
     @Override
     public String stringValue() {
         return container.result().stringValue();
+    }
+
+    @Override
+    public String toString() {
+        return container.toString();
     }
 }

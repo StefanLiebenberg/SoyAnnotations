@@ -45,7 +45,7 @@ public class ClassToSoyMapDataConverterTest {
         ImmutableMap.Builder<String, Converter<Object, ? extends SoyData>> membersConverters = ImmutableMap.builder();
         membersConverters.put("Name", mockNameConverter);
         membersConverters.put("Email", mockEmailConverter);
-        converter = new ClassToSoyMapDataConverter(membersConverters.build());
+        converter = new ClassToSoyMapDataConverter(membersConverters.build(), false);
     }
 
     @Test

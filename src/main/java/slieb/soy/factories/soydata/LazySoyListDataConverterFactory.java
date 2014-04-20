@@ -26,6 +26,6 @@ public class LazySoyListDataConverterFactory implements SoyConverterFactory {
     @Nonnull
     @Override
     public Converter<Object, ? extends SoyData> create(@Nonnull Class<?> classObject, @Nonnull SoyDataFactoryContext context) {
-        return new LazySoyListDataConverter(new SoyListDataConverter(wrapConverterWithNullSafe(new DynamicConverter(context))));
+        return new LazySoyListDataConverter(new SoyListDataConverter(wrapConverterWithNullSafe(new DynamicConverter(context))), false);
     }
 }

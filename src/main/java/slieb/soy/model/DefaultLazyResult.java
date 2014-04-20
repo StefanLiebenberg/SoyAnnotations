@@ -7,9 +7,9 @@ import javax.annotation.Nonnull;
 
 public class DefaultLazyResult<A, B> implements LazyResult<B> {
 
-    private final A object;
+    protected final A object;
 
-    private final Converter<A, B> converter;
+    protected final Converter<A, B> converter;
 
     private B result;
 
@@ -24,5 +24,12 @@ public class DefaultLazyResult<A, B> implements LazyResult<B> {
             result = converter.convert(object);
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+
+        return result().toString();
+
     }
 }

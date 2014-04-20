@@ -96,5 +96,9 @@ public class ReflectionFactoryHelper implements FactoryHelper {
         return name;
     }
 
-
+    @Nonnull
+    @Override
+    public Boolean useOriginalToString(@Nonnull Class<?> classObject) {
+        return true;
+    }
 }

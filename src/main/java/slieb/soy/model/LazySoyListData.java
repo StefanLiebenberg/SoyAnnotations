@@ -182,11 +182,6 @@ public class LazySoyListData extends SoyListData {
         return container.result().getSingle(key);
     }
 
-    @Override
-    public String toString() {
-        return "[LAZY-LIST:CANNOT-CONSTRUCT]";
-//        return container.result().toString();
-    }
 
     @Override
     public boolean toBoolean() {
@@ -252,5 +247,10 @@ public class LazySoyListData extends SoyListData {
     @Override
     public void put(String keyStr, String value) {
         container.result().put(keyStr, value);
+    }
+
+    @Override
+    public String toString() {
+        return container.toString();
     }
 }

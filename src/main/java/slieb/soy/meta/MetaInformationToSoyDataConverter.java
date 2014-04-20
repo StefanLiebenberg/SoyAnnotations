@@ -38,7 +38,7 @@ public class MetaInformationToSoyDataConverter implements Converter<MetaClassInf
     public Converter<Object, ? extends SoyMapData> getClassConverter(MetaClassInformation metaClassInformation) {
         Converter<Object, ?> valueConverter = metaClassInformation.getValueConverter();
         if (valueConverter == null) {
-            return new ClassToSoyMapDataConverter(getConverterMap(metaClassInformation));
+            return new ClassToSoyMapDataConverter(getConverterMap(metaClassInformation), metaClassInformation.getUseOriginalToString());
         } else {
             return join(valueConverter, new SoyMapDataConverter(dynamicConverter));
         }

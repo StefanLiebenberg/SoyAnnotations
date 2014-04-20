@@ -10,6 +10,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 public @interface Soy {
 
+    boolean useOriginalToString() default false;
+
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
     public @interface Dynamic {

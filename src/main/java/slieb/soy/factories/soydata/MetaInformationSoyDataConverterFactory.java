@@ -16,6 +16,7 @@ public class MetaInformationSoyDataConverterFactory implements SoyConverterFacto
     private final MetaContext metaContext;
 
 
+
     @Inject
     public MetaInformationSoyDataConverterFactory(MetaContext metaContext) {
         this.metaContext = metaContext;

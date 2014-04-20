@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import slieb.soy.annotations.Soy;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -15,10 +16,22 @@ public class DefaultFactoryHelper implements FactoryHelper {
 
     public DefaultFactoryHelper() {}
 
+
+    @Nullable
+    private Class<?> getSoyAnnotatedClass(@Nullable Class<?> classObject) {
+        if (classObject == null || classObject.equals(Object.class)) {
+            return null;
+        } else if (classObject.isAnnotationPresent(Soy.class)) {
+            return classObject;
+        } else {
+            return getSoyAnnotatedClass(classObject.getSuperclass());
+        }
+    }
+
     @Override
     @Nonnull
     public Boolean isFactoryClass(@Nonnull Class<?> classObject) {
-        return classObject.isAnnotationPresent(Soy.class);
+        return getSoyAnnotatedClass(classObject) != null;
     }
 
     @Override
@@ -48,20 +61,29 @@ public class DefaultFactoryHelper implements FactoryHelper {
     @Override
     @Nonnull
     public Boolean isDynamicFactoryClass(@Nonnull Class<?> classObject) {
-        return classObject.isAnnotationPresent(Soy.Dynamic.class);
+        Class<?> annotatedClass = getSoyAnnotatedClass(classObject);
+        return annotatedClass != null &&
+                annotatedClass.isAnnotationPresent(Soy.Dynamic.class);
     }
+
 
     @Override
     @Nonnull
     public Boolean hasTemplate(@Nonnull Class<?> classObject) {
-        return classObject.isAnnotationPresent(Soy.Template.class);
+        Class<?> annotatedClass = getSoyAnnotatedClass(classObject);
+        return annotatedClass != null &&
+                annotatedClass.isAnnotationPresent(Soy.Template.class);
     }
 
     @Override
     @Nonnull
     public String getTemplateName(@Nonnull Class<?> classObject) {
-        checkState(hasTemplate(classObject));
-        return classObject.getAnnotation(Soy.Template.class).value();
+        Class<?> annotatedClass = getSoyAnnotatedClass(classObject);
+        if (annotatedClass != null) {
+            return annotatedClass.getAnnotation(Soy.Template.class).value();
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     @Override
@@ -78,5 +100,14 @@ public class DefaultFactoryHelper implements FactoryHelper {
         return field.getAnnotation(Soy.Method.class).value();
     }
 
-
+    @Nonnull
+    @Override
+    public Boolean useOriginalToString(@Nonnull Class<?> classObject) {
+        Class<?> annotatedClass = getSoyAnnotatedClass(classObject);
+        if (annotatedClass != null) {
+            return annotatedClass.getAnnotation(Soy.class).useOriginalToString();
+        } else {
+            return false;
+        }
+    }
 }

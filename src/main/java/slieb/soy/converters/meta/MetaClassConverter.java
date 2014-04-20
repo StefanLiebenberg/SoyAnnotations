@@ -57,9 +57,11 @@ public class MetaClassConverter implements Converter<Class<?>, MetaClassInformat
 
     public MetaClassInformation convert(Class<?> from) {
         Boolean dyn = factoryHelper.isDynamicFactoryClass(from);
+        Boolean useOriginalToString = factoryHelper.useOriginalToString(from);
         return new MetaClassInformation(dyn,
                 from,
                 null,
-                getMemberMetaInformation(from, dyn));
+                getMemberMetaInformation(from, dyn),
+                useOriginalToString);
     }
 }

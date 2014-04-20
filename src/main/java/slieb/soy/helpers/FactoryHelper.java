@@ -37,5 +37,8 @@ public interface FactoryHelper {
     @Nonnull
     public String getMethodKey(@Nonnull Method field);
 
+    @Nonnull
+    public Boolean useOriginalToString(@Nonnull Class<?> classObject);
+
 }
 

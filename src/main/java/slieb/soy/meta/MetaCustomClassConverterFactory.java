@@ -43,7 +43,7 @@ public class MetaCustomClassConverterFactory implements Converter<Class<?>, Meta
 
     @Override
     public MetaClassInformation convert(Class<?> from) {
-        return new MetaClassInformation(Boolean.TRUE, from, getConverter(from), null);
+        return new MetaClassInformation(Boolean.TRUE, from, getConverter(from), null, false);
     }
 
     @Nonnull
