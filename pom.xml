@@ -131,8 +131,8 @@
             scm:git:git@github.com:StefanLiebenberg/SoyAnnotations.git
         </developerConnection>
         <url>http://github.com/StefanLiebenberg/SoyAnnotations</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <!--<distributionManagement>-->
         <!--<snapshotRepository>-->
