@@ -2,7 +2,6 @@ package slieb.soy.helpers;
 
 
 import com.google.inject.Singleton;
-import slieb.soy.exceptions.UnsupportedFunctionality;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
@@ -77,7 +76,7 @@ public class ReflectionFactoryHelper implements FactoryHelper {
     @Nonnull
     @Override
     public String getTemplateName(@Nonnull Class<?> classObject) {
-        throw new UnsupportedFunctionality("ReflectionFactoryHelper does not support templates.");
+        throw new IllegalStateException("ReflectionFactoryHelper does not support templates.");
     }
 
     @Nonnull

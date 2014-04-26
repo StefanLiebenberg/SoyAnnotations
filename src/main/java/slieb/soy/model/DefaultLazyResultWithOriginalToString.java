@@ -5,8 +5,9 @@ import ch.lambdaj.function.convert.Converter;
 
 import javax.annotation.Nonnull;
 
-public class DefaultLazyResultWithCustomToString<A, B> extends DefaultLazyResult<A, B> {
-    public DefaultLazyResultWithCustomToString(@Nonnull A object, @Nonnull Converter<A, B> converter) {
+public class DefaultLazyResultWithOriginalToString<A, B> extends DefaultLazyResult<A, B> {
+
+    public DefaultLazyResultWithOriginalToString(@Nonnull A object, @Nonnull Converter<A, B> converter) {
         super(object, converter);
     }
 
