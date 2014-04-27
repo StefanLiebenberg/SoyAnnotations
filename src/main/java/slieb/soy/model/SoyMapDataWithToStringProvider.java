@@ -5,7 +5,9 @@ import com.google.template.soy.data.SoyMapData;
 
 import java.util.Map;
 
-
+/**
+ *
+ */
 public class SoyMapDataWithToStringProvider extends SoyMapData {
 
     private final Object toStringProvider;
