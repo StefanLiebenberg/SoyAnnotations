@@ -8,6 +8,12 @@ import javax.annotation.Nonnull;
 
 /**
  * A guice injection module that inserts a piece of SoyTofu.
+ *
+ * <h3>usage:</h3>
+ * {@code
+ *   SoyTofu soytofu = ...;
+ *   Guice.createInjector(new SoyTofuModule(soytofu))
+ * }
  */
 public class SoyTofuModule extends AbstractModule {
 
