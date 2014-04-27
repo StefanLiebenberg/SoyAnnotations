@@ -6,6 +6,19 @@ import com.google.template.soy.data.SoyMapData;
 import java.util.Map;
 
 /**
+ *  Extends SoyMapData to override the toString method.
+ *
+ * Usage:
+ * * <pre>
+ * {@code
+ * Object object = new String("Boo");
+ *
+ * SoyMapData soyMapData = new SoyMapDataWithToStringProvider(object);
+ *
+ * soyMapData.toString() // "Boo"
+ * }
+ * </pre>
+ *
  *
  */
 public class SoyMapDataWithToStringProvider extends SoyMapData {
