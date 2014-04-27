@@ -2,15 +2,20 @@ package slieb.soy.configuration.rendering;
 
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
 import com.google.template.soy.tofu.SoyTofu;
 
 import javax.annotation.Nonnull;
 
+/**
+ * A guice injection module that inserts a piece of SoyTofu.
+ */
 public class SoyTofuModule extends AbstractModule {
 
     private final SoyTofu soyTofu;
 
+    /**
+     * @param soyTofu The piece of SoyTofu that should be injected.
+     */
     public SoyTofuModule(@Nonnull SoyTofu soyTofu) {
         this.soyTofu = soyTofu;
     }
@@ -19,6 +24,5 @@ public class SoyTofuModule extends AbstractModule {
     protected void configure() {
         bind(SoyTofu.class).toInstance(soyTofu);
     }
-
 
 }
