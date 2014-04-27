@@ -25,9 +25,7 @@ import static com.google.inject.Guice.createInjector;
 
 public class Loader {
 
-    private static Injector basicInjector, fullInjector,
-            fullInjectorWithRendering, lazyInjector,
-            lazyInjectorWithRendering;
+    private static Injector basicInjector, fullInjector, lazyInjector;
 
     /**
      * @return A injector that enables basic types to be
