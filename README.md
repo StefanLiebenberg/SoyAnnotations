@@ -24,5 +24,5 @@ If you don't want to wait for the sync, or if you want access to snapshot builds
  * Snapshots - https://oss.sonatype.org/content/repositories/snapshots/
 
 ##Documentation:
-
-https://github.com/StefanLiebenberg/SoyAnnotations/wiki
+ * Project -http://stefanliebenberg.github.io/SoyAnnotations/
+ * Wiki - https://github.com/StefanLiebenberg/SoyAnnotations/wiki
