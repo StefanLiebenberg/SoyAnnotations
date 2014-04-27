@@ -53,6 +53,11 @@ public class LongData extends NumberData {
         return longValue.floatValue();
     }
 
+    @Override
+    public double floatValue() {
+        return longValue.floatValue();
+    }
+
     public static SoyData forValue(Object value) {
         if (value != null && value instanceof Long) {
             return new LongData((Long) value);
