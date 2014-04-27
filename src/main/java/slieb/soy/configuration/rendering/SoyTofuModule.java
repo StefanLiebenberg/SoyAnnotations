@@ -10,10 +10,12 @@ import javax.annotation.Nonnull;
  * A guice injection module that inserts a piece of SoyTofu.
  *
  * <h3>usage:</h3>
+ * <pre>
  * {@code
  *   SoyTofu soytofu = ...;
- *   Guice.createInjector(new SoyTofuModule(soytofu))
+ *   Guice.createInjector(new SoyTofuModule(soytofu));
  * }
+ * </pre>
  */
 public class SoyTofuModule extends AbstractModule {
 
