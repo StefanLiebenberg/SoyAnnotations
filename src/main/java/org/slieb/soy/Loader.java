@@ -1,6 +1,5 @@
 package org.slieb.soy;
 
-
 import com.google.inject.Injector;
 import com.google.template.soy.tofu.SoyTofu;
 import org.slieb.soy.configuration.DefaultFactoryHelperModule;
@@ -29,7 +28,7 @@ public class Loader {
 
     /**
      * @return A injector that enables basic types to be
-     *         converter to soy and json.
+     * converter to soy and json.
      */
     @Nonnull
     public static Injector getBasicInjector() {
@@ -44,10 +43,9 @@ public class Loader {
         return basicInjector;
     }
 
-
     /**
      * @return A injector that enables basic types to be
-     *         converter to soy and json. As well as type annotations.
+     * converter to soy and json. As well as type annotations.
      */
     @Nonnull
     public static Injector getFullInjector() {
@@ -65,10 +63,11 @@ public class Loader {
         return fullInjector;
     }
 
-
     /**
+     * @param soyTofu          The tofu object.
+     * @param delegatePackages A set of delegate packages.
      * @return A injector that enables basic types to be
-     *         converter to soy and json. As well as type annotations.
+     * converter to soy and json. As well as type annotations.
      */
     @Nonnull
     public static Injector getFullInjector(@Nonnull SoyTofu soyTofu,
@@ -78,12 +77,11 @@ public class Loader {
                         new RenderingFactoriesModule(),
                         new DelegateTemplates(delegatePackages),
                         new SoyTofuModule(soyTofu));
-
     }
 
     /**
      * @return A injector that enables basic types to be
-     *         converter to soy and json. As well as type annotations.
+     * converter to soy and json. As well as type annotations.
      */
     @Nonnull
     public static Injector getLazyInjector() {
@@ -102,8 +100,10 @@ public class Loader {
     }
 
     /**
+     * @param soyTofu          The tofu object.
+     * @param delegatePackages set of delegate packages.
      * @return A injector that enables basic types to be
-     *         converter to soy and json. As well as type annotations.
+     * converter to soy and json. As well as type annotations.
      */
     @Nonnull
     public static Injector getLazyInjector(@Nonnull SoyTofu soyTofu,
@@ -113,7 +113,5 @@ public class Loader {
                         new RenderingFactoriesModule(),
                         new DelegateTemplates(delegatePackages),
                         new SoyTofuModule(soyTofu));
-
     }
-
 }
