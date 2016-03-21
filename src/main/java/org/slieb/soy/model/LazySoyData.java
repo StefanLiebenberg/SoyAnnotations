@@ -17,6 +17,7 @@ public class LazySoyData extends SoyData {
     }
 
     @Override
+    @Deprecated
     public boolean toBoolean() {
         return container.get().toBoolean();
     }

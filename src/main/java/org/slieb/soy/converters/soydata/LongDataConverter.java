@@ -1,12 +1,13 @@
 package org.slieb.soy.converters.soydata;
 
 
-import org.slieb.soy.internal.Converter;
 import com.google.inject.Singleton;
 import org.slieb.soy.model.LongData;
 
+import java.util.function.Function;
+
 @Singleton
-public class LongDataConverter implements Converter<Object, LongData> {
+public class LongDataConverter implements Function<Object, LongData> {
 
     @Override
     public LongData apply(Object from) {

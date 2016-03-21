@@ -1,6 +1,5 @@
 package org.slieb.soy.converters.soydata;
 
-import org.slieb.soy.internal.Converter;
 import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.data.restricted.NullData;
@@ -10,7 +9,7 @@ import org.slieb.soy.model.LazySoyMapData;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class LazyMapDataConverter implements Converter<Object, SoyData> {
+public class LazyMapDataConverter implements Function<Object, SoyData> {
 
     private final Function<Object, ? extends SoyMapData> soyMapDataConverter;
 

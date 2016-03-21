@@ -1,6 +1,5 @@
 package org.slieb.soy.converters.meta;
 
-import org.slieb.soy.internal.Converter;
 import com.google.common.collect.ImmutableMap;
 import org.slieb.soy.helpers.FactoryHelper;
 import org.slieb.soy.meta.MemberFieldValueConverter;
@@ -11,8 +10,9 @@ import org.slieb.soy.meta.MetaMemberInformation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.function.Function;
 
-public class MetaClassConverter implements Converter<Class<?>, MetaClassInformation> {
+public class MetaClassConverter implements Function<Class<?>, MetaClassInformation> {
 
     private final FactoryHelper factoryHelper;
 

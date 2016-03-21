@@ -23,6 +23,7 @@ public class LazySoyListData
     }
 
     @Override
+    @Deprecated
     public boolean toBoolean() {
         return container.get().booleanValue();
     }

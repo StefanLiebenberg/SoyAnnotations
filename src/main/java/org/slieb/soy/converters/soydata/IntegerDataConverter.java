@@ -1,14 +1,13 @@
 package org.slieb.soy.converters.soydata;
 
-
-import org.slieb.soy.internal.Converter;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.restricted.IntegerData;
 
 import javax.annotation.Nullable;
+import java.util.function.Function;
 
 @Singleton
-public class IntegerDataConverter implements Converter<Object, IntegerData> {
+public class IntegerDataConverter implements Function<Object, IntegerData> {
 
     @Override
     @Nullable

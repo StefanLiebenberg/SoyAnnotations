@@ -1,23 +1,23 @@
 package org.slieb.soy.factories.soydata;
 
-
-import org.slieb.soy.internal.Converter;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.SoyData;
+import com.google.template.soy.data.SoyValue;
 import org.slieb.soy.context.SoyDataFactoryContext;
 import org.slieb.soy.factories.SoyConverterFactory;
 
 import javax.annotation.Nonnull;
 
+import java.util.function.Function;
+
 import static com.google.common.base.Preconditions.checkArgument;
 
 @Singleton
-public class SoyDataConverterFactory implements SoyConverterFactory, Converter<Object, SoyData> {
+public class SoyDataConverterFactory implements SoyConverterFactory, Function<Object, SoyData> {
 
     public static final SoyDataConverterFactory INSTANCE = new SoyDataConverterFactory();
 
     public SoyDataConverterFactory() {}
-
 
     @Nonnull
     @Override
@@ -25,10 +25,10 @@ public class SoyDataConverterFactory implements SoyConverterFactory, Converter<O
         return SoyData.class.isAssignableFrom(classObject);
     }
 
-
     @Nonnull
     @Override
-    public Converter<Object, ? extends SoyData> create(@Nonnull Class<?> classObject, @Nonnull SoyDataFactoryContext context) {
+    public Function<Object, ? extends SoyValue> create(@Nonnull Class<?> classObject,
+                                                       @Nonnull SoyDataFactoryContext context) {
         checkArgument(canCreate(classObject));
         return this;
     }

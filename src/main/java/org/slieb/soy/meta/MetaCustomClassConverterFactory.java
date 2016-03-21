@@ -1,15 +1,15 @@
 package org.slieb.soy.meta;
 
 
-import org.slieb.soy.internal.Converter;
 import com.google.inject.Inject;
 import org.slieb.soy.annotations.CustomConverter;
 import org.slieb.soy.factories.MetaConverterFactory;
 import org.slieb.soy.helpers.FactoryHelper;
 
 import javax.annotation.Nonnull;
+import java.util.function.Function;
 
-public class MetaCustomClassConverterFactory implements Converter<Class<?>, MetaClassInformation>,
+public class MetaCustomClassConverterFactory implements Function<Class<?>, MetaClassInformation>,
         MetaConverterFactory {
 
     private final FactoryHelper factoryHelper;

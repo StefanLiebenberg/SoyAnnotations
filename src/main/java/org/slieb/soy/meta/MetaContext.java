@@ -1,7 +1,5 @@
 package org.slieb.soy.meta;
 
-
-import org.slieb.soy.internal.Converter;
 import com.google.inject.Inject;
 import org.slieb.soy.exceptions.MissingFactory;
 import org.slieb.soy.factories.MetaConverterFactory;
@@ -9,12 +7,12 @@ import org.slieb.soy.factories.MetaConverterFactory;
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.reverse;
 
-public class MetaContext implements Converter<Class<?>, MetaClassInformation> {
-
+public class MetaContext implements Function<Class<?>, MetaClassInformation> {
 
     private final List<MetaConverterFactory> factories;
 
@@ -22,7 +20,6 @@ public class MetaContext implements Converter<Class<?>, MetaClassInformation> {
     public MetaContext(Set<MetaConverterFactory> factories) {
         this.factories = newArrayList(factories);
     }
-
 
     public MetaConverterFactory getFactory(Class<?> classObject) {
         for (MetaConverterFactory factory : reverse(factories)) {
@@ -42,9 +39,8 @@ public class MetaContext implements Converter<Class<?>, MetaClassInformation> {
         return false;
     }
 
-
     @Nonnull
-    public Converter<Class<?>, MetaClassInformation> create(@Nonnull Class<?> classObject) {
+    public Function<Class<?>, MetaClassInformation> create(@Nonnull Class<?> classObject) {
         return getFactory(classObject).create(classObject);
     }
 

@@ -1,11 +1,10 @@
 package org.slieb.soy.meta;
 
-
-import org.slieb.soy.internal.Converter;
-
 import java.lang.reflect.Method;
+import java.util.function.Function;
 
-public class MemberMethodValueConverter implements Converter<Object, Object> {
+public class MemberMethodValueConverter implements Function<Object, Object> {
+
     private final Method method;
 
     public MemberMethodValueConverter(Method method) {

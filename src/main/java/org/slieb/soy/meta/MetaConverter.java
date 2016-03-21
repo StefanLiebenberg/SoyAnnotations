@@ -1,11 +1,10 @@
 package org.slieb.soy.meta;
 
 
-import org.slieb.soy.internal.Converter;
-
 import java.util.Map;
+import java.util.function.Function;
 
-public interface MetaConverter extends Converter<Object, Map<String, ?>> {
+public interface MetaConverter extends Function<Object, Map<String, ?>> {
 
     @Override
     public Map<String, ?> apply(Object from);

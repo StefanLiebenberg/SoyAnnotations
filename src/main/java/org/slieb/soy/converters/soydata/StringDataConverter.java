@@ -1,12 +1,12 @@
 package org.slieb.soy.converters.soydata;
 
-
-import org.slieb.soy.internal.Converter;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.restricted.StringData;
 
+import java.util.function.Function;
+
 @Singleton
-public class StringDataConverter implements Converter<Object, StringData> {
+public class StringDataConverter implements Function<Object, StringData> {
 
     @Override
     public StringData apply(Object from) {

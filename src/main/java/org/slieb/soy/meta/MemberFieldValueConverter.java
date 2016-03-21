@@ -1,11 +1,9 @@
 package org.slieb.soy.meta;
 
-
-import org.slieb.soy.internal.Converter;
-
 import java.lang.reflect.Field;
+import java.util.function.Function;
 
-public class MemberFieldValueConverter implements Converter<Object, Object> {
+public class MemberFieldValueConverter implements Function<Object, Object> {
 
     private final Field field;
 

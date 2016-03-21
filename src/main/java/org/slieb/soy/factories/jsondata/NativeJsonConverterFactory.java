@@ -1,7 +1,6 @@
 package org.slieb.soy.factories.jsondata;
 
 
-import org.slieb.soy.internal.Converter;
 import com.google.common.primitives.Primitives;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -10,6 +9,7 @@ import org.slieb.soy.converters.json.NativeJsonConverter;
 import org.slieb.soy.factories.JsonConverterFactory;
 
 import javax.annotation.Nonnull;
+import java.util.function.Function;
 
 @Singleton
 public class NativeJsonConverterFactory implements JsonConverterFactory {
@@ -30,7 +30,7 @@ public class NativeJsonConverterFactory implements JsonConverterFactory {
 
     @Nonnull
     @Override
-    public Converter<Object, ?> create(@Nonnull Class<?> classObject, @Nonnull JsonDataFactoryContext context) {
+    public Function<Object, ?> create(@Nonnull Class<?> classObject, @Nonnull JsonDataFactoryContext context) {
         return nativeJsonConverter;
     }
 }

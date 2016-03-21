@@ -1,18 +1,18 @@
 package org.slieb.soy.converters.soydata;
 
 
-import org.slieb.soy.internal.Converter;
 import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
 
 import javax.annotation.Nullable;
 import java.util.Map;
+import java.util.function.Function;
 
-public class SoyDataMapConverter implements Converter<Object, SoyMapData> {
+public class SoyDataMapConverter implements Function<Object, SoyMapData> {
 
-    private final Converter<Object, ? extends SoyData> typeConverter;
+    private final Function<Object, ? extends SoyData> typeConverter;
 
-    public SoyDataMapConverter(Converter<Object, ? extends SoyData> typeConverter) {
+    public SoyDataMapConverter(Function<Object, ? extends SoyData> typeConverter) {
         this.typeConverter = typeConverter;
     }
 
