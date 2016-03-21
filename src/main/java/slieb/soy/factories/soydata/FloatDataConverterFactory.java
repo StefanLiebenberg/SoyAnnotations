@@ -1,6 +1,6 @@
 package slieb.soy.factories.soydata;
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.SoyData;

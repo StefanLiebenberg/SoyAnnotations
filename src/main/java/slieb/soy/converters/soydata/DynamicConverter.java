@@ -1,14 +1,13 @@
 package slieb.soy.converters.soydata;
 
-
-import ch.lambdaj.function.convert.Converter;
-import com.google.template.soy.data.SoyData;
+import com.google.template.soy.data.SoyValue;
 import slieb.soy.context.SoyDataFactoryContext;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.function.Function;
 
-public class DynamicConverter implements Converter<Object, SoyData> {
+public class DynamicConverter implements Function<Object, SoyValue> {
 
     private final SoyDataFactoryContext context;
 
@@ -18,7 +17,7 @@ public class DynamicConverter implements Converter<Object, SoyData> {
 
     @Override
     @Nullable
-    public SoyData convert(@Nullable Object from) {
-        return context.convert(from);
+    public SoyValue apply(@Nullable Object from) {
+        return context.apply(from);
     }
 }

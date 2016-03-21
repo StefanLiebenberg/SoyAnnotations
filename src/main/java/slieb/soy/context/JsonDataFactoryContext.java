@@ -1,6 +1,5 @@
 package slieb.soy.context;
 
-import ch.lambdaj.function.convert.Converter;
 import com.google.inject.Inject;
 import slieb.soy.exceptions.MissingFactory;
 import slieb.soy.factories.JsonConverterFactory;
@@ -9,11 +8,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.reverse;
 
-public class JsonDataFactoryContext implements Converter<Object, Object> {
+public class JsonDataFactoryContext implements Function<Object, Object> {
 
     private final List<JsonConverterFactory> factories;
 
@@ -38,19 +38,19 @@ public class JsonDataFactoryContext implements Converter<Object, Object> {
     }
 
     @Nonnull
-    public Converter<Object, ?> create(@Nonnull Class<?> classObject) {
+    public Function<Object, ?> create(@Nonnull Class<?> classObject) {
         return getFactory(classObject).create(classObject, this);
     }
 
     @Nonnull
-    public Converter<Object, ?> createFromInstance(@Nonnull Object instanceObject) {
+    public Function<Object, ?> createFromInstance(@Nonnull Object instanceObject) {
         return create(instanceObject.getClass());
     }
 
     @Nullable
-    public Object convert(Object from) {
+    public Object apply(Object from) {
         if (from != null) {
-            return createFromInstance(from).convert(from);
+            return createFromInstance(from).apply(from);
         } else {
             return null;
         }

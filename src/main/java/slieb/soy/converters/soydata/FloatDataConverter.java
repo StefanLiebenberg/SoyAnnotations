@@ -1,7 +1,7 @@
 package slieb.soy.converters.soydata;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.restricted.FloatData;
 
@@ -9,7 +9,7 @@ import com.google.template.soy.data.restricted.FloatData;
 public class FloatDataConverter implements Converter<Object, FloatData> {
 
     @Override
-    public FloatData convert(Object from) {
+    public FloatData apply(Object from) {
         if (from instanceof Float) {
             return FloatData.forValue((Float) from);
         }

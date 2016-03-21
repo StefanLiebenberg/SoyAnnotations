@@ -1,7 +1,7 @@
 package slieb.soy.converters.soydata;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.restricted.StringData;
 
@@ -9,7 +9,7 @@ import com.google.template.soy.data.restricted.StringData;
 public class StringDataConverter implements Converter<Object, StringData> {
 
     @Override
-    public StringData convert(Object from) {
+    public StringData apply(Object from) {
         if (from != null) {
             return StringData.forValue(String.valueOf(from));
         } else {

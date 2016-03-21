@@ -1,25 +1,23 @@
 package slieb.soy.converters.json;
 
-
-import ch.lambdaj.function.convert.Converter;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
-public class ClassToMapConverter implements Converter<Object, Map<String, Object>> {
+public class ClassToMapConverter implements Function<Object, Map<String, Object>> {
 
-    public final Map<String, Converter<Object, ?>> membersConverters;
+    public final Map<String, Function<Object, ?>> membersConverters;
 
-    public ClassToMapConverter(Map<String, Converter<Object, ?>> membersConverters) {
+    public ClassToMapConverter(Map<String, Function<Object, ?>> membersConverters) {
         this.membersConverters = membersConverters;
     }
 
     @Override
-    public Map<String, Object> convert(Object from) {
+    public Map<String, Object> apply(Object from) {
         if (from != null) {
             Map<String, Object> map = new HashMap<>();
-            for (Map.Entry<String, Converter<Object, ?>> entry : membersConverters.entrySet()) {
-                map.put(entry.getKey(), entry.getValue().convert(from));
+            for (Map.Entry<String, Function<Object, ?>> entry : membersConverters.entrySet()) {
+                map.put(entry.getKey(), entry.getValue().apply(from));
             }
             return map;
         } else {

@@ -1,7 +1,7 @@
 package slieb.soy.factories.jsondata;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.common.primitives.Primitives;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

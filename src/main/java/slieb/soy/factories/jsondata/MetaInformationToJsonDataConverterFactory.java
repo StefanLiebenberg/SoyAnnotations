@@ -1,6 +1,5 @@
 package slieb.soy.factories.jsondata;
 
-import ch.lambdaj.function.convert.Converter;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import slieb.soy.context.JsonDataFactoryContext;
@@ -8,6 +7,7 @@ import slieb.soy.factories.JsonConverterFactory;
 import slieb.soy.meta.MetaContext;
 
 import javax.annotation.Nonnull;
+import java.util.function.Function;
 
 @Singleton
 public class MetaInformationToJsonDataConverterFactory implements JsonConverterFactory {
@@ -27,7 +27,8 @@ public class MetaInformationToJsonDataConverterFactory implements JsonConverterF
 
     @Nonnull
     @Override
-    public Converter<Object, ?> create(@Nonnull Class<?> classObject, @Nonnull JsonDataFactoryContext context) {
-        return new MetaInformationToJsonDataConverterConverter(context).convert(metaContext.convert(classObject));
+    public Function<Object, ?> create(@Nonnull Class<?> classObject,
+                                      @Nonnull JsonDataFactoryContext context) {
+        return new MetaInformationToJsonDataConverterConverter(context).apply(metaContext.apply(classObject));
     }
 }

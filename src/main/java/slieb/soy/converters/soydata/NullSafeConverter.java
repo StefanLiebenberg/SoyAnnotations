@@ -1,45 +1,41 @@
 package slieb.soy.converters.soydata;
 
-
-import ch.lambdaj.function.convert.Converter;
-import com.google.template.soy.data.SoyData;
+import com.google.template.soy.data.SoyValue;
 import com.google.template.soy.data.restricted.NullData;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.function.Function;
 
-public class NullSafeConverter implements Converter<Object, SoyData> {
+public class NullSafeConverter implements Function<Object, SoyValue> {
 
-    private final Converter<Object, ? extends SoyData> converter;
+    private final Function<Object, ? extends SoyValue> converter;
 
-    public NullSafeConverter(@Nonnull Converter<Object, ? extends SoyData> converter) {
+    public NullSafeConverter(@Nonnull Function<Object, ? extends SoyValue> converter) {
         this.converter = converter;
     }
 
-    public Converter<Object, ? extends SoyData> getNestedConverter() {
+    public Function<Object, ? extends SoyValue> getNestedConverter() {
         return converter;
     }
 
     @Override
     @Nonnull
-    public SoyData convert(@Nullable Object from) {
+    public SoyValue apply(@Nullable Object from) {
         if (from != null) {
-            return convertResult(converter.convert(from));
+            return convertResult(converter.apply(from));
         } else {
             return NullData.INSTANCE;
         }
     }
 
-
     @Nonnull
-    private SoyData convertResult(@Nullable SoyData from) {
+    private SoyValue convertResult(@Nullable SoyValue from) {
         return from != null ? from : NullData.INSTANCE;
     }
 
     @Nonnull
-    public static NullSafeConverter wrapConverterWithNullSafe(@Nonnull Converter<Object, ? extends SoyData> converter) {
+    public static NullSafeConverter wrapConverterWithNullSafe(@Nonnull Function<Object, ? extends SoyValue> converter) {
         return new NullSafeConverter(converter);
     }
-
-
 }

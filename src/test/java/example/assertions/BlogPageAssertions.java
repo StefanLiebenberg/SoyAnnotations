@@ -1,9 +1,9 @@
 package example.assertions;
 
-
 import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyMapData;
+import com.google.template.soy.data.SoyValue;
 import example.models.blog.BlogPost;
 import example.models.blog.BlogPostsPage;
 
@@ -17,7 +17,8 @@ import static org.junit.Assert.*;
 
 public class BlogPageAssertions {
 
-    public static void assertPostsJsonEquals(List<BlogPost> blogPosts, Object postsObject) {
+    public static void assertPostsJsonEquals(List<BlogPost> blogPosts,
+                                             Object postsObject) {
         if (blogPosts != null) {
             assertTrue(postsObject instanceof List);
             assertEquals(blogPosts.size(), ((List) postsObject).size());
@@ -31,7 +32,8 @@ public class BlogPageAssertions {
         }
     }
 
-    public static void assertPostsSoyDataEquals(List<BlogPost> blogPosts, SoyData postsObject) {
+    public static void assertPostsSoyDataEquals(List<BlogPost> blogPosts,
+                                                SoyData postsObject) {
         if (blogPosts != null) {
             assertTrue(postsObject instanceof SoyListData);
             assertEquals(blogPosts.size(), ((SoyListData) postsObject).length());
@@ -45,7 +47,8 @@ public class BlogPageAssertions {
         }
     }
 
-    public static void assertBlogPostPageJsonEquals(BlogPostsPage pageModel, Object pageObject) {
+    public static void assertBlogPostPageJsonEquals(BlogPostsPage pageModel,
+                                                    Object pageObject) {
         if (pageModel != null) {
             assertTrue(pageObject instanceof Map);
             assertEquals(pageModel.getId(), ((Map) pageObject).get("Id"));
@@ -55,7 +58,8 @@ public class BlogPageAssertions {
         }
     }
 
-    public static void assertBlogPostPageSoyDataEquals(BlogPostsPage pageModel, SoyData pageObject) {
+    public static void assertBlogPostPageSoyDataEquals(BlogPostsPage pageModel,
+                                                       SoyValue pageObject) {
         if (pageModel != null) {
             assertTrue(pageObject instanceof SoyMapData);
             assertString(pageModel.getId(), ((SoyMapData) pageObject).get("Id"));

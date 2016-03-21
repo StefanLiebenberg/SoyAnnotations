@@ -1,6 +1,5 @@
 package example.cases;
 
-
 import com.google.inject.Injector;
 import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.tofu.SoyTofu;
@@ -13,14 +12,12 @@ import slieb.soy.factories.rendering.Renderer;
 import static org.junit.Assert.assertEquals;
 
 public class StatisticsRenderingTest {
-
-
-    public final SoyTofu soyTofu = new SoyFileSet.Builder()
-            .add(getClass().getResource("/templates/models/StatisticsTemplate.soy"))
-            .build().compileToTofu();
+    
+    public final SoyTofu soyTofu = SoyFileSet.builder()
+                                             .add(getClass().getResource("/templates/models/StatisticsTemplate.soy"))
+                                             .build().compileToTofu();
 
     public final Injector injector = Loader.getFullInjector(soyTofu, null);
-
 
     @Test
     public void testRenderStatistics() {

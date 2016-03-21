@@ -19,7 +19,7 @@ public class CustomConverterTestCase {
     public static class ExampleToMapConverter implements MetaConverter {
 
         @Override
-        public Map<String, Integer> convert(Object from) {
+        public Map<String, Integer> apply(Object from) {
             if (from instanceof Example) {
                 Map<String, Integer> amountMap = new HashMap<>();
                 amountMap.put("Name", ((Example) from).userName.length());
@@ -53,6 +53,6 @@ public class CustomConverterTestCase {
     public void testCustomConverter() {
         SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
         Example example = new Example("John", "john@domain.com");
-        Object object = context.convert(example);
+        Object object = context.apply(example);
     }
 }

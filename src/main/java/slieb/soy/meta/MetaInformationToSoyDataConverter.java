@@ -1,8 +1,8 @@
 package slieb.soy.meta;
 
-import ch.lambdaj.function.convert.Converter;
 import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
+import com.google.template.soy.data.SoyValue;
 import slieb.soy.context.SoyDataFactoryContext;
 import slieb.soy.converters.soydata.ClassToSoyMapDataConverter;
 import slieb.soy.converters.soydata.DynamicConverter;
@@ -11,12 +11,13 @@ import slieb.soy.exceptions.NeedsDynamicConverterException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 import static slieb.soy.converters.soydata.NullSafeConverter.wrapConverterWithNullSafe;
 import static slieb.utilities.ConverterUtils.chain;
 import static slieb.utilities.ConverterUtils.join;
 
-public class MetaInformationToSoyDataConverter implements Converter<MetaClassInformation, Converter<Object, ? extends SoyData>> {
+public class MetaInformationToSoyDataConverter implements Function<MetaClassInformation, Function<Object, ? extends SoyData>> {
 
     private final SoyDataFactoryContext soyDataFactoryFactoryContext;
 
@@ -27,40 +28,42 @@ public class MetaInformationToSoyDataConverter implements Converter<MetaClassInf
         this.dynamicConverter = new DynamicConverter(soyDataFactoryFactoryContext);
     }
 
-    private Map<String, Converter<Object, ? extends SoyData>> getConverterMap(MetaClassInformation metaClassInformation) {
-        Map<String, Converter<Object, ? extends SoyData>> map = new HashMap<>();
+    private Map<String, Function<Object, ? extends SoyValue>> getConverterMap(MetaClassInformation metaClassInformation) {
+        Map<String, Function<Object, ? extends SoyValue>> map = new HashMap<>();
         for (Map.Entry<String, MetaMemberInformation> entry : metaClassInformation.getMembersInformation().entrySet()) {
             map.put(entry.getKey(), getValueConverter(entry.getValue()));
         }
         return map;
     }
 
-    public Converter<Object, ? extends SoyMapData> getClassConverter(MetaClassInformation metaClassInformation) {
-        Converter<Object, ?> valueConverter = metaClassInformation.getValueConverter();
+    public Function<Object, ? extends SoyMapData> getClassConverter(MetaClassInformation metaClassInformation) {
+        Function<Object, ?> valueConverter = metaClassInformation.getValueConverter();
         if (valueConverter == null) {
-            return new ClassToSoyMapDataConverter(getConverterMap(metaClassInformation), metaClassInformation.getUseOriginalToString());
+            final Map<String, Function<Object, ? extends SoyValue>> converterMap = getConverterMap(metaClassInformation);
+            final Boolean useOriginalToString = metaClassInformation.getUseOriginalToString();
+            return new ClassToSoyMapDataConverter(converterMap, useOriginalToString);
         } else {
             return join(valueConverter, new SoyMapDataConverter(dynamicConverter));
         }
     }
 
     @SuppressWarnings("unchecked")
-    public Converter<Object, ? extends SoyData> getValueConverter(MetaValueConvertableInformation valueConvertableInformation) {
+    public Function<Object, ? extends SoyValue> getValueConverter(MetaValueConvertableInformation valueConvertableInformation) {
         Class<?> memberType = valueConvertableInformation.getType();
-        Converter<Object, ?> valueConverter = valueConvertableInformation.getValueConverter();
+        Function<Object, ?> valueConverter = valueConvertableInformation.getValueConverter();
         try {
-            Converter<Object, ? extends SoyData> soyConverter =
+            Function<Object, ? extends SoyValue> soyConverter =
                     valueConvertableInformation.getDynamic() ?
                             wrapConverterWithNullSafe(dynamicConverter) :
                             soyDataFactoryFactoryContext.create(memberType);
-            return (Converter<Object, ? extends SoyData>) chain(valueConverter, soyConverter);
+            return (Function<Object, ? extends SoyValue>) chain(valueConverter, soyConverter);
         } catch (StackOverflowError e) {
             throw new NeedsDynamicConverterException(memberType, e);
         }
     }
 
     @Override
-    public Converter<Object, ? extends SoyMapData> convert(MetaClassInformation from) {
+    public Function<Object, ? extends SoyMapData> apply(MetaClassInformation from) {
         return getClassConverter(from);
     }
 }

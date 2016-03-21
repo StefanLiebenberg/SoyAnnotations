@@ -1,7 +1,7 @@
 package slieb.soy.meta;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.inject.Inject;
 import slieb.soy.exceptions.MissingFactory;
 import slieb.soy.factories.MetaConverterFactory;
@@ -49,7 +49,7 @@ public class MetaContext implements Converter<Class<?>, MetaClassInformation> {
     }
 
     @Override
-    public MetaClassInformation convert(Class<?> from) {
-        return this.create(from).convert(from);
+    public MetaClassInformation apply(Class<?> from) {
+        return this.create(from).apply(from);
     }
 }

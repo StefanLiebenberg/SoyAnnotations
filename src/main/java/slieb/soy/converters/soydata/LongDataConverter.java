@@ -1,7 +1,7 @@
 package slieb.soy.converters.soydata;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.inject.Singleton;
 import slieb.soy.model.LongData;
 
@@ -9,7 +9,7 @@ import slieb.soy.model.LongData;
 public class LongDataConverter implements Converter<Object, LongData> {
 
     @Override
-    public LongData convert(Object from) {
+    public LongData apply(Object from) {
         if (from instanceof Long) {
             return new LongData((Long) from);
         } else {

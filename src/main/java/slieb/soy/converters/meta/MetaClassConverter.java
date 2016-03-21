@@ -1,6 +1,6 @@
 package slieb.soy.converters.meta;
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.common.collect.ImmutableMap;
 import slieb.soy.helpers.FactoryHelper;
 import slieb.soy.meta.MemberFieldValueConverter;
@@ -55,7 +55,7 @@ public class MetaClassConverter implements Converter<Class<?>, MetaClassInformat
         return builder.build();
     }
 
-    public MetaClassInformation convert(Class<?> from) {
+    public MetaClassInformation apply(Class<?> from) {
         Boolean dyn = factoryHelper.isDynamicFactoryClass(from);
         Boolean useOriginalToString = factoryHelper.useOriginalToString(from);
         return new MetaClassInformation(dyn,

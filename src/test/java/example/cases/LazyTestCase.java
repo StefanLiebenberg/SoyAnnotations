@@ -1,15 +1,13 @@
 package example.cases;
 
-
 import com.google.inject.Injector;
-import com.google.template.soy.data.SoyData;
+import com.google.template.soy.data.SoyValue;
 import org.junit.Test;
 import slieb.soy.Loader;
 import slieb.soy.annotations.Soy;
 import slieb.soy.context.SoyDataFactoryContext;
 
 public class LazyTestCase {
-
 
     @Soy
     @Soy.Dynamic
@@ -28,8 +26,8 @@ public class LazyTestCase {
             b.append(name).append(":");
             if (next != null) {
                 b.append("[")
-                        .append(next.toString())
-                        .append("]");
+                 .append(next.toString())
+                 .append("]");
             } else {
                 b.append("null");
             }
@@ -37,7 +35,8 @@ public class LazyTestCase {
         }
     }
 
-    public Node createChain(Integer count, Node lastNode) {
+    public Node createChain(Integer count,
+                            Node lastNode) {
         if (count > 0) {
             Node node = new Node();
             node.name = "Node " + count;
@@ -55,13 +54,12 @@ public class LazyTestCase {
         return root;
     }
 
-
     @Test
     public void testExceptionIsNotThrownNormalChain() {
         Injector injector = Loader.getFullInjector();
         SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
         Node node = createChain(3, null);
-        SoyData soyData = context.convert(node);
+        SoyValue soyData = context.apply(node);
     }
 
     @Test(expected = StackOverflowError.class)
@@ -69,7 +67,7 @@ public class LazyTestCase {
         Injector injector = Loader.getFullInjector();
         SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
         Node node = createSelfReferenceChain(10);
-        SoyData soyData = context.convert(node);
+        SoyValue soyData = context.apply(node);
     }
 
     @Test
@@ -77,6 +75,6 @@ public class LazyTestCase {
         Injector injector = Loader.getLazyInjector();
         SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
         Node node = createSelfReferenceChain(10);
-        SoyData soyData = context.convert(node);
+        SoyValue soyData = context.apply(node);
     }
 }

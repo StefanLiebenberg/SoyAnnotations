@@ -18,11 +18,10 @@ import static org.junit.Assert.assertEquals;
 
 public class RendererFactoryContextTest {
 
-
     private final SoyTofu soyTofu =
-            new SoyFileSet.Builder()
-                    .add(getClass().getResource("/templates.soy"))
-                    .build().compileToTofu();
+            SoyFileSet.builder()
+                      .add(getClass().getResource("/templates.soy"))
+                      .build().compileToTofu();
 
     private final Injector injector = Loader.getFullInjector(soyTofu, null);
 
@@ -32,7 +31,6 @@ public class RendererFactoryContextTest {
     public void setUp() throws Exception {
         rendererFactoryContext = injector.getInstance(RendererFactoryContext.class);
     }
-
 
     @Test
     public void testBasicSoyTemplateWithFactory() throws Exception {
@@ -61,7 +59,6 @@ public class RendererFactoryContextTest {
         assertEquals(expected, result);
     }
 
-
     @Test
     public void testCustomRendererAnnotation() {
         Settings settings = new Settings();
@@ -78,6 +75,4 @@ public class RendererFactoryContextTest {
         String expected = "{ GlobalSettings : true, GeneralSettings: [UserName: user], SpecialSettings: null}";
         assertEquals(expected, result);
     }
-
-
 }

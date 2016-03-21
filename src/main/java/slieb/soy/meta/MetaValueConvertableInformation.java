@@ -1,21 +1,21 @@
 package slieb.soy.meta;
 
-
-import ch.lambdaj.function.convert.Converter;
-
 import javax.annotation.concurrent.Immutable;
+import java.util.function.Function;
 
 @Immutable
 public class MetaValueConvertableInformation extends MetaInformation {
 
-    private final Converter<Object, ?> valueConverter;
+    private final Function<Object, ?> valueConverter;
 
-    public MetaValueConvertableInformation(Boolean dynamic, Class<?> type, Converter<Object, ?> valueConverter) {
+    public MetaValueConvertableInformation(Boolean dynamic,
+                                           Class<?> type,
+                                           Function<Object, ?> valueConverter) {
         super(dynamic, type);
         this.valueConverter = valueConverter;
     }
 
-    public final Converter<Object, ?> getValueConverter() {
+    public final Function<Object, ?> getValueConverter() {
         return valueConverter;
     }
 }

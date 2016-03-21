@@ -1,20 +1,19 @@
 package slieb.soy.renderers;
 
-import ch.lambdaj.function.convert.Converter;
-import com.google.template.soy.data.SoyData;
-import slieb.soy.converters.soydata.ClassToSoyMapDataConverter;
+import com.google.template.soy.data.SoyValue;
 import slieb.soy.factories.rendering.Renderer;
 
 import javax.annotation.Nullable;
-
+import java.util.function.Function;
 
 public class ClassRenderer implements Renderer<Object> {
 
-    private final Converter<Object, ? extends SoyData> dataConverter;
+    private final Function<Object, ? extends SoyValue> dataConverter;
 
-    private final Renderer<SoyData> dataRenderer;
+    private final Renderer<SoyValue> dataRenderer;
 
-    public ClassRenderer(Converter<Object, ? extends SoyData> dataConverter, Renderer<SoyData> dataRenderer) {
+    public ClassRenderer(Function<Object, ? extends SoyValue> dataConverter,
+                         Renderer<SoyValue> dataRenderer) {
         this.dataConverter = dataConverter;
         this.dataRenderer = dataRenderer;
     }
@@ -22,6 +21,6 @@ public class ClassRenderer implements Renderer<Object> {
     @Nullable
     @Override
     public String render(@Nullable Object instanceObject) {
-        return dataRenderer.render(dataConverter.convert(instanceObject));
+        return dataRenderer.render(dataConverter.apply(instanceObject));
     }
 }

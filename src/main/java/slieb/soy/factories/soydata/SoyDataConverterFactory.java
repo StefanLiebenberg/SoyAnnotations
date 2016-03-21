@@ -1,7 +1,7 @@
 package slieb.soy.factories.soydata;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.SoyData;
 import slieb.soy.context.SoyDataFactoryContext;
@@ -35,7 +35,7 @@ public class SoyDataConverterFactory implements SoyConverterFactory, Converter<O
 
     // todo, move out to own factory
     @Override
-    public SoyData convert(Object from) {
+    public SoyData apply(Object from) {
         if (from instanceof SoyData) {
             return (SoyData) from;
         } else {

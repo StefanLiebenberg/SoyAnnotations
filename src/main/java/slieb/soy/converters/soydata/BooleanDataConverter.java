@@ -1,7 +1,7 @@
 package slieb.soy.converters.soydata;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.restricted.BooleanData;
 
@@ -9,7 +9,7 @@ import com.google.template.soy.data.restricted.BooleanData;
 public class BooleanDataConverter implements Converter<Object, BooleanData> {
 
     @Override
-    public BooleanData convert(Object from) {
+    public BooleanData apply(Object from) {
 
         if (from instanceof Boolean) {
             return BooleanData.forValue((Boolean) from);

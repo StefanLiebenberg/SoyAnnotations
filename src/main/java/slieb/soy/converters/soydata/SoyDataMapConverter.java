@@ -1,7 +1,7 @@
 package slieb.soy.converters.soydata;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
 
@@ -18,14 +18,14 @@ public class SoyDataMapConverter implements Converter<Object, SoyMapData> {
 
     @Override
     @Nullable
-    public SoyMapData convert(@Nullable Object object) {
+    public SoyMapData apply(@Nullable Object object) {
         if (object instanceof Map) {
             SoyMapData soyMapData = new SoyMapData();
             for (Map.Entry<?, ?> entry : ((Map<?, ?>) object).entrySet()) {
                 Object key = entry.getKey();
                 Object value = entry.getValue();
                 if (key instanceof String) {
-                    soyMapData.putSingle((String) key, typeConverter.convert(value));
+                    soyMapData.putSingle((String) key, typeConverter.apply(value));
                 }
             }
             return soyMapData;

@@ -1,7 +1,7 @@
 package slieb.soy.factories;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import slieb.soy.meta.MetaClassInformation;
 
 import javax.annotation.Nonnull;

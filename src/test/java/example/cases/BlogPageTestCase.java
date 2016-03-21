@@ -35,7 +35,7 @@ public class BlogPageTestCase {
     public void testPageJson() {
         JsonDataFactoryContext context = injector.getInstance(JsonDataFactoryContext.class);
         // todo, add getJson and getJsonMap to context as methods.
-        assertBlogPostPageJsonEquals(page, context.convert(page));
+        assertBlogPostPageJsonEquals(page, context.apply(page));
     }
 
 }

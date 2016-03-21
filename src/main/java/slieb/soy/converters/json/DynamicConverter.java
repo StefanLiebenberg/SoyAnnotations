@@ -1,13 +1,12 @@
 package slieb.soy.converters.json;
 
-
-import ch.lambdaj.function.convert.Converter;
 import slieb.soy.context.JsonDataFactoryContext;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.function.Function;
 
-public class DynamicConverter implements Converter<Object, Object> {
+public class DynamicConverter implements Function<Object, Object> {
 
     private final JsonDataFactoryContext context;
 
@@ -17,7 +16,7 @@ public class DynamicConverter implements Converter<Object, Object> {
 
     @Override
     @Nullable
-    public Object convert(@Nullable Object from) {
-        return context.convert(from);
+    public Object apply(@Nullable Object from) {
+        return context.apply(from);
     }
 }

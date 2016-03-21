@@ -1,13 +1,13 @@
 package slieb.soy.model;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Function;
 
-import ch.lambdaj.function.convert.Converter;
-
-import javax.annotation.Nonnull;
-
+@ParametersAreNonnullByDefault
 public class DefaultLazyResultWithOriginalToString<A, B> extends DefaultLazyResult<A, B> {
 
-    public DefaultLazyResultWithOriginalToString(@Nonnull A object, @Nonnull Converter<A, B> converter) {
+    public DefaultLazyResultWithOriginalToString(A object,
+                                                 Function<A, B> converter) {
         super(object, converter);
     }
 

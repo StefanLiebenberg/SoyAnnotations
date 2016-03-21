@@ -1,27 +1,27 @@
 package slieb.soy.model;
 
-
-import ch.lambdaj.function.convert.Converter;
-
 import javax.annotation.Nonnull;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
-public class DefaultLazyResult<A, B> implements LazyResult<B> {
+public class DefaultLazyResult<A, B> implements Supplier<B> {
 
     protected final A object;
 
-    protected final Converter<A, B> converter;
+    protected final Function<A, B> converter;
 
     private B result;
 
-    public DefaultLazyResult(@Nonnull A object, @Nonnull Converter<A, B> converter) {
+    public DefaultLazyResult(@Nonnull A object,
+                             @Nonnull Function<A, B> converter) {
         this.object = object;
         this.converter = converter;
     }
 
     @Nonnull
-    public B result() {
+    public B get() {
         if (result == null) {
-            result = converter.convert(object);
+            result = converter.apply(object);
         }
         return result;
     }
@@ -29,7 +29,6 @@ public class DefaultLazyResult<A, B> implements LazyResult<B> {
     @Override
     public String toString() {
 
-        return result().toString();
-
+        return get().toString();
     }
 }

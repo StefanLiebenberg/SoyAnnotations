@@ -1,7 +1,7 @@
 package slieb.soy.factories.soydata;
 
-import ch.lambdaj.function.convert.Converter;
 import com.google.inject.Injector;
+import com.google.template.soy.data.SoyValue;
 import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,8 +9,9 @@ import slieb.soy.Loader;
 import slieb.soy.context.SoyDataFactoryContext;
 import slieb.soy.converters.soydata.*;
 
-import static org.junit.Assert.assertTrue;
+import java.util.function.Function;
 
+import static org.junit.Assert.assertTrue;
 
 public class SoyDataConverterFactoryTest {
 
@@ -25,37 +26,37 @@ public class SoyDataConverterFactoryTest {
 
     @Test
     public void testCreateClassConverter() {
-        Converter converter = factoryContext.create(User.class);
+        Function<Object, ? extends SoyValue> converter = factoryContext.create(User.class);
         assertTrue(converter instanceof ClassToSoyMapDataConverter);
     }
 
     @Test
     public void testCreateBooleanConverter() {
-        Converter converter = factoryContext.create(Boolean.class);
+        Function<Object, ? extends SoyValue> converter = factoryContext.create(Boolean.class);
         assertTrue(converter instanceof BooleanDataConverter);
     }
 
     @Test
     public void testCreateLongConverter() {
-        Converter converter = factoryContext.create(Long.class);
+        Function<Object, ? extends SoyValue> converter = factoryContext.create(Long.class);
         assertTrue(converter instanceof LongDataConverter);
     }
 
     @Test
     public void testCreateIntegerConverter() {
-        Converter converter = factoryContext.create(Integer.class);
+        Function<Object, ? extends SoyValue> converter = factoryContext.create(Integer.class);
         assertTrue(converter instanceof IntegerDataConverter);
     }
 
     @Test
     public void testCreateFloatConverter() {
-        Converter converter = factoryContext.create(Float.class);
+        Function<Object, ? extends SoyValue> converter = factoryContext.create(Float.class);
         assertTrue(converter instanceof FloatDataConverter);
     }
 
     @Test
     public void testCreateStringConverter() {
-        Converter converter = factoryContext.create(String.class);
+        Function<Object, ? extends SoyValue> converter = factoryContext.create(String.class);
         assertTrue(converter instanceof StringDataConverter);
     }
 }

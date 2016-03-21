@@ -1,20 +1,20 @@
 package slieb.utilities;
 
-import ch.lambdaj.function.convert.Converter;
+import java.util.function.Function;
 
+public class JoinedConverter<A, B> implements Function<A, B> {
 
-public class JoinedConverter<A, B> implements Converter<A, B> {
+    private final Function<A, ?> converterA;
+    private final Function<Object, ? extends B> converterB;
 
-    private final Converter<A, ?> converterA;
-    private final Converter<Object, ? extends B> converterB;
-
-    public JoinedConverter(Converter<A, ?> converterA, Converter<Object, ? extends B> converterB) {
+    public JoinedConverter(Function<A, ?> converterA,
+                           Function<Object, ? extends B> converterB) {
         this.converterA = converterA;
         this.converterB = converterB;
     }
 
     @Override
-    public B convert(A from) {
-        return converterB.convert(converterA.convert(from));
+    public B apply(A from) {
+        return converterB.apply(converterA.apply(from));
     }
 }

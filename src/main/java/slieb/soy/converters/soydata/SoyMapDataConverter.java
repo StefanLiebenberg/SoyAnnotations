@@ -1,28 +1,27 @@
 package slieb.soy.converters.soydata;
 
-import ch.lambdaj.function.convert.Converter;
-import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
+import com.google.template.soy.data.SoyValue;
 
 import java.util.Map;
+import java.util.function.Function;
 
+public class SoyMapDataConverter implements Function<Object, SoyMapData> {
 
-public class SoyMapDataConverter implements Converter<Object, SoyMapData> {
+    private final Function<Object, SoyValue> typeConverter;
 
-    private final Converter<Object, SoyData> typeConverter;
-
-    public SoyMapDataConverter(Converter<Object, SoyData> typeConverter) {
+    public SoyMapDataConverter(Function<Object, SoyValue> typeConverter) {
         this.typeConverter = typeConverter;
     }
 
     @Override
-    public SoyMapData convert(Object from) {
+    public SoyMapData apply(Object from) {
         if (from instanceof Map<?, ?>) {
             @SuppressWarnings("unchecked")
             Map<String, ?> castMap = (Map<String, ?>) from;
             SoyMapData soyMapData = new SoyMapData();
             for (Map.Entry<String, ?> entry : castMap.entrySet()) {
-                soyMapData.put(entry.getKey(), typeConverter.convert(entry.getValue()));
+                soyMapData.put(entry.getKey(), typeConverter.apply(entry.getValue()));
             }
             return soyMapData;
         } else {

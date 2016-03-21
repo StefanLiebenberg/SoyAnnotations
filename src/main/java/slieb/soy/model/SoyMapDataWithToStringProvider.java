@@ -1,21 +1,16 @@
 package slieb.soy.model;
 
-import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
 
-import java.util.Map;
-
 /**
- *  Extends SoyMapData to override the toString method.
- *
+ * Extends SoyMapData to override the toString method.
+ * <p>
  * <h3>example:</h3>
  * <pre>
  * {@code
  *   new SoyMapDataWithToStringProvider(new String("Boo")).toString() // "Boo";
  * }
  * </pre>
- *
- *
  */
 public class SoyMapDataWithToStringProvider extends SoyMapData {
 
@@ -30,7 +25,7 @@ public class SoyMapDataWithToStringProvider extends SoyMapData {
     }
 
     @Override
-    protected String toStringHelper(Map<String, SoyData> map) {
+    public String toString() {
         return String.valueOf(toStringProvider);
     }
 }

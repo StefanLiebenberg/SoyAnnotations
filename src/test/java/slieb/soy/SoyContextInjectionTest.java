@@ -1,6 +1,5 @@
 package slieb.soy;
 
-
 import com.google.inject.ConfigurationException;
 import com.google.inject.Injector;
 import com.google.template.soy.SoyFileSet;
@@ -12,12 +11,11 @@ import slieb.soy.context.SoyDataFactoryContext;
 
 import static org.junit.Assert.assertSame;
 
-
 public class SoyContextInjectionTest {
 
-    private SoyTofu soyTofu = new SoyFileSet.Builder()
-            .add(getClass().getResource("/templates.soy"))
-            .build().compileToTofu();
+    private SoyTofu soyTofu = SoyFileSet.builder()
+                                        .add(getClass().getResource("/templates.soy"))
+                                        .build().compileToTofu();
 
     @Test
     public void testBasicInjection() {
@@ -53,7 +51,7 @@ public class SoyContextInjectionTest {
     @Test
     public void testFullInjectionCanSupplyRenderer() {
         Loader.getFullInjector(soyTofu, null)
-                .getInstance(RendererFactoryContext.class);
+              .getInstance(RendererFactoryContext.class);
     }
 
     @Test
@@ -74,7 +72,6 @@ public class SoyContextInjectionTest {
     @Test
     public void testLazyInjectionCanSupplyRenderer() {
         Loader.getLazyInjector(soyTofu, null)
-                .getInstance(RendererFactoryContext.class);
+              .getInstance(RendererFactoryContext.class);
     }
-
 }

@@ -1,7 +1,7 @@
 package slieb.soy.converters.soydata;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.restricted.IntegerData;
 
@@ -12,7 +12,7 @@ public class IntegerDataConverter implements Converter<Object, IntegerData> {
 
     @Override
     @Nullable
-    public IntegerData convert(@Nullable Object from) {
+    public IntegerData apply(@Nullable Object from) {
         if (from instanceof Integer) {
             return IntegerData.forValue((Integer) from);
         } else {

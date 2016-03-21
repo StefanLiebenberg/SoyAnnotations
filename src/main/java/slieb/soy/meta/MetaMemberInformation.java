@@ -1,7 +1,7 @@
 package slieb.soy.meta;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 
 import javax.annotation.concurrent.Immutable;
 import java.lang.reflect.Member;

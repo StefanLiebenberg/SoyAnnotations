@@ -1,7 +1,7 @@
 package slieb.soy.meta;
 
 
-import ch.lambdaj.function.convert.Converter;
+import slieb.soy.internal.Converter;
 import com.google.inject.Inject;
 import slieb.soy.annotations.CustomConverter;
 import slieb.soy.factories.MetaConverterFactory;
@@ -42,7 +42,7 @@ public class MetaCustomClassConverterFactory implements Converter<Class<?>, Meta
     }
 
     @Override
-    public MetaClassInformation convert(Class<?> from) {
+    public MetaClassInformation apply(Class<?> from) {
         return new MetaClassInformation(Boolean.TRUE, from, getConverter(from), null, false);
     }
 

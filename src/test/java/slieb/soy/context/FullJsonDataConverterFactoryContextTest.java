@@ -1,6 +1,5 @@
 package slieb.soy.context;
 
-import ch.lambdaj.function.convert.Converter;
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 import example.models.AnnotatedCommentExample;
@@ -14,9 +13,9 @@ import slieb.soy.converters.json.NativeJsonConverter;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import static org.junit.Assert.*;
-
 
 public class FullJsonDataConverterFactoryContextTest {
 
@@ -28,7 +27,8 @@ public class FullJsonDataConverterFactoryContextTest {
         factoryContext = injector.getInstance(JsonDataFactoryContext.class);
     }
 
-    private void assertUserEquals(AnnotatedUserExample userExample, Object userObject) {
+    private void assertUserEquals(AnnotatedUserExample userExample,
+                                  Object userObject) {
         if (userExample != null) {
             assertTrue(userObject instanceof Map);
             assertEquals(userExample.getName(), ((Map) userObject).get("Name"));
@@ -40,7 +40,8 @@ public class FullJsonDataConverterFactoryContextTest {
         }
     }
 
-    private void assertPostEquals(AnnotatedPostExample postExample, Object postObject) {
+    private void assertPostEquals(AnnotatedPostExample postExample,
+                                  Object postObject) {
         if (postExample != null) {
             assertTrue(postObject instanceof Map);
             assertUserEquals(postExample.user, ((Map) postObject).get("User"));
@@ -50,7 +51,8 @@ public class FullJsonDataConverterFactoryContextTest {
         }
     }
 
-    private void assertCommentsEquals(List<AnnotatedCommentExample> commentExamples, Object commentsObject) {
+    private void assertCommentsEquals(List<AnnotatedCommentExample> commentExamples,
+                                      Object commentsObject) {
         if (commentExamples != null) {
             assertTrue(commentsObject instanceof List);
             for (int i = 0; i < commentExamples.size(); i++) {
@@ -61,7 +63,8 @@ public class FullJsonDataConverterFactoryContextTest {
         }
     }
 
-    private void assertCommentEquals(AnnotatedCommentExample commentExample, Object commentPost) {
+    private void assertCommentEquals(AnnotatedCommentExample commentExample,
+                                     Object commentPost) {
         if (commentExample != null) {
             assertTrue(commentPost instanceof Map);
             assertUserEquals(commentExample.user, ((Map) commentPost).get("User"));
@@ -83,8 +86,8 @@ public class FullJsonDataConverterFactoryContextTest {
     @Test
     public void testCreateConverterForUserAndConverterUser() {
         AnnotatedUserExample userExample = new AnnotatedUserExample("domain.com", "John", "john@domain.com", 123);
-        Converter<Object, ?> converter = factoryContext.create(AnnotatedUserExample.class);
-        Object object = converter.convert(userExample);
+        Function<Object, ?> converter = factoryContext.create(AnnotatedUserExample.class);
+        Object object = converter.apply(userExample);
         assertUserEquals(userExample, object);
     }
 
@@ -92,8 +95,8 @@ public class FullJsonDataConverterFactoryContextTest {
     public void testCreateConverterForPost() {
         AnnotatedPostExample postExample = new AnnotatedPostExample();
         postExample.user = new AnnotatedUserExample("domain.com", "John", "john@domain.com", 123);
-        Converter<Object, ?> converter = factoryContext.create(AnnotatedPostExample.class);
-        Object post = converter.convert(postExample);
+        Function<Object, ?> converter = factoryContext.create(AnnotatedPostExample.class);
+        Object post = converter.apply(postExample);
         assertPostEquals(postExample, post);
     }
 
@@ -106,8 +109,8 @@ public class FullJsonDataConverterFactoryContextTest {
         comment2 = new AnnotatedCommentExample(2, postExample.user, "Hello There", Lists.newArrayList(comment1));
         comment3 = new AnnotatedCommentExample(3, postExample.user, "Hello guys", Lists.newArrayList(comment2));
         postExample.comments = Lists.newArrayList(comment3);
-        Converter<Object, ?> converter = factoryContext.create(AnnotatedPostExample.class);
-        Object post = converter.convert(postExample);
+        Function<Object, ?> converter = factoryContext.create(AnnotatedPostExample.class);
+        Object post = converter.apply(postExample);
         assertPostEquals(postExample, post);
     }
 }
