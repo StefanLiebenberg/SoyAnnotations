@@ -2,9 +2,9 @@ package example.renderer;
 
 
 import example.models.Setting;
-import slieb.soy.context.RendererFactoryContext;
-import slieb.soy.factories.rendering.Renderer;
-import slieb.soy.factories.rendering.RendererFactoryContextAware;
+import org.slieb.soy.context.RendererFactoryContext;
+import org.slieb.soy.factories.rendering.Renderer;
+import org.slieb.soy.factories.rendering.RendererFactoryContextAware;
 
 import javax.annotation.Nullable;
 

@@ -1,9 +1,9 @@
 package example.models;
 
 import example.renderer.SettingsRenderer;
-import slieb.soy.annotations.CustomRenderer;
-import slieb.soy.annotations.Soy;
-import slieb.soy.context.RendererFactoryContext;
+import org.slieb.soy.annotations.CustomRenderer;
+import org.slieb.soy.annotations.Soy;
+import org.slieb.soy.context.RendererFactoryContext;
 
 import java.util.Collection;
 

@@ -1,6 +1,6 @@
 package example.models;
 
-import slieb.soy.annotations.Soy;
+import org.slieb.soy.annotations.Soy;
 
 @Soy
 public class AnnotatedUserExample extends AbstractUser {

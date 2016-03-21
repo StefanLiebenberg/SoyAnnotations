@@ -5,14 +5,14 @@ import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.tofu.SoyTofu;
 import example.models.Statistics;
 import org.junit.Test;
-import slieb.soy.Loader;
-import slieb.soy.context.RendererFactoryContext;
-import slieb.soy.factories.rendering.Renderer;
+import org.slieb.soy.Loader;
+import org.slieb.soy.context.RendererFactoryContext;
+import org.slieb.soy.factories.rendering.Renderer;
 
 import static org.junit.Assert.assertEquals;
 
 public class StatisticsRenderingTest {
-    
+
     public final SoyTofu soyTofu = SoyFileSet.builder()
                                              .add(getClass().getResource("/templates/models/StatisticsTemplate.soy"))
                                              .build().compileToTofu();

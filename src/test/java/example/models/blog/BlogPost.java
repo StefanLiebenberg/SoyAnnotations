@@ -1,7 +1,7 @@
 package example.models.blog;
 
 
-import slieb.soy.annotations.Soy;
+import org.slieb.soy.annotations.Soy;
 
 import java.util.List;
 

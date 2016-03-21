@@ -5,9 +5,9 @@ import com.google.inject.Injector;
 import example.models.blog.BlogPostsPage;
 import org.junit.Before;
 import org.junit.Test;
-import slieb.soy.Loader;
-import slieb.soy.context.JsonDataFactoryContext;
-import slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.Loader;
+import org.slieb.soy.context.JsonDataFactoryContext;
+import org.slieb.soy.context.SoyDataFactoryContext;
 
 import static example.assertions.BlogPageAssertions.assertBlogPostPageJsonEquals;
 import static example.assertions.BlogPageAssertions.assertBlogPostPageSoyDataEquals;

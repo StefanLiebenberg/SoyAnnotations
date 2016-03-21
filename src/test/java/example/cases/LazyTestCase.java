@@ -3,9 +3,9 @@ package example.cases;
 import com.google.inject.Injector;
 import com.google.template.soy.data.SoyValue;
 import org.junit.Test;
-import slieb.soy.Loader;
-import slieb.soy.annotations.Soy;
-import slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.Loader;
+import org.slieb.soy.annotations.Soy;
+import org.slieb.soy.context.SoyDataFactoryContext;
 
 public class LazyTestCase {
 

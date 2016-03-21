@@ -5,7 +5,7 @@ import com.google.template.soy.data.restricted.BooleanData;
 import com.google.template.soy.data.restricted.NullData;
 import com.google.template.soy.data.restricted.NumberData;
 import com.google.template.soy.data.restricted.StringData;
-import slieb.soy.model.LongData;
+import org.slieb.soy.model.LongData;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
