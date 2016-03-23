@@ -1,0 +1,12 @@
+example.assertions
+example.builders
+example.cases
+example.models
+example.models.blog
+example.renderer
+org.slieb.soy
+org.slieb.soy.context
+org.slieb.soy.converters
+org.slieb.soy.factories.rendering
+org.slieb.soy.factories.soydata
+org.slieb.soy.helpers
