@@ -1,6 +1,7 @@
 package org.slieb.soy.model;
 
 import com.google.template.soy.data.SoyMap;
+import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.data.SoyValue;
 import com.google.template.soy.data.SoyValueProvider;
 
@@ -9,9 +10,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
-public class LazySoyMapData extends LazySoyValue<SoyMap> implements SoyMap {
+public class LazySoyMapData extends LazySoyValue<SoyMapData> implements SoyMap {
 
-    public LazySoyMapData(Supplier<SoyMap> supplier) {
+    public LazySoyMapData(Supplier<SoyMapData> supplier) {
         super(supplier);
     }
 

@@ -1,7 +1,7 @@
 package org.slieb.soy.factories.soydata;
 
 import com.google.inject.Singleton;
-import com.google.template.soy.data.SoyMap;
+import com.google.template.soy.data.SoyMapData;
 import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.converters.soydata.DynamicConverter;
 import org.slieb.soy.converters.soydata.SoyMapDataConverter;
@@ -24,8 +24,8 @@ public class SoyMapDataConverterFactory implements SoyConverterFactory {
 
     @Nonnull
     @Override
-    public Function<Object, SoyMap> create(@Nonnull Class<?> classObject,
-                                           @Nonnull SoyValueFactoryContext context) {
+    public Function<Object, SoyMapData> create(@Nonnull Class<?> classObject,
+                                               @Nonnull SoyValueFactoryContext context) {
         return new SoyMapDataConverter(wrapConverterWithNullSafe(new DynamicConverter(context)));
     }
 }

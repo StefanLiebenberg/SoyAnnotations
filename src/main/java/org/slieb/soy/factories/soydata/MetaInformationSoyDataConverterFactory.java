@@ -1,7 +1,7 @@
 package org.slieb.soy.factories.soydata;
 
 import com.google.inject.Inject;
-import com.google.template.soy.data.SoyMap;
+import com.google.template.soy.data.SoyMapData;
 import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.factories.SoyConverterFactory;
 import org.slieb.soy.meta.MetaContext;
@@ -27,8 +27,8 @@ public class MetaInformationSoyDataConverterFactory implements SoyConverterFacto
 
     @Nonnull
     @Override
-    public Function<Object, SoyMap> create(@Nonnull Class<?> classObject,
-                                                     @Nonnull SoyValueFactoryContext context) {
+    public Function<Object, SoyMapData> create(@Nonnull Class<?> classObject,
+                                               @Nonnull SoyValueFactoryContext context) {
         final MetaInformationToSoyDataConverter metaInformationToSoyDataConverter = new MetaInformationToSoyDataConverter(context);
         return metaInformationToSoyDataConverter.apply(metaContext.apply(classObject));
     }

@@ -1,13 +1,13 @@
 package org.slieb.soy.converters.soydata;
 
-import com.google.template.soy.data.SoyValue;
+import com.google.template.soy.data.SoyData;
 import org.slieb.soy.context.SoyValueFactoryContext;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-public class DynamicConverter implements Function<Object, SoyValue> {
+public class DynamicConverter implements Function<Object, SoyData> {
 
     private final SoyValueFactoryContext context;
 
@@ -17,7 +17,7 @@ public class DynamicConverter implements Function<Object, SoyValue> {
 
     @Override
     @Nullable
-    public SoyValue apply(@Nullable Object from) {
+    public SoyData apply(@Nullable Object from) {
         return context.apply(from);
     }
 }

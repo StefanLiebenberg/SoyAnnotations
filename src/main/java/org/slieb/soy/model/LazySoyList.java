@@ -1,6 +1,7 @@
 package org.slieb.soy.model;
 
 import com.google.template.soy.data.SoyList;
+import com.google.template.soy.data.SoyListData;
 import com.google.template.soy.data.SoyValue;
 import com.google.template.soy.data.SoyValueProvider;
 
@@ -10,9 +11,9 @@ import java.util.List;
 import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
-public class LazySoyList extends LazySoyValue<SoyList> implements SoyList {
+public class LazySoyList extends LazySoyValue<SoyListData> implements SoyList {
 
-    public LazySoyList(Supplier<SoyList> supplier) {
+    public LazySoyList(Supplier<SoyListData> supplier) {
         super(supplier);
     }
 

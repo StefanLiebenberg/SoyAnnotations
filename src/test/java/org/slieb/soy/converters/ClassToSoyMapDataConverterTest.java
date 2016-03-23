@@ -3,7 +3,6 @@ package org.slieb.soy.converters;
 import com.google.common.collect.ImmutableMap;
 import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
-import com.google.template.soy.data.SoyValue;
 import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,10 +21,10 @@ import static org.mockito.Mockito.when;
 public class ClassToSoyMapDataConverterTest {
 
     @Mock
-    private Function<Object, ? extends SoyData> mockNameConverter;
+    private Function<Object, SoyData> mockNameConverter;
 
     @Mock
-    private Function<Object, ? extends SoyData> mockEmailConverter;
+    private Function<Object, SoyData> mockEmailConverter;
 
     @Mock
     private User mockUser;
@@ -42,7 +41,7 @@ public class ClassToSoyMapDataConverterTest {
     public void setUp() throws Exception {
         when(mockNameConverter.apply(mockUser)).thenReturn(mockNameData);
         when(mockEmailConverter.apply(mockUser)).thenReturn(mockEmailData);
-        ImmutableMap.Builder<String, Function<Object, ? extends SoyValue>> membersConverters = ImmutableMap.builder();
+        ImmutableMap.Builder<String, Function<Object, ? extends SoyData>> membersConverters = ImmutableMap.builder();
         membersConverters.put("Name", mockNameConverter);
         membersConverters.put("Email", mockEmailConverter);
         converter = new ClassToSoyMapDataConverter(membersConverters.build(), false);

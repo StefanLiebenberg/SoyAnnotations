@@ -1,5 +1,6 @@
 package org.slieb.soy.model;
 
+import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyValue;
 import com.google.template.soy.jbcsrc.api.AdvisingAppendable;
 import com.google.template.soy.jbcsrc.api.RenderResult;
@@ -11,7 +12,7 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("WeakerAccess")
 @ParametersAreNonnullByDefault
-public class LazySoyValue<T extends SoyValue> implements SoyValue {
+public class LazySoyValue<T extends SoyData> extends SoyData {
 
     protected final LazyContainer<T> container;
 
@@ -28,6 +29,21 @@ public class LazySoyValue<T extends SoyValue> implements SoyValue {
     @Override
     public boolean coerceToBoolean() {
         return container.get().coerceToBoolean();
+    }
+
+    /**
+     * This was a required method in the old SoyData interface. For new data classes, please use
+     * interface SoyValue, which has the method coerceToBoolean().
+     * <p>
+     * Converts this data object into a boolean (e.g. when used in a boolean context). In other words,
+     * this method tells whether this object is truthy.
+     *
+     * @return The value of this data object if coerced into a boolean. I.e. true if this object is
+     * truthy, false if this object is falsy.
+     */
+    @Override
+    public boolean toBoolean() {
+        return container.get().toBoolean();
     }
 
     @Override
@@ -74,7 +90,7 @@ public class LazySoyValue<T extends SoyValue> implements SoyValue {
     public String toString() {
         return container.get().toString();
     }
-    
+
     @Nonnull
     @Override
     public SoyValue resolve() {

@@ -1,5 +1,6 @@
 package org.slieb.soy.converters.soydata;
 
+import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyValue;
 import com.google.template.soy.data.restricted.NullData;
 
@@ -7,11 +8,11 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-public class NullSafeConverter implements Function<Object, SoyValue> {
+public class NullSafeConverter implements Function<Object, SoyData> {
 
-    private final Function<Object, ? extends SoyValue> converter;
+    private final Function<Object, ? extends SoyData> converter;
 
-    public NullSafeConverter(@Nonnull Function<Object, ? extends SoyValue> converter) {
+    public NullSafeConverter(@Nonnull Function<Object, ? extends SoyData> converter) {
         this.converter = converter;
     }
 
@@ -21,7 +22,7 @@ public class NullSafeConverter implements Function<Object, SoyValue> {
 
     @Override
     @Nonnull
-    public SoyValue apply(@Nullable Object from) {
+    public SoyData apply(@Nullable Object from) {
         if (from != null) {
             return convertResult(converter.apply(from));
         } else {
@@ -30,12 +31,12 @@ public class NullSafeConverter implements Function<Object, SoyValue> {
     }
 
     @Nonnull
-    private SoyValue convertResult(@Nullable SoyValue from) {
+    private SoyData convertResult(@Nullable SoyData from) {
         return from != null ? from : NullData.INSTANCE;
     }
 
     @Nonnull
-    public static NullSafeConverter wrapConverterWithNullSafe(@Nonnull Function<Object, ? extends SoyValue> converter) {
+    public static NullSafeConverter wrapConverterWithNullSafe(@Nonnull Function<Object, ? extends SoyData> converter) {
         return new NullSafeConverter(converter);
     }
 }

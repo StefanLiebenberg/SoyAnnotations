@@ -1,6 +1,6 @@
 package org.slieb.soy.factories;
 
-import com.google.template.soy.data.SoyValue;
+import com.google.template.soy.data.SoyData;
 import org.slieb.soy.context.SoyValueFactoryContext;
 
 import javax.annotation.Nonnull;
@@ -12,6 +12,6 @@ public interface SoyConverterFactory {
     Boolean canCreate(@Nonnull Class<?> classObject);
 
     @Nonnull
-    Function<Object, ? extends SoyValue> create(@Nonnull Class<?> classObject,
-                                                @Nonnull SoyValueFactoryContext context);
+    Function<Object, ? extends SoyData> create(@Nonnull Class<?> classObject,
+                                               @Nonnull SoyValueFactoryContext context);
 }

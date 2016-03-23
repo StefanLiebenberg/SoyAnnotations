@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
+@SuppressWarnings("WeakerAccess")
 public class RendererFactoryContext implements Renderer<Object> {
 
     private final SoyValueFactoryContext soyValueFactoryContext;
@@ -18,7 +19,8 @@ public class RendererFactoryContext implements Renderer<Object> {
     private final List<RendererFactory> rendererFactories;
 
     @Inject
-    public RendererFactoryContext(SoyValueFactoryContext soyValueFactoryContext, Set<RendererFactory> rendererFactories) {
+    public RendererFactoryContext(SoyValueFactoryContext soyValueFactoryContext,
+                                  Set<RendererFactory> rendererFactories) {
         this.soyValueFactoryContext = soyValueFactoryContext;
         this.rendererFactories = Lists.newArrayList(rendererFactories);
     }
@@ -32,7 +34,6 @@ public class RendererFactoryContext implements Renderer<Object> {
         }
         throw new MissingFactory(classObject);
     }
-
 
     @Nonnull
     public Renderer<Object> getRenderer(@Nonnull Class<?> classObject) {

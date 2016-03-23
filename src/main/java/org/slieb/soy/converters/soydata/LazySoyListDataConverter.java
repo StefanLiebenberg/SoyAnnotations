@@ -1,7 +1,7 @@
 package org.slieb.soy.converters.soydata;
 
-import com.google.template.soy.data.SoyList;
-import com.google.template.soy.data.SoyValue;
+import com.google.template.soy.data.SoyData;
+import com.google.template.soy.data.SoyListData;
 import org.slieb.soy.model.DefaultLazyResult;
 import org.slieb.soy.model.DefaultLazyResultWithOriginalToString;
 import org.slieb.soy.model.LazySoyList;
@@ -10,19 +10,19 @@ import java.util.Collection;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class LazySoyListDataConverter implements Function<Object, SoyValue> {
+public class LazySoyListDataConverter implements Function<Object, SoyData> {
 
-    private final Function<Object, SoyList> listDataConverter;
+    private final Function<Object, SoyListData> listDataConverter;
 
     private final Boolean useOriginalToString;
 
-    public LazySoyListDataConverter(Function<Object, SoyList> listDataConverter,
+    public LazySoyListDataConverter(Function<Object, SoyListData> listDataConverter,
                                     Boolean useOriginalToString) {
         this.listDataConverter = listDataConverter;
         this.useOriginalToString = useOriginalToString;
     }
 
-    public Supplier<SoyList> getLazyResult(Object from) {
+    public Supplier<SoyListData> getLazyResult(Object from) {
         if (useOriginalToString) {
             return new DefaultLazyResultWithOriginalToString<>(from, listDataConverter);
         } else {
@@ -31,7 +31,7 @@ public class LazySoyListDataConverter implements Function<Object, SoyValue> {
     }
 
     @Override
-    public SoyList apply(Object from) {
+    public SoyData apply(Object from) {
         if (from instanceof Collection) {
             return new LazySoyList(getLazyResult(from));
         } else {

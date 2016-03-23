@@ -1,20 +1,22 @@
 package org.slieb.soy.converters.soydata;
 
-import com.google.template.soy.data.SoyMap;
+import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyMapData;
-import com.google.template.soy.data.SoyValue;
 import org.slieb.soy.model.SoyMapDataWithToStringProvider;
 
 import java.util.Map;
 import java.util.function.Function;
 
-public class ClassToSoyMapDataConverter implements Function<Object, SoyMap> {
+public class ClassToSoyMapDataConverter implements Function<Object, SoyMapData> {
 
-    public final Map<String, Function<Object, ? extends SoyValue>> membersConverters;
+    /**
+     * Important to keep this SoyData for the time being.
+     */
+    public final Map<String, Function<Object, ? extends SoyData>> membersConverters;
 
     private final Boolean useOriginalToString;
 
-    public ClassToSoyMapDataConverter(Map<String, Function<Object, ? extends SoyValue>> membersConverters,
+    public ClassToSoyMapDataConverter(Map<String, Function<Object, ? extends SoyData>> membersConverters,
                                       Boolean useOriginalToString) {
         this.membersConverters = membersConverters;
         this.useOriginalToString = useOriginalToString;
@@ -32,7 +34,7 @@ public class ClassToSoyMapDataConverter implements Function<Object, SoyMap> {
     public SoyMapData apply(Object from) {
         if (from != null) {
             SoyMapData soyMapData = getSoyMapData(from);
-            for (Map.Entry<String, Function<Object, ? extends SoyValue>> entry : membersConverters.entrySet()) {
+            for (Map.Entry<String, Function<Object, ? extends SoyData>> entry : membersConverters.entrySet()) {
                 soyMapData.put(entry.getKey(), entry.getValue().apply(from));
             }
             return soyMapData;

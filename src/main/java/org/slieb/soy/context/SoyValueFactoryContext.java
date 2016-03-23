@@ -1,6 +1,7 @@
 package org.slieb.soy.context;
 
 import com.google.inject.Inject;
+import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyValue;
 import com.google.template.soy.data.restricted.NullData;
 import org.slieb.soy.exceptions.MissingFactory;
@@ -16,7 +17,7 @@ import static com.google.common.collect.Lists.reverse;
 import static java.util.Collections.unmodifiableList;
 
 @SuppressWarnings("WeakerAccess")
-public class SoyValueFactoryContext implements Function<Object, SoyValue> {
+public class SoyValueFactoryContext implements Function<Object, SoyData> {
 
     private final List<SoyConverterFactory> factories;
 
@@ -41,18 +42,18 @@ public class SoyValueFactoryContext implements Function<Object, SoyValue> {
     }
 
     @Nonnull
-    public Function<Object, ? extends SoyValue> create(@Nonnull Class<?> classObject) {
+    public Function<Object, ? extends SoyData> create(@Nonnull Class<?> classObject) {
         return getFactory(classObject).create(classObject, this);
     }
 
     @Nonnull
-    public Function<Object, ? extends SoyValue> createFromInstance(@Nonnull Object instanceObject) {
+    public Function<Object, ? extends SoyData> createFromInstance(@Nonnull Object instanceObject) {
         return create(instanceObject.getClass());
     }
 
     @Override
     @Nonnull
-    public SoyValue apply(Object from) {
+    public SoyData apply(Object from) {
         if (from != null) {
             return createFromInstance(from).apply(from);
         } else {
