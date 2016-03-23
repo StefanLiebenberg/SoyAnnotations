@@ -11,9 +11,9 @@ import java.util.function.Function;
 import static com.google.common.base.Preconditions.checkArgument;
 
 @Singleton
-public class SoyDataConverterFactory implements SoyConverterFactory, Function<Object, SoyData> {
+public class SoyDataConverterFactory implements SoyConverterFactory {
 
-    public static final SoyDataConverterFactory INSTANCE = new SoyDataConverterFactory();
+    private static final SoyDataCastFunction CAST_FUNCTION_INSTANCE = new SoyDataCastFunction();
 
     public SoyDataConverterFactory() {}
 
@@ -28,16 +28,18 @@ public class SoyDataConverterFactory implements SoyConverterFactory, Function<Ob
     public Function<Object, ? extends SoyData> create(@Nonnull Class<?> classObject,
                                                       @Nonnull SoyValueFactoryContext context) {
         checkArgument(canCreate(classObject));
-        return this;
+        return CAST_FUNCTION_INSTANCE;
     }
 
-    // todo, move out to own factory
-    @Override
-    public SoyData apply(Object from) {
-        if (from instanceof SoyData) {
-            return (SoyData) from;
-        } else {
-            return null;
+    private static class SoyDataCastFunction implements Function<Object, SoyData> {
+
+        @Override
+        public SoyData apply(Object from) {
+            if (from instanceof SoyData) {
+                return (SoyData) from;
+            } else {
+                return null;
+            }
         }
     }
 }
