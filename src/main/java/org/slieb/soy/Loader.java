@@ -1,6 +1,7 @@
 package org.slieb.soy;
 
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.template.soy.tofu.SoyTofu;
 import org.slieb.soy.configuration.DefaultFactoryHelperModule;
 import org.slieb.soy.configuration.SingletonModule;
@@ -22,6 +23,7 @@ import java.util.Set;
 
 import static com.google.inject.Guice.createInjector;
 
+@SuppressWarnings("WeakerAccess")
 public class Loader {
 
     private static Injector basicInjector, fullInjector, lazyInjector;
@@ -33,14 +35,18 @@ public class Loader {
     @Nonnull
     public static Injector getBasicInjector() {
         if (basicInjector == null) {
-            basicInjector = createInjector(
-                    new DefaultFactoryHelperModule(),
-                    new SingletonModule(SoyDataFactoryContext.class),
-                    new SingletonModule(JsonDataFactoryContext.class),
-                    new BasicSoyDataConvertersFactoryModule(),
-                    new BasicJsonDataConvertersFactoryModule());
+            basicInjector = createInjector(getBasicModules());
         }
         return basicInjector;
+    }
+
+    @Nonnull
+    public static Module[] getBasicModules() {
+        return new Module[]{new DefaultFactoryHelperModule(),
+                new SingletonModule(SoyDataFactoryContext.class),
+                new SingletonModule(JsonDataFactoryContext.class),
+                new BasicSoyDataConvertersFactoryModule(),
+                new BasicJsonDataConvertersFactoryModule()};
     }
 
     /**
@@ -50,17 +56,21 @@ public class Loader {
     @Nonnull
     public static Injector getFullInjector() {
         if (fullInjector == null) {
-            fullInjector = createInjector(
-                    new DefaultFactoryHelperModule(),
-                    new BasicSoyDataConvertersFactoryModule(),
-                    new BasicJsonDataConvertersFactoryModule(),
-                    new MetaFactoriesModule(),
-                    new MetaClassBindingsModule(),
-                    new MetaJsonDataConvertersFactoryModule(),
-                    new SingletonModule(SoyDataFactoryContext.class),
-                    new SingletonModule(JsonDataFactoryContext.class));
+            fullInjector = createInjector(getFullModules());
         }
         return fullInjector;
+    }
+
+    @Nonnull
+    public static Module[] getFullModules() {
+        return new Module[]{new DefaultFactoryHelperModule(),
+                new BasicSoyDataConvertersFactoryModule(),
+                new BasicJsonDataConvertersFactoryModule(),
+                new MetaFactoriesModule(),
+                new MetaClassBindingsModule(),
+                new MetaJsonDataConvertersFactoryModule(),
+                new SingletonModule(SoyDataFactoryContext.class),
+                new SingletonModule(JsonDataFactoryContext.class)};
     }
 
     /**
@@ -73,10 +83,15 @@ public class Loader {
     public static Injector getFullInjector(@Nonnull SoyTofu soyTofu,
                                            @Nullable Set<String> delegatePackages) {
         return getFullInjector()
-                .createChildInjector(
-                        new RenderingFactoriesModule(),
-                        new DelegateTemplates(delegatePackages),
-                        new SoyTofuModule(soyTofu));
+                .createChildInjector(getPackagesModules(soyTofu, delegatePackages));
+    }
+
+    public static Module[] getPackagesModules(final @Nonnull SoyTofu soyTofu,
+                                              final @Nullable Set<String> delegatePackages) {
+        return new Module[]{
+                new RenderingFactoriesModule(),
+                new DelegateTemplates(delegatePackages),
+                new SoyTofuModule(soyTofu)};
     }
 
     /**
@@ -87,16 +102,20 @@ public class Loader {
     public static Injector getLazyInjector() {
         if (lazyInjector == null) {
             lazyInjector = createInjector(
-                    new DefaultFactoryHelperModule(),
-                    new BasicSoyDataConvertersFactoryModule(),
-                    new BasicJsonDataConvertersFactoryModule(),
-                    new MetaFactoriesModule(),
-                    new MetaClassBindingsModule(),
-                    new LazyClassSoyFactoriesModule(),
-                    new SingletonModule(SoyDataFactoryContext.class),
-                    new SingletonModule(JsonDataFactoryContext.class));
+                    getLazyModules());
         }
         return lazyInjector;
+    }
+
+    public static Module[] getLazyModules() {
+        return new Module[]{new DefaultFactoryHelperModule(),
+                new BasicSoyDataConvertersFactoryModule(),
+                new BasicJsonDataConvertersFactoryModule(),
+                new MetaFactoriesModule(),
+                new MetaClassBindingsModule(),
+                new LazyClassSoyFactoriesModule(),
+                new SingletonModule(SoyDataFactoryContext.class),
+                new SingletonModule(JsonDataFactoryContext.class)};
     }
 
     /**
