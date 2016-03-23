@@ -2,7 +2,7 @@ package org.slieb.soy.factories.soydata;
 
 
 import com.google.inject.Singleton;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.converters.soydata.StringDataConverter;
 import org.slieb.soy.factories.SoyConverterFactory;
 
@@ -29,7 +29,7 @@ public class StringDataConverterFactory implements SoyConverterFactory {
     @Nonnull
     @Override
     public StringDataConverter create(@Nonnull Class<?> classObject,
-                                      @Nonnull SoyDataFactoryContext context) {
+                                      @Nonnull SoyValueFactoryContext context) {
         return stringDataConverter;
     }
 

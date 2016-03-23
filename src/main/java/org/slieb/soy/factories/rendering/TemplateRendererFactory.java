@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.google.template.soy.data.SoyValue;
 import com.google.template.soy.tofu.SoyTofu;
 import org.slieb.soy.context.RendererFactoryContext;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.factories.RendererFactory;
 import org.slieb.soy.helpers.FactoryHelper;
 import org.slieb.soy.renderers.ClassRenderer;
@@ -18,7 +18,7 @@ public class TemplateRendererFactory implements RendererFactory {
 
     private final FactoryHelper factoryHelper;
 
-    private final SoyDataFactoryContext soyDataFactoryContext;
+    private final SoyValueFactoryContext soyValueFactoryContext;
 
     private final SoyTofu soyTofu;
 
@@ -26,11 +26,11 @@ public class TemplateRendererFactory implements RendererFactory {
 
     @Inject
     public TemplateRendererFactory(FactoryHelper factoryHelper,
-                                   SoyDataFactoryContext soyDataFactoryContext,
+                                   SoyValueFactoryContext soyValueFactoryContext,
                                    SoyTofu soyTofu,
                                    @Named("DelegatePackages") Set<String> delegatePackages) {
         this.factoryHelper = factoryHelper;
-        this.soyDataFactoryContext = soyDataFactoryContext;
+        this.soyValueFactoryContext = soyValueFactoryContext;
         this.soyTofu = soyTofu;
         this.delegatePackages = delegatePackages;
     }
@@ -44,7 +44,7 @@ public class TemplateRendererFactory implements RendererFactory {
     public Renderer<Object> create(Class<?> classObject,
                                    RendererFactoryContext context) {
         String templateName = factoryHelper.getTemplateName(classObject);
-        Function<Object, ? extends SoyValue> dataConverter = soyDataFactoryContext.create(classObject);
+        Function<Object, ? extends SoyValue> dataConverter = soyValueFactoryContext.create(classObject);
         Renderer<SoyValue> dataRenderer = new DataRenderer(soyTofu, templateName, delegatePackages);
         return new ClassRenderer(dataConverter, dataRenderer);
     }

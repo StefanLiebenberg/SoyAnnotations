@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+@SuppressWarnings("WeakerAccess")
 public class ClassToMapConverter implements Function<Object, Map<String, Object>> {
 
     public final Map<String, Function<Object, ?>> membersConverters;

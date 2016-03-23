@@ -28,7 +28,8 @@ public class CustomRendererFactory implements RendererFactory {
     }
 
     @Override
-    public Renderer<Object> create(Class<?> classObject, RendererFactoryContext context) {
+    public Renderer<Object> create(Class<?> classObject,
+                                   RendererFactoryContext context) {
         return getRendererInstance(getRendererClass(classObject), context);
     }
 

@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slieb.soy.Loader;
 import org.slieb.soy.context.JsonDataFactoryContext;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 
 import static example.assertions.BlogPageAssertions.assertBlogPostPageJsonEquals;
 import static example.assertions.BlogPageAssertions.assertBlogPostPageSoyDataEquals;
@@ -27,7 +27,7 @@ public class BlogPageTestCase {
 
     @Test
     public void testPageSoy() {
-        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        SoyValueFactoryContext context = injector.getInstance(SoyValueFactoryContext.class);
         assertBlogPostPageSoyDataEquals(page, context.getSoyData(page));
     }
 

@@ -1,15 +1,15 @@
 package org.slieb.soy.meta;
 
-
 import com.google.inject.Inject;
 import org.slieb.soy.annotations.CustomConverter;
 import org.slieb.soy.factories.MetaConverterFactory;
 import org.slieb.soy.helpers.FactoryHelper;
+import org.slieb.throwables.FunctionWithThrowable;
 
 import javax.annotation.Nonnull;
-import java.util.function.Function;
 
-public class MetaCustomClassConverterFactory implements Function<Class<?>, MetaClassInformation>,
+@SuppressWarnings("WeakerAccess")
+public class MetaCustomClassConverterFactory implements FunctionWithThrowable<Class<?>, MetaClassInformation, ReflectiveOperationException>,
         MetaConverterFactory {
 
     private final FactoryHelper factoryHelper;
@@ -20,16 +20,12 @@ public class MetaCustomClassConverterFactory implements Function<Class<?>, MetaC
     }
 
     @Nonnull
-    public MetaConverter getConverterInstance(Class<? extends MetaConverter> converterClass) {
-        try {
-            MetaConverter converter = converterClass.newInstance();
-            if (converter instanceof MetaFactoryHelperAware) {
-                ((MetaFactoryHelperAware) converter).setFactoryHelper(factoryHelper);
-            }
-            return converter;
-        } catch (ReflectiveOperationException e) {
-            throw new RuntimeException(e);
+    public MetaConverter getConverterInstance(Class<? extends MetaConverter> converterClass) throws IllegalAccessException, InstantiationException {
+        MetaConverter converter = converterClass.newInstance();
+        if (converter instanceof MetaFactoryHelperAware) {
+            ((MetaFactoryHelperAware) converter).setFactoryHelper(factoryHelper);
         }
+        return converter;
     }
 
     @Nonnull
@@ -37,12 +33,12 @@ public class MetaCustomClassConverterFactory implements Function<Class<?>, MetaC
         return classObject.getAnnotation(CustomConverter.class).value();
     }
 
-    public MetaConverter getConverter(Class<?> classObject) {
+    public MetaConverter getConverter(Class<?> classObject) throws InstantiationException, IllegalAccessException {
         return getConverterInstance(getConverterClass(classObject));
     }
 
     @Override
-    public MetaClassInformation apply(Class<?> from) {
+    public MetaClassInformation applyWithThrowable(Class<?> from) throws IllegalAccessException, InstantiationException {
         return new MetaClassInformation(Boolean.TRUE, from, getConverter(from), null, false);
     }
 

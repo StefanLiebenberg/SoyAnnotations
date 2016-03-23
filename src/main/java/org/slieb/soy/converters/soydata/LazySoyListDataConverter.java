@@ -4,7 +4,7 @@ import com.google.template.soy.data.SoyList;
 import com.google.template.soy.data.SoyValue;
 import org.slieb.soy.model.DefaultLazyResult;
 import org.slieb.soy.model.DefaultLazyResultWithOriginalToString;
-import org.slieb.soy.model.LazySoyListData;
+import org.slieb.soy.model.LazySoyList;
 
 import java.util.Collection;
 import java.util.function.Function;
@@ -33,7 +33,7 @@ public class LazySoyListDataConverter implements Function<Object, SoyValue> {
     @Override
     public SoyList apply(Object from) {
         if (from instanceof Collection) {
-            return new LazySoyListData(getLazyResult(from));
+            return new LazySoyList(getLazyResult(from));
         } else {
             return null;
         }

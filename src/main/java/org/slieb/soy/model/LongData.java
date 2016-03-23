@@ -1,6 +1,6 @@
 package org.slieb.soy.model;
 
-import com.google.template.soy.data.SoyData;
+import com.google.template.soy.data.SoyValue;
 import com.google.template.soy.data.restricted.NullData;
 import com.google.template.soy.data.restricted.NumberData;
 
@@ -20,7 +20,6 @@ public class LongData extends NumberData {
         return longValue.toString();
     }
 
-
     @Override
     public boolean toBoolean() {
         return !longValue.equals(0L);
@@ -28,12 +27,12 @@ public class LongData extends NumberData {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) { return true; }
+        if (o == null || getClass() != o.getClass()) { return false; }
 
         LongData that = (LongData) o;
 
-        if (!longValue.equals(that.longValue)) return false;
+        if (!longValue.equals(that.longValue)) { return false; }
 
         return true;
     }
@@ -58,7 +57,7 @@ public class LongData extends NumberData {
         return longValue.floatValue();
     }
 
-    public static SoyData forValue(Object value) {
+    public static SoyValue forValue(Object value) {
         if (value != null && value instanceof Long) {
             return new LongData((Long) value);
         } else {

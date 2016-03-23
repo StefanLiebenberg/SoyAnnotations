@@ -5,7 +5,7 @@ import com.google.template.soy.data.SoyValue;
 import org.junit.Test;
 import org.slieb.soy.Loader;
 import org.slieb.soy.annotations.Soy;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 
 public class LazyTestCase {
 
@@ -57,7 +57,7 @@ public class LazyTestCase {
     @Test
     public void testExceptionIsNotThrownNormalChain() {
         Injector injector = Loader.getFullInjector();
-        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        SoyValueFactoryContext context = injector.getInstance(SoyValueFactoryContext.class);
         Node node = createChain(3, null);
         SoyValue soyData = context.apply(node);
     }
@@ -65,7 +65,7 @@ public class LazyTestCase {
     @Test(expected = StackOverflowError.class)
     public void testExceptionIsThrownOnSelfReferencingChain() {
         Injector injector = Loader.getFullInjector();
-        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        SoyValueFactoryContext context = injector.getInstance(SoyValueFactoryContext.class);
         Node node = createSelfReferenceChain(10);
         SoyValue soyData = context.apply(node);
     }
@@ -73,7 +73,7 @@ public class LazyTestCase {
     @Test
     public void testExceptionIsNotThrownOnSelfReferencingChainWithLazyContext() {
         Injector injector = Loader.getLazyInjector();
-        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        SoyValueFactoryContext context = injector.getInstance(SoyValueFactoryContext.class);
         Node node = createSelfReferenceChain(10);
         SoyValue soyData = context.apply(node);
     }

@@ -3,7 +3,7 @@ package org.slieb.soy.factories.soydata;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.SoyData;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.converters.soydata.FloatDataConverter;
 import org.slieb.soy.factories.SoyConverterFactory;
 
@@ -30,14 +30,11 @@ public class FloatDataConverterFactory implements SoyConverterFactory {
                 classObject.equals(double.class) || classObject.equals(float.class);
     }
 
-
     @Nonnull
     @Override
-    public Function<Object, ? extends SoyData> create(@Nonnull Class<?> classObject, @Nonnull SoyDataFactoryContext context) {
+    public Function<Object, ? extends SoyData> create(@Nonnull Class<?> classObject,
+                                                      @Nonnull SoyValueFactoryContext context) {
         checkArgument(canCreate(classObject));
         return floatDataConverter;
     }
-
-
-
 }

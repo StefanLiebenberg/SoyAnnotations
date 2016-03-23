@@ -10,7 +10,7 @@ import com.google.template.soy.data.restricted.StringData;
 import org.junit.Before;
 import org.junit.Test;
 import org.slieb.soy.context.RendererFactoryContext;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.model.LongData;
 
 import java.util.HashMap;
@@ -31,8 +31,8 @@ public class BasicLoaderTest {
     @Test
     public void testBasicInjectorMakesSingletonContext() throws Exception {
         assertSame("Singleton instance expected",
-                   injector.getInstance(SoyDataFactoryContext.class),
-                   injector.getInstance(SoyDataFactoryContext.class));
+                   injector.getInstance(SoyValueFactoryContext.class),
+                   injector.getInstance(SoyValueFactoryContext.class));
     }
 
     @Test(expected = ConfigurationException.class)
@@ -42,7 +42,7 @@ public class BasicLoaderTest {
 
     @Test
     public void testBasicInjectorCanConvertInteger() {
-        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        SoyValueFactoryContext context = injector.getInstance(SoyValueFactoryContext.class);
         Integer integer = new Integer(102);
         SoyValue data = context.apply(integer);
         assertTrue(data instanceof IntegerData);
@@ -54,7 +54,7 @@ public class BasicLoaderTest {
 
     @Test
     public void testBasicInjectorCanConvertLong() {
-        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        SoyValueFactoryContext context = injector.getInstance(SoyValueFactoryContext.class);
         Long integer = new Long(102);
         SoyValue data = context.apply(integer);
         assertTrue(data instanceof LongData);
@@ -62,7 +62,7 @@ public class BasicLoaderTest {
 
     @Test
     public void testBasicInjectorCanConvertSoyData() {
-        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        SoyValueFactoryContext context = injector.getInstance(SoyValueFactoryContext.class);
         SoyValue data = context.apply(1);
         assertTrue(data instanceof IntegerData);
         assertSame(data, context.apply(data));
@@ -70,7 +70,7 @@ public class BasicLoaderTest {
 
     @Test
     public void testBasicInjectorCanConvertString() {
-        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        SoyValueFactoryContext context = injector.getInstance(SoyValueFactoryContext.class);
         SoyValue data = context.apply("string");
         assertTrue(data instanceof StringData);
         assertEquals("string", data.stringValue());
@@ -78,7 +78,7 @@ public class BasicLoaderTest {
 
     @Test
     public void testBasicInjectorCanConvertMap() {
-        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        SoyValueFactoryContext context = injector.getInstance(SoyValueFactoryContext.class);
 
         Map<String, Object> map = new HashMap<>();
         map.put("strEntry", "string");

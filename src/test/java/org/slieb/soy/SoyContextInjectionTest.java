@@ -7,7 +7,7 @@ import com.google.template.soy.tofu.SoyTofu;
 import org.junit.Test;
 import org.slieb.soy.context.JsonDataFactoryContext;
 import org.slieb.soy.context.RendererFactoryContext;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 
 import static org.junit.Assert.assertSame;
 
@@ -21,7 +21,7 @@ public class SoyContextInjectionTest {
     public void testBasicInjection() {
         Injector injector = Loader.getBasicInjector();
         // todo, maybe test with == instead
-        Class<SoyDataFactoryContext> soyContextClass = SoyDataFactoryContext.class;
+        Class<SoyValueFactoryContext> soyContextClass = SoyValueFactoryContext.class;
         assertSame(injector.getInstance(soyContextClass), injector.getInstance(soyContextClass));
 
         Class<JsonDataFactoryContext> jsonContextClass = JsonDataFactoryContext.class;
@@ -36,7 +36,7 @@ public class SoyContextInjectionTest {
     @Test
     public void testFullInjection() {
         Injector injector = Loader.getFullInjector();
-        Class<SoyDataFactoryContext> soyContextClass = SoyDataFactoryContext.class;
+        Class<SoyValueFactoryContext> soyContextClass = SoyValueFactoryContext.class;
         assertSame(injector.getInstance(soyContextClass), injector.getInstance(soyContextClass));
 
         Class<JsonDataFactoryContext> jsonContextClass = JsonDataFactoryContext.class;
@@ -57,7 +57,7 @@ public class SoyContextInjectionTest {
     @Test
     public void testLazyInjection() {
         Injector injector = Loader.getLazyInjector();
-        Class<SoyDataFactoryContext> soyContextClass = SoyDataFactoryContext.class;
+        Class<SoyValueFactoryContext> soyContextClass = SoyValueFactoryContext.class;
         assertSame(injector.getInstance(soyContextClass), injector.getInstance(soyContextClass));
 
         Class<JsonDataFactoryContext> jsonContextClass = JsonDataFactoryContext.class;

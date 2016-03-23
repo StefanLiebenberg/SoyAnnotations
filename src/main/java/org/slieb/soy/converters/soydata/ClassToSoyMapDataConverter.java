@@ -1,5 +1,6 @@
 package org.slieb.soy.converters.soydata;
 
+import com.google.template.soy.data.SoyMap;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.data.SoyValue;
 import org.slieb.soy.model.SoyMapDataWithToStringProvider;
@@ -7,7 +8,7 @@ import org.slieb.soy.model.SoyMapDataWithToStringProvider;
 import java.util.Map;
 import java.util.function.Function;
 
-public class ClassToSoyMapDataConverter implements Function<Object, SoyMapData> {
+public class ClassToSoyMapDataConverter implements Function<Object, SoyMap> {
 
     public final Map<String, Function<Object, ? extends SoyValue>> membersConverters;
 

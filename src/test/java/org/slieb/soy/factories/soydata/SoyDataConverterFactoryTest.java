@@ -6,7 +6,7 @@ import example.models.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.slieb.soy.Loader;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.converters.soydata.*;
 
 import java.util.function.Function;
@@ -17,11 +17,11 @@ public class SoyDataConverterFactoryTest {
 
     private final Injector injector = Loader.getFullInjector();
 
-    public SoyDataFactoryContext factoryContext;
+    public SoyValueFactoryContext factoryContext;
 
     @Before
     public void setUp() {
-        factoryContext = injector.getInstance(SoyDataFactoryContext.class);
+        factoryContext = injector.getInstance(SoyValueFactoryContext.class);
     }
 
     @Test

@@ -1,6 +1,5 @@
 package org.slieb.soy.factories.jsondata;
 
-import com.google.template.soy.data.SoyValue;
 import org.slieb.soy.context.JsonDataFactoryContext;
 import org.slieb.soy.converters.json.ClassToMapConverter;
 import org.slieb.soy.converters.json.DynamicConverter;
@@ -12,9 +11,6 @@ import org.slieb.soy.meta.MetaValueConvertableInformation;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
-import static org.slieb.utilities.ConverterUtils.chain;
-import static org.slieb.utilities.ConverterUtils.join;
 
 public class MetaInformationToJsonDataConverterConverter implements Function<MetaClassInformation, Function<Object, ?>> {
 
@@ -40,7 +36,7 @@ public class MetaInformationToJsonDataConverterConverter implements Function<Met
         Class<?> memberType = valueConvertableInformation.getType();
         Function<Object, ?> valueConverter = valueConvertableInformation.getValueConverter();
         Function<Object, ?> soyConverter = context.create(memberType);
-        return (Function<Object, ? extends SoyValue>) chain(valueConverter, soyConverter);
+        return valueConverter.andThen(soyConverter);
     }
 
     private Function<Object, ?> getClassConverter(MetaClassInformation classInformation) {
@@ -48,7 +44,7 @@ public class MetaInformationToJsonDataConverterConverter implements Function<Met
         if (valueConverter == null) {
             return new ClassToMapConverter(getConverterMap(classInformation));
         } else {
-            return join(valueConverter, new JsonMapConverter(dynamicConverter));
+            return valueConverter.andThen(new JsonMapConverter(dynamicConverter));
         }
     }
 

@@ -1,9 +1,10 @@
 package org.slieb.soy.meta;
 
-import java.lang.reflect.Field;
-import java.util.function.Function;
+import org.slieb.throwables.FunctionWithThrowable;
 
-public class MemberFieldValueConverter implements Function<Object, Object> {
+import java.lang.reflect.Field;
+
+public class MemberFieldValueConverter implements FunctionWithThrowable<Object, Object, ReflectiveOperationException> {
 
     private final Field field;
 
@@ -12,11 +13,7 @@ public class MemberFieldValueConverter implements Function<Object, Object> {
     }
 
     @Override
-    public Object apply(Object from) {
-        try {
-            return field.get(from);
-        } catch (ReflectiveOperationException e) {
-            throw new RuntimeException(e);
-        }
+    public Object applyWithThrowable(final Object from) throws ReflectiveOperationException {
+        return field.get(from);
     }
 }

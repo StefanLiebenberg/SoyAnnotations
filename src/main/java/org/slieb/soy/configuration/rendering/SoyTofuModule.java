@@ -1,6 +1,5 @@
 package org.slieb.soy.configuration.rendering;
 
-
 import com.google.inject.AbstractModule;
 import com.google.template.soy.tofu.SoyTofu;
 
@@ -8,7 +7,7 @@ import javax.annotation.Nonnull;
 
 /**
  * A guice injection module that inserts a piece of SoyTofu.
- *
+ * <p>
  * <h3>usage:</h3>
  * <pre>
  * {@code
@@ -32,5 +31,4 @@ public class SoyTofuModule extends AbstractModule {
     protected void configure() {
         bind(SoyTofu.class).toInstance(soyTofu);
     }
-
 }

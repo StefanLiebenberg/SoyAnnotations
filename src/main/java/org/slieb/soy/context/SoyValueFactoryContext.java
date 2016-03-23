@@ -1,8 +1,6 @@
 package org.slieb.soy.context;
 
 import com.google.inject.Inject;
-import com.google.template.soy.data.SoyMap;
-import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.data.SoyValue;
 import com.google.template.soy.data.restricted.NullData;
 import org.slieb.soy.exceptions.MissingFactory;
@@ -15,14 +13,16 @@ import java.util.function.Function;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.reverse;
+import static java.util.Collections.unmodifiableList;
 
-public class SoyDataFactoryContext implements Function<Object, SoyValue> {
+@SuppressWarnings("WeakerAccess")
+public class SoyValueFactoryContext implements Function<Object, SoyValue> {
 
     private final List<SoyConverterFactory> factories;
 
     @Inject
-    public SoyDataFactoryContext(Set<SoyConverterFactory> factories) {
-        this.factories = newArrayList(factories);
+    public SoyValueFactoryContext(Set<SoyConverterFactory> factories) {
+        this.factories = unmodifiableList(newArrayList(factories));
     }
 
     @Nonnull
@@ -64,12 +64,9 @@ public class SoyDataFactoryContext implements Function<Object, SoyValue> {
         return apply(instanceObject);
     }
 
-    public SoyMap getSoyMapData(Object instanceObject) {
-        SoyValue result = getSoyData(instanceObject);
-        if (result instanceof SoyMap) {
-            return (SoyMapData) result;
-        } else {
-            return null;
-        }
+    @SuppressWarnings("unused")
+    public <T> T getSoyValueAs(final Object obj,
+                               final Class<T> classObject) {
+        return classObject.cast(apply(obj));
     }
 }

@@ -15,7 +15,7 @@ import org.slieb.soy.configuration.soydata.BasicSoyDataConvertersFactoryModule;
 import org.slieb.soy.configuration.soydata.LazyClassSoyFactoriesModule;
 import org.slieb.soy.configuration.soydata.MetaClassBindingsModule;
 import org.slieb.soy.context.JsonDataFactoryContext;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -43,7 +43,7 @@ public class Loader {
     @Nonnull
     public static Module[] getBasicModules() {
         return new Module[]{new DefaultFactoryHelperModule(),
-                new SingletonModule(SoyDataFactoryContext.class),
+                new SingletonModule(SoyValueFactoryContext.class),
                 new SingletonModule(JsonDataFactoryContext.class),
                 new BasicSoyDataConvertersFactoryModule(),
                 new BasicJsonDataConvertersFactoryModule()};
@@ -69,7 +69,7 @@ public class Loader {
                 new MetaFactoriesModule(),
                 new MetaClassBindingsModule(),
                 new MetaJsonDataConvertersFactoryModule(),
-                new SingletonModule(SoyDataFactoryContext.class),
+                new SingletonModule(SoyValueFactoryContext.class),
                 new SingletonModule(JsonDataFactoryContext.class)};
     }
 
@@ -114,7 +114,7 @@ public class Loader {
                 new MetaFactoriesModule(),
                 new MetaClassBindingsModule(),
                 new LazyClassSoyFactoriesModule(),
-                new SingletonModule(SoyDataFactoryContext.class),
+                new SingletonModule(SoyValueFactoryContext.class),
                 new SingletonModule(JsonDataFactoryContext.class)};
     }
 

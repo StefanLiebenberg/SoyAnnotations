@@ -1,12 +1,13 @@
 package org.slieb.soy.converters.soydata;
 
+import com.google.template.soy.data.SoyMap;
 import com.google.template.soy.data.SoyMapData;
 import com.google.template.soy.data.SoyValue;
 
 import java.util.Map;
 import java.util.function.Function;
 
-public class SoyMapDataConverter implements Function<Object, SoyMapData> {
+public class SoyMapDataConverter implements Function<Object, SoyMap> {
 
     private final Function<Object, SoyValue> typeConverter;
 

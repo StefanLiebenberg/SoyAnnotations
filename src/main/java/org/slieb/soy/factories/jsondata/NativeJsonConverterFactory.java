@@ -1,6 +1,5 @@
 package org.slieb.soy.factories.jsondata;
 
-
 import com.google.common.primitives.Primitives;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -30,7 +29,8 @@ public class NativeJsonConverterFactory implements JsonConverterFactory {
 
     @Nonnull
     @Override
-    public Function<Object, ?> create(@Nonnull Class<?> classObject, @Nonnull JsonDataFactoryContext context) {
+    public Function<Object, ?> create(@Nonnull Class<?> classObject,
+                                      @Nonnull JsonDataFactoryContext context) {
         return nativeJsonConverter;
     }
 }

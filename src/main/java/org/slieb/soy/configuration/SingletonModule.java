@@ -1,6 +1,5 @@
 package org.slieb.soy.configuration;
 
-
 import com.google.inject.AbstractModule;
 
 import javax.annotation.Nonnull;

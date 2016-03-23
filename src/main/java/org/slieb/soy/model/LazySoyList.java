@@ -1,23 +1,51 @@
 package org.slieb.soy.model;
 
-import com.google.template.soy.data.SoyMap;
+import com.google.template.soy.data.SoyList;
 import com.google.template.soy.data.SoyValue;
 import com.google.template.soy.data.SoyValueProvider;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
-public class LazySoyMapData extends LazySoyValue<SoyMap> implements SoyMap {
+public class LazySoyList extends LazySoyValue<SoyList> implements SoyList {
 
-    public LazySoyMapData(Supplier<SoyMap> supplier) {
+    public LazySoyList(Supplier<SoyList> supplier) {
         super(supplier);
     }
 
     @Override
+    public int length() {
+        return container.get().length();
+    }
+
+    @Nonnull
+    @Override
+    public List<? extends SoyValueProvider> asJavaList() {
+        return container.get().asJavaList();
+    }
+
+    @Nonnull
+    @Override
+    public List<? extends SoyValue> asResolvedJavaList() {
+        return container.get().asResolvedJavaList();
+    }
+
+    @Override
+    public SoyValue get(final int index) {
+        return container.get().get(index);
+    }
+
+    @Override
+    public SoyValueProvider getProvider(final int index) {
+        return container.get().getProvider(index);
+    }
+
+    @Override
     public int getItemCnt() {
-        return container.get().getItemCnt();
+        return 0;
     }
 
     @Nonnull

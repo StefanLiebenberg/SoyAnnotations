@@ -13,13 +13,13 @@ import java.util.Set;
 
 public class RendererFactoryContext implements Renderer<Object> {
 
-    private final SoyDataFactoryContext soyDataFactoryContext;
+    private final SoyValueFactoryContext soyValueFactoryContext;
 
     private final List<RendererFactory> rendererFactories;
 
     @Inject
-    public RendererFactoryContext(SoyDataFactoryContext soyDataFactoryContext, Set<RendererFactory> rendererFactories) {
-        this.soyDataFactoryContext = soyDataFactoryContext;
+    public RendererFactoryContext(SoyValueFactoryContext soyValueFactoryContext, Set<RendererFactory> rendererFactories) {
+        this.soyValueFactoryContext = soyValueFactoryContext;
         this.rendererFactories = Lists.newArrayList(rendererFactories);
     }
 

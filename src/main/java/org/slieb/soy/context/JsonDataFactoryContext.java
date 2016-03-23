@@ -13,6 +13,7 @@ import java.util.function.Function;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.reverse;
 
+@SuppressWarnings("WeakerAccess")
 public class JsonDataFactoryContext implements Function<Object, Object> {
 
     private final List<JsonConverterFactory> factories;

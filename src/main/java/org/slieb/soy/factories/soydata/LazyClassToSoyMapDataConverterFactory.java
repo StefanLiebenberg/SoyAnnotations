@@ -1,7 +1,7 @@
 package org.slieb.soy.factories.soydata;
 
 import com.google.inject.Inject;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.converters.soydata.LazyMapDataConverter;
 import org.slieb.soy.factories.SoyConverterFactory;
 
@@ -24,7 +24,8 @@ public class LazyClassToSoyMapDataConverterFactory implements SoyConverterFactor
 
     @Nonnull
     @Override
-    public LazyMapDataConverter create(@Nonnull Class<?> classObject, @Nonnull SoyDataFactoryContext context) {
+    public LazyMapDataConverter create(@Nonnull Class<?> classObject,
+                                       @Nonnull SoyValueFactoryContext context) {
         return new LazyMapDataConverter(metaClassToSoyMapDataConverterFactory.create(classObject, context));
     }
 }

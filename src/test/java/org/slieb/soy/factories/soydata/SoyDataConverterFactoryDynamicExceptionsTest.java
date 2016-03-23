@@ -5,18 +5,18 @@ import example.models.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.slieb.soy.Loader;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.exceptions.NeedsDynamicConverterException;
 
 public class SoyDataConverterFactoryDynamicExceptionsTest {
 
     private final Injector injector = Loader.getFullInjector();
 
-    private SoyDataFactoryContext factoryContext;
+    private SoyValueFactoryContext factoryContext;
 
     @Before
     public void setUp() throws Exception {
-        factoryContext = injector.getInstance(SoyDataFactoryContext.class);
+        factoryContext = injector.getInstance(SoyValueFactoryContext.class);
     }
 
     // todo, better exception class

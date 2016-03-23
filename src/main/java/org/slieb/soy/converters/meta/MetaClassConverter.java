@@ -20,7 +20,8 @@ public class MetaClassConverter implements Function<Class<?>, MetaClassInformati
         this.factoryHelper = factoryHelper;
     }
 
-    private MetaMemberInformation getMemberInformation(Field field, Boolean dyn) {
+    private MetaMemberInformation getMemberInformation(Field field,
+                                                       Boolean dyn) {
         return new MetaMemberInformation(
                 dyn || factoryHelper.isDynamicFactoryField(field),
                 field.getType(),
@@ -28,7 +29,8 @@ public class MetaClassConverter implements Function<Class<?>, MetaClassInformati
                 field);
     }
 
-    private MetaMemberInformation getMemberInformation(Method method, Boolean dyn) {
+    private MetaMemberInformation getMemberInformation(Method method,
+                                                       Boolean dyn) {
         return new MetaMemberInformation(
                 dyn || factoryHelper.isDynamicFactoryMethod(method),
                 method.getReturnType(),
@@ -36,7 +38,8 @@ public class MetaClassConverter implements Function<Class<?>, MetaClassInformati
                 method);
     }
 
-    public Map<String, MetaMemberInformation> getMemberMetaInformation(Class<?> classObject, Boolean dyn) {
+    public Map<String, MetaMemberInformation> getMemberMetaInformation(Class<?> classObject,
+                                                                       Boolean dyn) {
         ImmutableMap.Builder<String, MetaMemberInformation> builder = new ImmutableMap.Builder<>();
         for (Field field : classObject.getFields()) {
             if (factoryHelper.isFactoryField(field)) {
@@ -59,9 +62,9 @@ public class MetaClassConverter implements Function<Class<?>, MetaClassInformati
         Boolean dyn = factoryHelper.isDynamicFactoryClass(from);
         Boolean useOriginalToString = factoryHelper.useOriginalToString(from);
         return new MetaClassInformation(dyn,
-                from,
-                null,
-                getMemberMetaInformation(from, dyn),
-                useOriginalToString);
+                                        from,
+                                        null,
+                                        getMemberMetaInformation(from, dyn),
+                                        useOriginalToString);
     }
 }

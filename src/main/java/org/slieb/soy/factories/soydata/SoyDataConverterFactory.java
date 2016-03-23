@@ -3,7 +3,7 @@ package org.slieb.soy.factories.soydata;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.SoyData;
 import com.google.template.soy.data.SoyValue;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.factories.SoyConverterFactory;
 
 import javax.annotation.Nonnull;
@@ -28,7 +28,7 @@ public class SoyDataConverterFactory implements SoyConverterFactory, Function<Ob
     @Nonnull
     @Override
     public Function<Object, ? extends SoyValue> create(@Nonnull Class<?> classObject,
-                                                       @Nonnull SoyDataFactoryContext context) {
+                                                       @Nonnull SoyValueFactoryContext context) {
         checkArgument(canCreate(classObject));
         return this;
     }

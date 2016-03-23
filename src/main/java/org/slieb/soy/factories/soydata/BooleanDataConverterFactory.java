@@ -2,7 +2,7 @@ package org.slieb.soy.factories.soydata;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.converters.soydata.BooleanDataConverter;
 import org.slieb.soy.factories.SoyConverterFactory;
 
@@ -26,13 +26,11 @@ public class BooleanDataConverterFactory implements SoyConverterFactory {
         return classObject.equals(Boolean.class) || classObject.equals(boolean.class);
     }
 
-
     @Nonnull
     @Override
-    public BooleanDataConverter create(@Nonnull Class<?> classObject, @Nonnull SoyDataFactoryContext context) {
+    public BooleanDataConverter create(@Nonnull Class<?> classObject,
+                                       @Nonnull SoyValueFactoryContext context) {
         checkArgument(canCreate(classObject));
         return booleanDataConverter;
     }
-
-
 }

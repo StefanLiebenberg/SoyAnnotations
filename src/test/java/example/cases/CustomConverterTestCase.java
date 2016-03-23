@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.slieb.soy.Loader;
 import org.slieb.soy.annotations.CustomConverter;
 import org.slieb.soy.annotations.Soy;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.meta.MetaConverter;
 
 import java.util.HashMap;
@@ -51,7 +51,7 @@ public class CustomConverterTestCase {
 
     @Test
     public void testCustomConverter() {
-        SoyDataFactoryContext context = injector.getInstance(SoyDataFactoryContext.class);
+        SoyValueFactoryContext context = injector.getInstance(SoyValueFactoryContext.class);
         Example example = new Example("John", "john@domain.com");
         Object object = context.apply(example);
     }

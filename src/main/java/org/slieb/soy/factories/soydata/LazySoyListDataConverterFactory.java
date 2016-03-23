@@ -3,7 +3,7 @@ package org.slieb.soy.factories.soydata;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.template.soy.data.SoyValue;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.converters.soydata.DynamicConverter;
 import org.slieb.soy.converters.soydata.LazySoyListDataConverter;
 import org.slieb.soy.converters.soydata.NullSafeConverter;
@@ -35,7 +35,7 @@ public class LazySoyListDataConverterFactory implements SoyConverterFactory {
     @Nonnull
     @Override
     public Function<Object, ? extends SoyValue> create(@Nonnull Class<?> classObject,
-                                                       @Nonnull SoyDataFactoryContext context) {
+                                                       @Nonnull SoyValueFactoryContext context) {
         Boolean useOriginalToString = factoryHelper.useOriginalToString(classObject);
         final DynamicConverter dynamicConverter = new DynamicConverter(context);
         final NullSafeConverter itemConverter = wrapConverterWithNullSafe(dynamicConverter);

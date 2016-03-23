@@ -1,9 +1,8 @@
 package org.slieb.soy.meta;
 
-import com.google.template.soy.data.SoyData;
-import com.google.template.soy.data.SoyMapData;
+import com.google.template.soy.data.SoyMap;
 import com.google.template.soy.data.SoyValue;
-import org.slieb.soy.context.SoyDataFactoryContext;
+import org.slieb.soy.context.SoyValueFactoryContext;
 import org.slieb.soy.converters.soydata.ClassToSoyMapDataConverter;
 import org.slieb.soy.converters.soydata.DynamicConverter;
 import org.slieb.soy.converters.soydata.SoyMapDataConverter;
@@ -14,16 +13,14 @@ import java.util.Map;
 import java.util.function.Function;
 
 import static org.slieb.soy.converters.soydata.NullSafeConverter.wrapConverterWithNullSafe;
-import static org.slieb.utilities.ConverterUtils.chain;
-import static org.slieb.utilities.ConverterUtils.join;
 
-public class MetaInformationToSoyDataConverter implements Function<MetaClassInformation, Function<Object, ? extends SoyData>> {
+public class MetaInformationToSoyDataConverter implements Function<MetaClassInformation, Function<Object, SoyMap>> {
 
-    private final SoyDataFactoryContext soyDataFactoryFactoryContext;
+    private final SoyValueFactoryContext soyDataFactoryFactoryContext;
 
     private final DynamicConverter dynamicConverter;
 
-    public MetaInformationToSoyDataConverter(SoyDataFactoryContext soyDataFactoryFactoryContext) {
+    public MetaInformationToSoyDataConverter(SoyValueFactoryContext soyDataFactoryFactoryContext) {
         this.soyDataFactoryFactoryContext = soyDataFactoryFactoryContext;
         this.dynamicConverter = new DynamicConverter(soyDataFactoryFactoryContext);
     }
@@ -36,14 +33,14 @@ public class MetaInformationToSoyDataConverter implements Function<MetaClassInfo
         return map;
     }
 
-    public Function<Object, ? extends SoyMapData> getClassConverter(MetaClassInformation metaClassInformation) {
+    public Function<Object, SoyMap> getClassConverter(MetaClassInformation metaClassInformation) {
         Function<Object, ?> valueConverter = metaClassInformation.getValueConverter();
         if (valueConverter == null) {
             final Map<String, Function<Object, ? extends SoyValue>> converterMap = getConverterMap(metaClassInformation);
             final Boolean useOriginalToString = metaClassInformation.getUseOriginalToString();
             return new ClassToSoyMapDataConverter(converterMap, useOriginalToString);
         } else {
-            return join(valueConverter, new SoyMapDataConverter(dynamicConverter));
+            return valueConverter.andThen(new SoyMapDataConverter(dynamicConverter));
         }
     }
 
@@ -56,14 +53,14 @@ public class MetaInformationToSoyDataConverter implements Function<MetaClassInfo
                     valueConvertableInformation.getDynamic() ?
                             wrapConverterWithNullSafe(dynamicConverter) :
                             soyDataFactoryFactoryContext.create(memberType);
-            return (Function<Object, ? extends SoyValue>) chain(valueConverter, soyConverter);
+            return valueConverter.andThen(soyConverter);
         } catch (StackOverflowError e) {
             throw new NeedsDynamicConverterException(memberType, e);
         }
     }
 
     @Override
-    public Function<Object, ? extends SoyMapData> apply(MetaClassInformation from) {
+    public Function<Object, SoyMap> apply(MetaClassInformation from) {
         return getClassConverter(from);
     }
 }

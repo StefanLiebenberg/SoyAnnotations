@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@SuppressWarnings("WeakerAccess")
 public class DefaultLazyResult<A, B> implements Supplier<B> {
 
     protected final A object;
@@ -28,7 +29,6 @@ public class DefaultLazyResult<A, B> implements Supplier<B> {
 
     @Override
     public String toString() {
-
         return get().toString();
     }
 }

@@ -12,6 +12,7 @@ import java.util.function.Function;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Lists.reverse;
 
+@SuppressWarnings("WeakerAccess")
 public class MetaContext implements Function<Class<?>, MetaClassInformation> {
 
     private final List<MetaConverterFactory> factories;

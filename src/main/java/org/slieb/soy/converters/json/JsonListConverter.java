@@ -4,7 +4,8 @@ import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class JsonListConverter implements Function<Object, List> {
 
@@ -18,8 +19,8 @@ public class JsonListConverter implements Function<Object, List> {
     public List<?> apply(Object from) {
         if (from instanceof Collection) {
             return ((Collection<?>) from).stream()
-                                         .map(typeConverter::apply)
-                                         .collect(Collectors.toList());
+                                         .map(typeConverter)
+                                         .collect(toList());
         } else {
             return null;
         }
