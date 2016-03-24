@@ -21,7 +21,7 @@ public class SoyMapDataConverter implements Function<Object, SoyMapData> {
             Map<String, ?> castMap = (Map<String, ?>) from;
             SoyMapData soyMapData = new SoyMapData();
             for (Map.Entry<String, ?> entry : castMap.entrySet()) {
-                soyMapData.putSingle(entry.getKey(), typeConverter.apply(entry.getValue()));
+                soyMapData.put(entry.getKey(), typeConverter.apply(entry.getValue()));
             }
             return soyMapData;
         } else {

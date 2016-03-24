@@ -25,7 +25,7 @@ public class SoyDataMapConverter implements Function<Object, SoyMapData> {
                 Object key = entry.getKey();
                 Object value = entry.getValue();
                 if (key instanceof String) {
-                    soyMapData.putSingle((String) key, typeConverter.apply(value));
+                    soyMapData.put((String) key, typeConverter.apply(value));
                 }
             }
             return soyMapData;

@@ -35,7 +35,7 @@ public class ClassToSoyMapDataConverter implements Function<Object, SoyMapData> 
         if (from != null) {
             SoyMapData soyMapData = getSoyMapData(from);
             for (Map.Entry<String, Function<Object, ? extends SoyData>> entry : membersConverters.entrySet()) {
-                soyMapData.putSingle(entry.getKey(), entry.getValue().apply(from));
+                soyMapData.put(entry.getKey(), entry.getValue().apply(from));
             }
             return soyMapData;
         } else {
